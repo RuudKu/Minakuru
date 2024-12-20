@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace Engine
 {
@@ -108,9 +110,7 @@ namespace Engine
 					byte columnNo = (byte)(board.Specials & Board.EnPassantColumnFilter);
 					char column = (char)((byte)'a' + columnNo);
 					sb.Append(column);
-					sb.Append(whiteToMove ? '7' : '2');
-					sb.Append(column);
-					sb.Append(whiteToMove ? '5' : '4');
+					sb.Append(whiteToMove ? '6' : '3');
 				}
 			}
 
@@ -143,7 +143,142 @@ namespace Engine
 
 		public static Board ToBoard(this string fen)
 		{
-			return new Board();
+			void SetPiecePlacement(Board board, string pieces)
+			{
+				var piecesPerRow = pieces.Split('/');
+				for (sbyte rowNo = 7; rowNo >= 0; rowNo--)
+				{
+					var piecesThisRow = piecesPerRow[7 - rowNo];
+					piecesThisRow = piecesThisRow.Replace("8", "........");
+					piecesThisRow = piecesThisRow.Replace("7", ".......");
+					piecesThisRow = piecesThisRow.Replace("6", "......");
+					piecesThisRow = piecesThisRow.Replace("5", ".....");
+					piecesThisRow = piecesThisRow.Replace("4", "....");
+					piecesThisRow = piecesThisRow.Replace("3", "...");
+					piecesThisRow = piecesThisRow.Replace("2", "..");
+					piecesThisRow = piecesThisRow.Replace("1", ".");
+
+					for (byte columnNo = 0; columnNo < 8; columnNo++)
+					{
+						ulong filter = (ulong)1 << (rowNo * 8 + columnNo);
+
+						switch (piecesThisRow[columnNo])
+						{
+							case 'K':
+								board.WhiteKing |= filter;
+								break;
+							case 'Q':
+								board.WhiteQueens |= filter;
+								break;
+							case 'R':
+								board.WhiteRooks |= filter;
+								break;
+							case 'B':
+								board.WhiteBishops |= filter;
+								break;
+							case 'N':
+								board.WhiteKnights |= filter;
+								break;
+							case 'P':
+								board.WhitePawns |= filter;
+								break;
+							case 'k':
+								board.BlackKing |= filter;
+								break;
+							case 'q':
+								board.BlackQueens |= filter;
+								break;
+							case 'r':
+								board.BlackRooks |= filter;
+								break;
+							case 'b':
+								board.BlackBishops |= filter;
+								break;
+							case 'n':
+								board.BlackKnights |= filter;
+								break;
+							case 'p':
+								board.BlackPawns |= filter;
+								break;
+							case '.':
+								break;
+							default: throw new NotImplementedException();
+						}
+					}
+				}
+			}
+
+			void SetSideToMove(Board board, string part)
+			{
+				if (part == "b")
+				{
+					board.Specials |= Board.ColorToMove;
+				}
+			}
+
+			void SetCastlingAbility(Board board, string part)
+			{
+				foreach (var c in part)
+				{
+					switch (c)
+					{
+						case 'K':
+							board.Specials &= ~Board.WhiteCantCastleShort;
+							break;
+						case 'Q':
+							board.Specials &= ~Board.WhiteCantCastleLong;
+							break;
+						case 'k':
+							board.Specials &= ~Board.BlackCantCastleShort;
+							break;
+						case 'q':
+							board.Specials &= ~Board.BlackCantCastleLong;
+							break;
+						default:
+							throw new InvalidCastException();
+					}
+				}
+			}
+
+			void SetEnPassantTargetSquare(Board board, string part)
+			{
+				if (part == "-")
+				{
+					return;
+				}
+
+				byte columnNo = (byte) (part[0] - 'a');
+				board.Specials |= columnNo;
+				board.Specials |= Board.EnPassantPossible;
+			}
+
+			void SetHalfMoveClock(Board board, string part)
+			{
+				board.HalfMoveClock = byte.Parse(part);
+			}
+
+			void SetFullMoveCounter(Board board, string part)
+			{
+				board.FullMoveCounter = byte.Parse(part);
+			}
+
+			var board = new Board();
+
+			var parts = fen.Trim().Split(' ');
+
+			SetPiecePlacement(board, parts[0]);
+
+			SetSideToMove(board, parts[1]);
+
+			SetCastlingAbility(board, parts[2]);
+
+			SetEnPassantTargetSquare(board, parts[3]);
+
+			SetHalfMoveClock(board, parts[4]);
+
+			SetFullMoveCounter(board, parts[5]);
+
+			return board;
 		}
 	}
 }

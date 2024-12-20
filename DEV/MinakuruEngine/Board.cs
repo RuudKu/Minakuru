@@ -1,22 +1,18 @@
-﻿namespace Engine;
+﻿using System.Text;
 
-public class Board
+namespace Engine;
+
+public record Board
 {
-	public const ulong WhiteKingMoved = 1 << 0;
-	public const ulong WhiteARookMoved = 1 << 1;
-	public const ulong WhiteHRookMoved = 1 << 2;
-	public const ulong WhiteCantCastleShort = WhiteKingMoved | WhiteHRookMoved;
-	public const ulong WhiteCantCastleLong = WhiteKingMoved | WhiteARookMoved;
-	public const ulong BlackKingMoved = 1 << 3;
-	public const ulong BlackARookMoved = 1 << 4;
-	public const ulong BlackHRookMoved = 1 << 5;
-	public const ulong BlackCantCastleShort = BlackKingMoved | BlackHRookMoved;
-	public const ulong BlackCantCastleLong = BlackKingMoved | BlackARookMoved;
 
 	// Specials filter
-	public const ulong ColorToMove = 1 << 4;
-	public const ulong EnPassantPossible = 1 << 3;
 	public const ulong EnPassantColumnFilter = 0b_0111;  // bits 0..2
+	public const ulong EnPassantPossible = 1 << 3;
+	public const ulong ColorToMove = 1 << 4;
+	public const ulong WhiteCantCastleShort = 1 << 5;
+	public const ulong WhiteCantCastleLong = 1 << 6;
+	public const ulong BlackCantCastleShort = 1 << 7;
+	public const ulong BlackCantCastleLong = 1 << 8;
 
 	public ulong WhitePawns { get; set; }
 	public ulong WhiteKnights { get; set; }
@@ -55,5 +51,54 @@ public class Board
 		Specials = 0;
 		HalfMoveClock = 0;
 		FullMoveCounter = 1;
+	}
+
+	public override string ToString()
+	{
+		static void FindPieces(StringBuilder sb, string mnemonic, ulong bits)
+		{
+			sb.Append(mnemonic + ':');
+			int count = 0;
+			for (int rowNo = 0; rowNo < 8; rowNo++)
+			{
+				for (int columnNo = 0; columnNo < 8; columnNo++)
+				{
+					var filter = (ulong)1 << (rowNo * 8 + columnNo);
+					if ((bits & filter) != 0)
+					{
+						if (count > 0)
+						{
+							sb.Append(',');
+						}
+
+						sb.Append((char)('a' + columnNo));
+						sb.Append((char)('1' + rowNo));
+
+						count++;
+					}
+				}
+			}
+			if (count == 0)
+			{
+				sb.Append(' ');
+			}
+			sb.Append(' ');
+		}
+
+		var sb = new StringBuilder();
+		FindPieces(sb, "WK", WhiteKing);
+		FindPieces(sb, "WQ", WhiteQueens);
+		FindPieces(sb, "WR", WhiteRooks);
+		FindPieces(sb, "WB", WhiteBishops);
+		FindPieces(sb, "WN", WhiteKnights);
+		FindPieces(sb, "WP", WhitePawns);
+
+		FindPieces(sb, "BK", BlackKing);
+		FindPieces(sb, "BQ", BlackQueens);
+		FindPieces(sb, "BR", BlackRooks);
+		FindPieces(sb, "BB", BlackBishops);
+		FindPieces(sb, "BN", BlackKnights);
+		FindPieces(sb, "BP", BlackPawns);
+		return sb.ToString();
 	}
 }
