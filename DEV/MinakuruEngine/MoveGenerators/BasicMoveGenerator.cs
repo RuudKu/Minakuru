@@ -1,20 +1,24 @@
-﻿namespace Engine.MoveGenerators
+﻿namespace Engine.MoveGenerators;
+
+public class BasicMoveGenerator : IMoveGenerator
 {
-	public interface IMoveGenerator
-	{
-		public IEnumerable<Move> GenerateMove(Board board, Color color);
-	}
+	private readonly IMoveGenerator[] generators =
+		[
+			new QueenMoveGenerator(),
+			new RookMoveGenerator(),
+			new BishopMoveGenerator(),
+			new KnightMoveGenerator(),
+			new KingMoveGenerator()
+		];
 
-	public class BasicMoveGenerator : IMoveGenerator
+	public IEnumerable<Move> GenerateMove(Board board, Color color)
 	{
-		private readonly IMoveGenerator knightGenerator = new KnightMoveGenerator();
-
-		public IEnumerable<Move> GenerateMove(Board board, Color color)
+		foreach (var generator in generators)
 		{
-			var knightEnumerator = knightGenerator.GenerateMove(board, color).GetEnumerator();
-			while (knightEnumerator.MoveNext())
+			var generatorEnumerator = generator.GenerateMove(board, color).GetEnumerator();
+			while (generatorEnumerator.MoveNext())
 			{
-				yield return knightEnumerator.Current;
+				yield return generatorEnumerator.Current;
 			}
 		}
 	}
