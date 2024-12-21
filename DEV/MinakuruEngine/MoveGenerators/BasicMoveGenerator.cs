@@ -1,7 +1,4 @@
-﻿
-using System.Data;
-
-namespace Engine.MoveGenerators
+﻿namespace Engine.MoveGenerators
 {
 	public interface IMoveGenerator
 	{

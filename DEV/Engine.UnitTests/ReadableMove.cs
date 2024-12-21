@@ -1,11 +1,10 @@
 ﻿
-namespace Engine.UnitTests
+namespace Engine.UnitTests;
+
+public record ReadableMove(string From, string To, bool Captures, bool Check)
 {
-	public record ReadableMove(string From, string To, bool Captures, bool Check)
+	public override string ToString()
 	{
-		public override string ToString()
-		{
-			return base.ToString();
-		}
+		return base.ToString();
 	}
 }
