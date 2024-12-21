@@ -5,7 +5,7 @@ namespace Engine
 	{
 		public static ColoredPiece PieceAt(this Board board, byte columnNo, byte rowNo)
 		{
-			ulong fieldFilter = (ulong)1 << (rowNo * 8 + columnNo);
+			ulong fieldFilter = ((ulong)1) << (rowNo * 8 + columnNo);
 			if ((board.WhiteKing & fieldFilter) != 0)
 			{
 				return ColoredPiece.WhiteKing;

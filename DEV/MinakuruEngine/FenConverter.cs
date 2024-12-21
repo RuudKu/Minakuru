@@ -160,7 +160,7 @@ namespace Engine
 
 					for (byte columnNo = 0; columnNo < 8; columnNo++)
 					{
-						ulong filter = (ulong)1 << (rowNo * 8 + columnNo);
+						ulong filter =((ulong)1) << (rowNo * 8 + columnNo);
 
 						switch (piecesThisRow[columnNo])
 						{
@@ -233,6 +233,8 @@ namespace Engine
 							break;
 						case 'q':
 							board.Specials &= ~Board.BlackCantCastleLong;
+							break;
+						case '-':
 							break;
 						default:
 							throw new InvalidCastException();
