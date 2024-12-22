@@ -151,4 +151,72 @@ public class PawnMoveGeneratorTests
 		readableMoves.Should().BeEquivalentTo(expected);
 	}
 
+	[TestMethod]
+	public void PawnPromotionTest()
+	{
+		var fen = "7k/3P4/8/8/8/8/8/K7 w - - 0 1";
+		var board = fen.ToBoard();
+
+		var sut = new PawnMoveGenerator();
+
+		var actual = sut.GenerateMove(board, Color.White).ToArray();
+
+		var readableMoves = actual.ToReadableMoves().ToArray();
+		var expected = new ReadableMove[]
+		{
+			// all promotions
+			new ("d7", "d8", false, Piece.Queen),
+			new ("d7", "d8", false, Piece.Rook),
+			new ("d7", "d8", false, Piece.Bishop),
+			new ("d7", "d8", false, Piece.Knight)
+		};
+
+		readableMoves.Should().BeEquivalentTo(expected);
+	}
+
+	[TestMethod]
+	public void PawnCapturesToLowerColumnAndPromotesTest()
+	{
+		var fen = "2rr3k/3P4/8/8/8/8/8/K7 w - - 0 1";
+		var board = fen.ToBoard();
+
+		var sut = new PawnMoveGenerator();
+
+		var actual = sut.GenerateMove(board, Color.White).ToArray();
+
+		var readableMoves = actual.ToReadableMoves().ToArray();
+		var expected = new ReadableMove[]
+		{
+			// all promotions
+			new ("d7", "c8", true, Piece.Queen),
+			new ("d7", "c8", true, Piece.Rook),
+			new ("d7", "c8", true, Piece.Bishop),
+			new ("d7", "c8", true, Piece.Knight)
+		};
+
+		readableMoves.Should().BeEquivalentTo(expected);
+	}
+
+	[TestMethod]
+	public void PawnCapturesToHigherColumnAndPromotesTest()
+	{
+		var fen = "3rr2k/3P4/8/8/8/8/8/K7 w - - 0 1";
+		var board = fen.ToBoard();
+
+		var sut = new PawnMoveGenerator();
+
+		var actual = sut.GenerateMove(board, Color.White).ToArray();
+
+		var readableMoves = actual.ToReadableMoves().ToArray();
+		var expected = new ReadableMove[]
+		{
+			// all promotions
+			new ("d7", "e8", true, Piece.Queen),
+			new ("d7", "e8", true, Piece.Rook),
+			new ("d7", "e8", true, Piece.Bishop),
+			new ("d7", "e8", true, Piece.Knight)
+		};
+
+		readableMoves.Should().BeEquivalentTo(expected);
+	}
 }

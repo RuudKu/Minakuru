@@ -2,6 +2,8 @@
 
 public class PawnMoveGenerator : IMoveGenerator
 {
+	private readonly Piece[] PromotionToPieces = [Piece.Queen, Piece.Rook, Piece.Bishop, Piece.Knight];
+
 	public IEnumerable<Move> GenerateMove(Board board, Color color)
 	{
 		var whitePiecesAt = board.WhiteKing | board.WhiteQueens | board.WhiteRooks | board.WhiteBishops | board.WhiteKnights | board.WhitePawns;
@@ -33,9 +35,18 @@ public class PawnMoveGenerator : IMoveGenerator
 
 				if ((piecesAt & toFilter) == 0)
 				{
-					yield return new Move(from, to, false);
-
-
+					if (toRow == 0 || toRow == 7)
+					{
+						foreach (var promotionToPiece in PromotionToPieces)
+						{
+							yield return new Move(from, to, false, promotionToPiece);
+						}
+					}
+					else
+					{
+						yield return new Move(from, to, false);
+					}
+					
 					// move 2 up
 					// note: only possible if at least 1 up was possible
 					// note: only from 2nd rw (white) or 7th row (black)
@@ -62,7 +73,17 @@ public class PawnMoveGenerator : IMoveGenerator
 					toFilter = (ulong)1 << to;
 					if ((opponentPiecesAt & toFilter) != 0)
 					{
-						yield return new Move(from, to, true);
+						if (toRow == 0 || toRow == 7)
+						{
+							foreach (var promotionToPiece in PromotionToPieces)
+							{
+								yield return new Move(from, to, true, promotionToPiece);
+							}
+						}
+						else
+						{
+							yield return new Move(from, to, true);
+						}
 					}
 				}
 
@@ -75,7 +96,17 @@ public class PawnMoveGenerator : IMoveGenerator
 					toFilter = (ulong)1 << to;
 					if ((opponentPiecesAt & toFilter) != 0)
 					{
-						yield return new Move(from, to, true);
+						if (toRow == 0 || toRow == 7)
+						{
+							foreach (var promotionToPiece in PromotionToPieces)
+							{
+								yield return new Move(from, to, true, promotionToPiece);
+							}
+						}
+						else
+						{
+							yield return new Move(from, to, true);
+						}
 					}
 				}
 
