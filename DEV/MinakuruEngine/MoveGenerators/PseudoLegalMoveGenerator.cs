@@ -1,6 +1,6 @@
 ﻿namespace Engine.MoveGenerators;
 
-public class BasicMoveGenerator : IMoveGenerator
+public class PseudoLegalMoveGenerator : IMoveGenerator
 {
 	private readonly IMoveGenerator[] generators =
 		[
@@ -8,6 +8,7 @@ public class BasicMoveGenerator : IMoveGenerator
 			new RookMoveGenerator(),
 			new BishopMoveGenerator(),
 			new KnightMoveGenerator(),
+			new PawnMoveGenerator(),
 			new KingMoveGenerator()
 		];
 

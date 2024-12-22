@@ -48,7 +48,7 @@ public class PawnMoveGenerator : IMoveGenerator
 					{
 						yield return new Move(from, to, false);
 					}
-					
+
 					// move 2 up
 					// note: only possible if at least 1 up was possible
 					// note: only from 2nd rw (white) or 7th row (black)
@@ -119,12 +119,16 @@ public class PawnMoveGenerator : IMoveGenerator
 				// en passant capture
 				if (enPassantPossible)
 				{
-					toRow = fromRow + deltaRow;
-					toColumn = enPassantTargetColumn;
-					if ((toColumn == fromColumn +1) || (toColumn == fromColumn - 1))
+					var fromRowEnPassant = color == Color.White ? 4 : 3;
+					if (fromRow == fromRowEnPassant)
 					{
-						to = (byte)(8 * toRow + toColumn);
-						yield return new Move(from, to, true);
+						toRow = fromRow + deltaRow;
+						toColumn = enPassantTargetColumn;
+						if ((toColumn == fromColumn + 1) || (toColumn == fromColumn - 1))
+						{
+							to = (byte)(8 * toRow + toColumn);
+							yield return new Move(from, to, true);
+						}
 					}
 				}
 
