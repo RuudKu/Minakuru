@@ -65,7 +65,7 @@ public static class FenConverter
 
 		void AddSideToMove(Board board, StringBuilder sb)
 		{
-			if ((board.Specials & Board.ColorToMove) == 0)
+			if ((board.Specials & Board.ColorToMoveFilter) == 0)
 			{
 				sb.Append(" w ");
 			}
@@ -77,19 +77,19 @@ public static class FenConverter
 
 		void AddCastlingAbility(Board board, StringBuilder sb)
 		{
-			if ((board.Specials & Board.WhiteCantCastleShort) == 0)
+			if ((board.Specials & Board.WhiteCantCastleShortFilter) == 0)
 			{
 				sb.Append('K');
 			}
-			if ((board.Specials & Board.WhiteCantCastleLong) == 0)
+			if ((board.Specials & Board.WhiteCantCastleLongFilter) == 0)
 			{
 				sb.Append('Q');
 			}
-			if ((board.Specials & Board.BlackCantCastleShort) == 0)
+			if ((board.Specials & Board.BlackCantCastleShortFilter) == 0)
 			{
 				sb.Append('k');
 			}
-			if ((board.Specials & Board.BlackCantCastleLong) == 0)
+			if ((board.Specials & Board.BlackCantCastleLongFilter) == 0)
 			{
 				sb.Append('q');
 			}
@@ -98,14 +98,14 @@ public static class FenConverter
 		void AddEnPassantTargetSquare(Board board, StringBuilder sb)
 		{
 			sb.Append(' ');
-			if ((board.Specials & Board.EnPassantPossible) == 0)
+			if ((board.Specials & Board.EnPassantPossibleFilter) == 0)
 			{
 				sb.Append('-');
 			}
 			else
 			{
-				bool whiteToMove = (board.Specials & Board.ColorToMove) == 0;
-				byte columnNo = (byte)(board.Specials & Board.EnPassantColumnFilter);
+				bool whiteToMove = (board.Specials & Board.ColorToMoveFilter) == 0;
+				byte columnNo = (byte)(board.Specials & Board.EnPassantTargetColumnFilter);
 				char column = (char)((byte)'a' + columnNo);
 				sb.Append(column);
 				sb.Append(whiteToMove ? '6' : '3');
@@ -210,7 +210,7 @@ public static class FenConverter
 		{
 			if (part == "b")
 			{
-				board.Specials |= Board.ColorToMove;
+				board.Specials |= Board.ColorToMoveFilter;
 			}
 		}
 
@@ -221,16 +221,16 @@ public static class FenConverter
 				switch (c)
 				{
 					case 'K':
-						board.Specials &= ~Board.WhiteCantCastleShort;
+						board.Specials &= ~Board.WhiteCantCastleShortFilter;
 						break;
 					case 'Q':
-						board.Specials &= ~Board.WhiteCantCastleLong;
+						board.Specials &= ~Board.WhiteCantCastleLongFilter;
 						break;
 					case 'k':
-						board.Specials &= ~Board.BlackCantCastleShort;
+						board.Specials &= ~Board.BlackCantCastleShortFilter;
 						break;
 					case 'q':
-						board.Specials &= ~Board.BlackCantCastleLong;
+						board.Specials &= ~Board.BlackCantCastleLongFilter;
 						break;
 					case '-':
 						break;
@@ -249,7 +249,7 @@ public static class FenConverter
 
 			byte columnNo = (byte) (part[0] - 'a');
 			board.Specials |= columnNo;
-			board.Specials |= Board.EnPassantPossible;
+			board.Specials |= Board.EnPassantPossibleFilter;
 		}
 
 		void SetHalfMoveClock(Board board, string part)

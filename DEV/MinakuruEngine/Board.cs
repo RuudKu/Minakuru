@@ -6,13 +6,13 @@ public record Board
 {
 
 	// Specials filter
-	public const ulong EnPassantColumnFilter = 0b_0111;  // bits 0..2
-	public const ulong EnPassantPossible = 1 << 3;
-	public const ulong ColorToMove = 1 << 4;
-	public const ulong WhiteCantCastleShort = 1 << 5;
-	public const ulong WhiteCantCastleLong = 1 << 6;
-	public const ulong BlackCantCastleShort = 1 << 7;
-	public const ulong BlackCantCastleLong = 1 << 8;
+	public const ulong EnPassantTargetColumnFilter = 0b_0111;  // bits 0..2
+	public const ulong EnPassantPossibleFilter = 1 << 3;
+	public const ulong ColorToMoveFilter = 1 << 4;
+	public const ulong WhiteCantCastleShortFilter = 1 << 5;
+	public const ulong WhiteCantCastleLongFilter = 1 << 6;
+	public const ulong BlackCantCastleShortFilter = 1 << 7;
+	public const ulong BlackCantCastleLongFilter = 1 << 8;
 
 	public ulong WhitePawns { get; set; }
 	public ulong WhiteKnights { get; set; }

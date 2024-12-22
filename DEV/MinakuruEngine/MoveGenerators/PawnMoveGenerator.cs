@@ -12,6 +12,8 @@ public class PawnMoveGenerator : IMoveGenerator
 		var pawns = color == Color.White ? board.WhitePawns : board.BlackPawns;
 		var opponentPiecesAt = color == Color.White ? blackPiecesAt : whitePiecesAt;
 		var piecesAt = whitePiecesAt | blackPiecesAt;
+		var enPassantPossible = (board.Specials & Board.EnPassantPossibleFilter) != 0;
+		var enPassantTargetColumn = (byte)(board.Specials & Board.EnPassantTargetColumnFilter);
 
 		for (byte from = 0; from < 64; from++)
 		{
@@ -75,6 +77,7 @@ public class PawnMoveGenerator : IMoveGenerator
 					{
 						if (toRow == 0 || toRow == 7)
 						{
+							// all promotions
 							foreach (var promotionToPiece in PromotionToPieces)
 							{
 								yield return new Move(from, to, true, promotionToPiece);
@@ -82,12 +85,13 @@ public class PawnMoveGenerator : IMoveGenerator
 						}
 						else
 						{
+							// no promotion
 							yield return new Move(from, to, true);
 						}
 					}
 				}
 
-				// capture to lower column
+				// capture to higher column
 				if (fromColumn < 7)
 				{
 					toRow = fromRow + deltaRow;
@@ -98,6 +102,7 @@ public class PawnMoveGenerator : IMoveGenerator
 					{
 						if (toRow == 0 || toRow == 7)
 						{
+							// all promotions
 							foreach (var promotionToPiece in PromotionToPieces)
 							{
 								yield return new Move(from, to, true, promotionToPiece);
@@ -105,8 +110,21 @@ public class PawnMoveGenerator : IMoveGenerator
 						}
 						else
 						{
+							// no promotion
 							yield return new Move(from, to, true);
 						}
+					}
+				}
+
+				// en passant capture
+				if (enPassantPossible)
+				{
+					toRow = fromRow + deltaRow;
+					toColumn = enPassantTargetColumn;
+					if ((toColumn == fromColumn +1) || (toColumn == fromColumn - 1))
+					{
+						to = (byte)(8 * toRow + toColumn);
+						yield return new Move(from, to, true);
 					}
 				}
 

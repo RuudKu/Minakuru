@@ -219,4 +219,45 @@ public class PawnMoveGeneratorTests
 
 		readableMoves.Should().BeEquivalentTo(expected);
 	}
+
+	// lower   7k/8/8/2pP4/8/8/8/K7 w - - 0 1
+	[TestMethod]
+	public void PawnCapturesEnPassantToLowerColumnTest()
+	{
+		var fen = "7k/8/3p4/2pP4/8/8/8/K7 w - c6 0 1";
+		var board = fen.ToBoard();
+
+		var sut = new PawnMoveGenerator();
+
+		var actual = sut.GenerateMove(board, Color.White).ToArray();
+
+		var readableMoves = actual.ToReadableMoves().ToArray();
+		var expected = new ReadableMove[]
+		{
+			// up field up
+			new ("d5", "c6", true),
+		};
+
+		readableMoves.Should().BeEquivalentTo(expected);
+	}
+
+	[TestMethod]
+	public void PawnCapturesEnPassantToHigherColumnTest()
+	{
+		var fen = "7k/8/3p4/3Pp3/8/8/8/K7 w - e6 0 1";
+		var board = fen.ToBoard();
+
+		var sut = new PawnMoveGenerator();
+
+		var actual = sut.GenerateMove(board, Color.White).ToArray();
+
+		var readableMoves = actual.ToReadableMoves().ToArray();
+		var expected = new ReadableMove[]
+		{
+			// up field up
+			new ("d5", "e6", true),
+		};
+
+		readableMoves.Should().BeEquivalentTo(expected);
+	}
 }
