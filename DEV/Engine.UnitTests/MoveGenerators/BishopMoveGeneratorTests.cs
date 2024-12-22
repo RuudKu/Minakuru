@@ -20,22 +20,22 @@ public class BishopMoveGeneratorTests
 		var expected = new ReadableMove[]
 		{
 			// to the left-down
-			new ("d4", "c3", false, false),
-			new ("d4", "b2", false, false),
-			new ("d4", "a1", false, false),
+			new ("d4", "c3"),
+			new ("d4", "b2"),
+			new ("d4", "a1"),
 			// to the left-up
-			new ("d4", "c5", false, false),
-			new ("d4", "b6", false, false),
-			new ("d4", "a7", false, false),
+			new ("d4", "c5"),
+			new ("d4", "b6"),
+			new ("d4", "a7"),
 			// to right-down
-			new ("d4", "e3", false, false),
-			new ("d4", "f2", false, false),
-			new ("d4", "g1", false, false),
+			new ("d4", "e3"),
+			new ("d4", "f2"),
+			new ("d4", "g1"),
 			// to right-up
-			new ("d4", "e5", false, false),
-			new ("d4", "f6", false, false),
-			new ("d4", "g7", false, false),
-			new ("d4", "h8", false, false)
+			new ("d4", "e5"),
+			new ("d4", "f6"),
+			new ("d4", "g7"),
+			new ("d4", "h8")
 		};
 
 		readableMoves.Should().BeEquivalentTo(expected);
@@ -55,19 +55,19 @@ public class BishopMoveGeneratorTests
 		var expected = new ReadableMove[]
 		{
 			// to the left-down
-			new ("d4", "c3", false, false),
-			new ("d4", "b2", false, false),
-			new ("d4", "a1", false, false),
+			new ("d4", "c3"),
+			new ("d4", "b2"),
+			new ("d4", "a1"),
 			// to the left-up
-			new ("d4", "c5", false, false),
-			new ("d4", "b6", false, false),
-			new ("d4", "a7", false, false),
+			new ("d4", "c5"),
+			new ("d4", "b6"),
+			new ("d4", "a7"),
 			// to right-down
-			new ("d4", "e3", false, false),
-			new ("d4", "f2", false, false),
+			new ("d4", "e3"),
+			new ("d4", "f2"),
 			// to-right up
-			new ("d4", "e5", false, false),
-			new ("d4", "f6", true, false)
+			new ("d4", "e5"),
+			new ("d4", "f6", true)
 		};
 
 		readableMoves.Should().BeEquivalentTo(expected);

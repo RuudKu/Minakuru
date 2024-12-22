@@ -19,14 +19,14 @@ public class KnightMoveGeneratorTests
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
 		{
-			new ("d4", "b3", false, false),
-			new ("d4", "b5", false, false),
-			new ("d4", "c2", false, false),
-			new ("d4", "c6", false, false),
-			new ("d4", "e2", false, false),
-			new ("d4", "e6", false, false),
-			new ("d4", "f3", false, false),
-			new ("d4", "f5", false, false),
+			new ("d4", "b3"),
+			new ("d4", "b5"),
+			new ("d4", "c2"),
+			new ("d4", "c6"),
+			new ("d4", "e2"),
+			new ("d4", "e6"),
+			new ("d4", "f3"),
+			new ("d4", "f5"),
 		};
 
 		readableMoves.Should().BeEquivalentTo(expected);
@@ -45,13 +45,13 @@ public class KnightMoveGeneratorTests
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
 		{
-			new ("d4", "b3", false, false),
-			new ("d4", "b5", false, false),
-			new ("d4", "c2", false, false),
-			new ("d4", "c6", false, false),
-			new ("d4", "e2", false, false),
-			new ("d4", "e6", true, false),
-			new ("d4", "f5", false, false),
+			new ("d4", "b3"),
+			new ("d4", "b5"),
+			new ("d4", "c2"),
+			new ("d4", "c6"),
+			new ("d4", "e2"),
+			new ("d4", "e6", true),
+			new ("d4", "f5"),
 		};
 
 		readableMoves.Should().BeEquivalentTo(expected);

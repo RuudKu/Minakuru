@@ -1,10 +1,6 @@
 ﻿
 namespace Engine.UnitTests;
 
-public record ReadableMove(string From, string To, bool Captures, bool Check)
+public record ReadableMove(string From, string To, bool Captures = false, Piece? PromotedTo = null)
 {
-	public override string ToString()
-	{
-		return base.ToString();
-	}
 }

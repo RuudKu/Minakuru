@@ -21,6 +21,6 @@ public static class ReadableMoveExtensions
 		return new ReadableMove(
 			new string([fromColumn, fromRow]),
 			new string([toColumn, toRow]),
-			move.Capture, false);
+			move.Capture);
 	}
 }

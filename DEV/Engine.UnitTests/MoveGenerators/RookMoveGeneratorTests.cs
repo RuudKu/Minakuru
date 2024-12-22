@@ -20,23 +20,23 @@ public class RookMoveGeneratorTests
 		var expected = new ReadableMove[]
 		{
 			// to the left
-			new ("d4", "c4", false, false),
-			new ("d4", "b4", false, false),
-			new ("d4", "a4", false, false),
+			new ("d4", "c4"),
+			new ("d4", "b4"),
+			new ("d4", "a4"),
 			// to the right
-			new ("d4", "e4", false, false),
-			new ("d4", "f4", false, false),
-			new ("d4", "g4", false, false),
-			new ("d4", "h4", false, false),
+			new ("d4", "e4"),
+			new ("d4", "f4"),
+			new ("d4", "g4"),
+			new ("d4", "h4"),
 			// down
-			new ("d4", "d3", false, false),
-			new ("d4", "d2", false, false),
-			new ("d4", "d1", false, false),
+			new ("d4", "d3"),
+			new ("d4", "d2"),
+			new ("d4", "d1"),
 			// up
-			new ("d4", "d5", false, false),
-			new ("d4", "d6", false, false),
-			new ("d4", "d7", false, false),
-			new ("d4", "d8", false, false)
+			new ("d4", "d5"),
+			new ("d4", "d6"),
+			new ("d4", "d7"),
+			new ("d4", "d8")
 		};
 
 		readableMoves.Should().BeEquivalentTo(expected);
@@ -56,20 +56,20 @@ public class RookMoveGeneratorTests
 		var expected = new ReadableMove[]
 		{
 			// to the left
-			new ("d4", "c4", false, false),
-			new ("d4", "b4", false, false),
-			new ("d4", "a4", false, false),
+			new ("d4", "c4"),
+			new ("d4", "b4"),
+			new ("d4", "a4"),
 			// to the right
-			new ("d4", "e4", false, false),
-			new ("d4", "f4", false, false),
+			new ("d4", "e4"),
+			new ("d4", "f4"),
 			// down
-			new ("d4", "d3", false, false),
-			new ("d4", "d2", false, false),
-			new ("d4", "d1", false, false),
+			new ("d4", "d3"),
+			new ("d4", "d2"),
+			new ("d4", "d1"),
 			// up
-			new ("d4", "d5", false, false),
-			new ("d4", "d6", false, false),
-			new ("d4", "d7", true, false),
+			new ("d4", "d5"),
+			new ("d4", "d6"),
+			new ("d4", "d7", true),
 		};
 
 		readableMoves.Should().BeEquivalentTo(expected);

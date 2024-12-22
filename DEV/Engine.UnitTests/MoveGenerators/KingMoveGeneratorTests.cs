@@ -20,21 +20,21 @@ public class KingMoveGeneratorTests
 		var expected = new ReadableMove[]
 		{
 			// to the left-down
-			new ("d4", "c3", false, false),
+			new ("d4", "c3"),
 			// to the left
-			new ("d4", "c4", false, false),
+			new ("d4", "c4"),
 			// to the left-up
-			new ("d4", "c5", false, false),
+			new ("d4", "c5"),
 			// down
-			new ("d4", "d3", false, false),
+			new ("d4", "d3"),
 			// up
-			new ("d4", "d5", false, false),
+			new ("d4", "d5"),
 			// to right-down
-			new ("d4", "e3", false, false),
+			new ("d4", "e3"),
 			// to right
-			new ("d4", "e4", false, false),
+			new ("d4", "e4"),
 			// to right-up
-			new ("d4", "e5", false, false),
+			new ("d4", "e5"),
 		};
 
 		readableMoves.Should().BeEquivalentTo(expected);
@@ -54,24 +54,23 @@ public class KingMoveGeneratorTests
 		var expected = new ReadableMove[]
 		{
 			// to the left-down
-			new ("d4", "c3", false, false),
+			new ("d4", "c3"),
 			// to the left
-			new ("d4", "c4", false, false),
+			new ("d4", "c4"),
 			// to the left-up
 			// no moves possible
 			// down
-			new ("d4", "d3", false, false),
+			new ("d4", "d3"),
 			// up
-			new ("d4", "d5", false, false),
+			new ("d4", "d5"),
 			// to right-down
-			new ("d4", "e3", true, false),
+			new ("d4", "e3", true),
 			// to right
-			new ("d4", "e4", false, false),
+			new ("d4", "e4"),
 			// to right-up
-			new ("d4", "e5", false, false),
+			new ("d4", "e5"),
 		};
 
 		readableMoves.Should().BeEquivalentTo(expected);
 	}
 }
-
