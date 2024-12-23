@@ -12,8 +12,8 @@ public class PawnMoveGenerator : IMoveGenerator
 		var pawns = color == Color.White ? board.WhitePawns : board.BlackPawns;
 		var opponentPiecesAt = color == Color.White ? blackPiecesAt : whitePiecesAt;
 		var piecesAt = whitePiecesAt | blackPiecesAt;
-		var enPassantPossible = (board.Specials & Board.EnPassantPossibleFilter) != 0;
-		var enPassantTargetColumn = (byte)(board.Specials & Board.EnPassantTargetColumnFilter);
+		var enPassantPossible = board.EnPassantPossible;
+		var enPassantTargetColumn = board.EnPassantTargetColumn;
 
 		for (byte from = 0; from < 64; from++)
 		{

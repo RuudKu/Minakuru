@@ -9,7 +9,7 @@ namespace Engine.UnitTests
 		[TestMethod]
 		public void StartWithD2D4()
 		{
-			var board = BoardHelper.StartPosition();
+			var board = Board.Init();
 
 			Move move = new(Field.D2FieldNo, Field.D4FieldNo);
 			var newBoard = MoveMaker.MakeMove(board, move);

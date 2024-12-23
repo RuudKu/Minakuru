@@ -9,15 +9,13 @@ namespace Engine
 		{
 			var newBoard = board with { };
 
-			var colorToMove = (board.Specials & Board.ColorToMoveFilter) == 0 ? Color.White : Color.Black;
-			ulong fromFilter = (ulong)1 << move.From;
-			ulong toFilter = (ulong)1 << move.To;
+			var colorToMove = board.ColorToMove;
 
 			Piece fromPiece = Piece.Any;
 
-			fromPiece = UpdatePiecePlacement(newBoard, board, move, colorToMove, fromFilter, toFilter, fromPiece);
+			fromPiece = UpdatePiecePlacement(newBoard, board, colorToMove, move, fromPiece);
 
-			UpdateSideToMove(newBoard, colorToMove);
+			UpdateSideToMove(newBoard);
 
 			UpdateCastlingAbility(newBoard, move);
 
@@ -57,13 +55,12 @@ namespace Engine
 
 			if (fromPiece == Piece.Pawn && (fromRow == 1 || fromRow == 6) && (toRow == 3 || toRow == 4))
 			{
-				newBoard.Specials |= Board.EnPassantPossibleFilter;
-				newBoard.Specials &= ~Board.EnPassantTargetColumnFilter;
-				newBoard.Specials |= (ulong)move.From % 8;
+				newBoard.EnPassantPossible = true;
+				newBoard.EnPassantTargetColumn = (byte)(move.From % 8);
 			}
 			else
 			{
-				newBoard.Specials &= ~(Board.EnPassantPossibleFilter | Board.EnPassantTargetColumnFilter);
+				newBoard.EnPassantPossible = false;
 			}
 		}
 
@@ -72,39 +69,40 @@ namespace Engine
 			switch (move.From)
 			{
 				case Field.A1FieldNo:
-					newBoard.Specials |= Board.WhiteCantCastleLongFilter;
+					newBoard.WhiteCanCastleLong = false;
 					break;
 				case Field.E1FieldNo:
-					newBoard.Specials |= (Board.WhiteCantCastleShortFilter | Board.WhiteCantCastleLongFilter);
+					newBoard.WhiteCanCastleShort = false;
+					newBoard.WhiteCanCastleLong = false;
 					break;
 				case Field.H1FieldNo:
-					newBoard.Specials |= Board.WhiteCantCastleShortFilter;
+					newBoard.WhiteCanCastleShort = false;
 					break;
 				case Field.A8FieldNo:
-					newBoard.Specials |= Board.BlackCantCastleLongFilter;
+					newBoard.BlackCanCastleLong = false;
 					break;
 				case Field.E8FieldNo:
-					newBoard.Specials |= (Board.BlackCantCastleShortFilter | Board.BlackCantCastleLongFilter);
+					newBoard.BlackCanCastleShort = false;
+					newBoard.BlackCanCastleLong = false;
 					break;
 				case Field.H8FieldNo:
-					newBoard.Specials |= Board.BlackCantCastleShortFilter;
+					newBoard.BlackCanCastleShort = false;
 					break;
 				default:
 					break;
 			}
 		}
 
-		private static void UpdateSideToMove(Board newBoard, Color colorToMove)
+		private static void UpdateSideToMove(Board newBoard)
 		{
-			newBoard.Specials &= ~Board.ColorToMoveFilter;
-			if (colorToMove == Color.White)
-			{
-				newBoard.Specials |= Board.ColorToMoveFilter;
-			}
+			newBoard.ToggleColorToMove();
 		}
 
-		private static Piece UpdatePiecePlacement(Board newBoard, Board board, Move move, Color colorToMove, ulong fromFilter, ulong toFilter, Piece fromPiece)
+		private static Piece UpdatePiecePlacement(Board newBoard, Board board, Color colorToMove, Move move, Piece fromPiece)
 		{
+			ulong fromFilter = (ulong)1 << move.From;
+			ulong toFilter = (ulong)1 << move.To;
+
 			if (colorToMove == Color.White)
 			{
 				if ((newBoard.WhitePawns & fromFilter) != 0)

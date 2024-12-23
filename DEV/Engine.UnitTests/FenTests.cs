@@ -9,7 +9,7 @@ public sealed class FenTests
 	public void TestStartPositionToFen()
 	{
 		// Arrange
-		var board = BoardHelper.StartPosition();
+		var board = Board.Init();
 
 		// Act
 		var actual = board.ToFen();
@@ -30,7 +30,7 @@ public sealed class FenTests
 		var boardAsString = actual.ToString();
 
 		// Assert
-		var expected = BoardHelper.StartPosition();
+		var expected = Board.Init();
 		actual.Should().Be(expected);
 	}
 

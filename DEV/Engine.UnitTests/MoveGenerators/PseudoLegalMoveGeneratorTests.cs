@@ -9,7 +9,7 @@ namespace Engine.UnitTests.MoveGenerators
 		[TestMethod]
 		public void GenerateFromStartingPosition()
 		{
-			var board = BoardHelper.StartPosition();
+			var board = Board.Init();
 			var sut = new PseudoLegalMoveGenerator();
 
 			var allMoves = sut.GenerateMove(board, Color.White);
