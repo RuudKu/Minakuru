@@ -1,4 +1,6 @@
 ﻿
+using System.Net.Http.Headers;
+
 namespace Engine
 {
 	public static class MoveMaker
@@ -12,6 +14,97 @@ namespace Engine
 			ulong toFilter = (ulong)1 << move.To;
 
 			Piece fromPiece = Piece.Any;
+
+			fromPiece = UpdatePiecePlacement(newBoard, board, move, colorToMove, fromFilter, toFilter, fromPiece);
+
+			UpdateSideToMove(newBoard, colorToMove);
+
+			UpdateCastlingAbility(newBoard, move);
+
+			UpdateEnPassantPossibility(newBoard, fromPiece, move);
+
+			UpdateHalfMoveClock(newBoard, move, fromPiece);
+
+			UpdateFullMoveCounter(newBoard, colorToMove);
+
+			return newBoard;
+		}
+
+		private static void UpdateFullMoveCounter(Board newBoard, Color colorToMove)
+		{
+			if (colorToMove == Color.Black)
+			{
+				newBoard.FullMoveCounter++;
+			}
+		}
+
+		private static void UpdateHalfMoveClock(Board newBoard, Move move, Piece fromPiece)
+		{
+			if (fromPiece == Piece.Pawn || move.Capture)
+			{
+				newBoard.HalfMoveClock = 0;
+			}
+			else
+			{
+				newBoard.HalfMoveClock++;
+			}
+		}
+
+		private static void UpdateEnPassantPossibility(Board newBoard, Piece fromPiece, Move move)
+		{
+			int fromRow = move.From / 8;
+			int toRow = move.To / 8;
+
+			if (fromPiece == Piece.Pawn && (fromRow == 1 || fromRow == 6) && (toRow == 3 || toRow == 4))
+			{
+				newBoard.Specials |= Board.EnPassantPossibleFilter;
+				newBoard.Specials &= ~Board.EnPassantTargetColumnFilter;
+				newBoard.Specials |= (ulong)move.From % 8;
+			}
+			else
+			{
+				newBoard.Specials &= ~(Board.EnPassantPossibleFilter | Board.EnPassantTargetColumnFilter);
+			}
+		}
+
+		private static void UpdateCastlingAbility(Board newBoard, Move move)
+		{
+			switch (move.From)
+			{
+				case Field.A1FieldNo:
+					newBoard.Specials |= Board.WhiteCantCastleLongFilter;
+					break;
+				case Field.E1FieldNo:
+					newBoard.Specials |= (Board.WhiteCantCastleShortFilter | Board.WhiteCantCastleLongFilter);
+					break;
+				case Field.H1FieldNo:
+					newBoard.Specials |= Board.WhiteCantCastleShortFilter;
+					break;
+				case Field.A8FieldNo:
+					newBoard.Specials |= Board.BlackCantCastleLongFilter;
+					break;
+				case Field.E8FieldNo:
+					newBoard.Specials |= (Board.BlackCantCastleShortFilter | Board.BlackCantCastleLongFilter);
+					break;
+				case Field.H8FieldNo:
+					newBoard.Specials |= Board.BlackCantCastleShortFilter;
+					break;
+				default:
+					break;
+			}
+		}
+
+		private static void UpdateSideToMove(Board newBoard, Color colorToMove)
+		{
+			newBoard.Specials &= ~Board.ColorToMoveFilter;
+			if (colorToMove == Color.White)
+			{
+				newBoard.Specials |= Board.ColorToMoveFilter;
+			}
+		}
+
+		private static Piece UpdatePiecePlacement(Board newBoard, Board board, Move move, Color colorToMove, ulong fromFilter, ulong toFilter, Piece fromPiece)
+		{
 			if (colorToMove == Color.White)
 			{
 				if ((newBoard.WhitePawns & fromFilter) != 0)
@@ -85,14 +178,6 @@ namespace Engine
 				{
 					case Piece.Pawn:
 						newBoard.WhitePawns |= toFilter;
-						int fromRow = move.From / 8;
-						int toRow = move.To / 8;
-						if (fromRow == 1 && toRow == 3)
-						{
-							newBoard.Specials |= Board.EnPassantPossibleFilter;
-							newBoard.Specials &= ~Board.EnPassantTargetColumnFilter;
-							newBoard.Specials |= (ulong)move.From % 8;
-						}
 						break;
 					case Piece.Knight:
 						newBoard.WhiteKnights |= toFilter;
@@ -140,13 +225,7 @@ namespace Engine
 				}
 			}
 
-			newBoard.Specials &= ~Board.ColorToMoveFilter;
-			if (colorToMove == Color.White)
-			{
-				newBoard.Specials |= Board.ColorToMoveFilter;
-			}
-
-			return newBoard;
+			return fromPiece;
 		}
 	}
 }
