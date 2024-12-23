@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using System.Text;
+﻿using System.Text;
 
 namespace Engine;
 
@@ -15,23 +14,96 @@ public record Board
 	private const ulong BlackCantCastleShortFilter = 1 << 7;
 	private const ulong BlackCantCastleLongFilter = 1 << 8;
 
-	public ulong WhitePawns { get; set; }
-	public ulong WhiteKnights { get; set; }
-	public ulong WhiteBishops { get; set; }
-	public ulong WhiteRooks { get; set; }
-	public ulong WhiteQueens { get; set; }
-	public ulong WhiteKing { get; set; }
+	public ulong WhitePawns { get; private set; }
+	public ulong WhiteKnights { get; private set; }
+	public ulong WhiteBishops { get; private set; }
+	public ulong WhiteRooks { get; private set; }
+	public ulong WhiteQueens { get; private set; }
+	public ulong WhiteKing { get; private set; }
 
-	public ulong BlackPawns { get; set; }
-	public ulong BlackKnights { get; set; }
-	public ulong BlackBishops { get; set; }
-	public ulong BlackRooks { get; set; }
-	public ulong BlackQueens { get; set; }
-	public ulong BlackKing { get; set; }
+	public ulong BlackPawns { get; private set; }
+	public ulong BlackKnights { get; private set; }
+	public ulong BlackBishops { get; private set; }
+	public ulong BlackRooks { get; private set; }
+	public ulong BlackQueens { get; private set; }
+	public ulong BlackKing { get; private set; }
 
-	public ulong Specials { get; set; }
+	private ulong Specials;
 	public byte HalfMoveClock { get; set; }
 	public byte FullMoveCounter { get; set; } = 1;
+
+	public ulong WhitePieces
+	{
+		get
+		{
+			return WhiteKing | WhiteQueens | WhiteRooks | WhiteBishops | WhiteKnights | WhitePawns;
+		}
+	}
+
+	public ulong BlackPieces
+	{
+		get
+		{
+			return BlackKing | BlackQueens | BlackRooks | BlackBishops | BlackKnights | BlackPawns;
+		}
+	}
+
+	public ulong Pieces
+	{
+		get
+		{
+			return WhiteKing | WhiteQueens | WhiteRooks | WhiteBishops | WhiteKnights | WhitePawns |
+				BlackKing | BlackQueens | BlackRooks | BlackBishops | BlackKnights | BlackPawns;
+		}
+	}
+
+	public void EmptyField(byte fieldNo, ColoredPiece coloredPiece)
+	{
+		ulong filter = (ulong)1 << fieldNo;
+		switch (coloredPiece)
+		{
+			case ColoredPiece.WhiteKing:
+				WhiteKing &= ~filter;
+				break;
+			case ColoredPiece.WhiteQueen:
+				WhiteQueens &= ~filter;
+				break;
+			case ColoredPiece.WhiteRook:
+				WhiteRooks &= ~filter;
+				break;
+			case ColoredPiece.WhiteBishop:
+				WhiteBishops &= ~filter;
+				break;
+			case ColoredPiece.WhiteKnight:
+				WhiteKnights &= ~filter;
+				break;
+			case ColoredPiece.WhitePawn:
+				WhitePawns &= ~filter;
+				break;
+
+			case ColoredPiece.BlackKing:
+				BlackKing &= ~filter;
+				break;
+			case ColoredPiece.BlackQueen:
+				BlackQueens &= ~filter;
+				break;
+			case ColoredPiece.BlackRook:
+				BlackRooks &= ~filter;
+				break;
+			case ColoredPiece.BlackBishop:
+				BlackBishops &= ~filter;
+				break;
+			case ColoredPiece.BlackKnight:
+				BlackKnights &= ~filter;
+				break;
+			case ColoredPiece.BlackPawn:
+				BlackPawns &= ~filter;
+				break;
+
+			default:
+				throw new Exception();
+		}
+	}
 
 	public void Clear()
 	{

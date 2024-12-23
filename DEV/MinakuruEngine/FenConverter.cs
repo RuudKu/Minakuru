@@ -160,45 +160,45 @@ public static class FenConverter
 
 				for (byte columnNo = 0; columnNo < 8; columnNo++)
 				{
-					ulong filter = ((ulong)1) << (rowNo * 8 + columnNo);
+					byte fieldNo = (byte)(rowNo * 8 + columnNo);
 
 					switch (piecesThisRow[columnNo])
 					{
 						case 'K':
-							board.WhiteKing |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.WhiteKing);
 							break;
 						case 'Q':
-							board.WhiteQueens |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.WhiteQueen);
 							break;
 						case 'R':
-							board.WhiteRooks |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.WhiteRook);
 							break;
 						case 'B':
-							board.WhiteBishops |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.WhiteBishop);
 							break;
 						case 'N':
-							board.WhiteKnights |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.WhiteKnight);
 							break;
 						case 'P':
-							board.WhitePawns |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.WhitePawn);
 							break;
 						case 'k':
-							board.BlackKing |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.BlackKing);
 							break;
 						case 'q':
-							board.BlackQueens |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.BlackQueen);
 							break;
 						case 'r':
-							board.BlackRooks |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.BlackRook);
 							break;
 						case 'b':
-							board.BlackBishops |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.BlackBishop);
 							break;
 						case 'n':
-							board.BlackKnights |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.BlackKnight);
 							break;
 						case 'p':
-							board.BlackPawns |= filter;
+							board.SetColoredPieceAt(fieldNo, ColoredPiece.BlackPawn);
 							break;
 						case '.':
 							break;
@@ -257,7 +257,7 @@ public static class FenConverter
 			}
 
 			byte columnNo = (byte)(part[0] - 'a');
-			board.Specials |= columnNo;
+			board.EnPassantTargetColumn = columnNo;
 			board.EnPassantPossible = true;
 		}
 
