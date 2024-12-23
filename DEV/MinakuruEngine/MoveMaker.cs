@@ -96,7 +96,7 @@
 
 		private static ColoredPiece UpdatePiecePlacement(Board newBoard, Board board, Color colorToMove, Move move)
 		{
-			var coloredPieceFrom = board.GetColoredPieceAt(move.From);
+			var coloredPieceFrom = board.GetColoredPieceAt(move.From, colorToMove);
 
 			if (!coloredPieceFrom.HasValue)
 			{

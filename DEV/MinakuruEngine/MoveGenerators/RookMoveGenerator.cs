@@ -43,8 +43,8 @@ public class RookMoveGenerator : IMoveGenerator
 						}
 						ownPiece = (ownPiecesAt & toFilter) != 0;
 
-						toColumn = toColumn + deltaColumn;
-						toRow = toRow + deltaRow;
+						toColumn += deltaColumn;
+						toRow += deltaRow;
 					}
 				}
 

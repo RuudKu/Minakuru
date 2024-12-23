@@ -6,8 +6,8 @@ public class PawnMoveGenerator : IMoveGenerator
 
 	public IEnumerable<Move> GenerateMove(Board board, Color color)
 	{
-		var whitePiecesAt = board.WhiteKing | board.WhiteQueens | board.WhiteRooks | board.WhiteBishops | board.WhiteKnights | board.WhitePawns;
-		var blackPiecesAt = board.BlackKing | board.BlackQueens | board.BlackRooks | board.BlackBishops | board.BlackKnights | board.BlackPawns;
+		var whitePiecesAt = board.WhitePieces;
+		var blackPiecesAt = board.BlackPieces;
 
 		var pawns = color == Color.White ? board.WhitePawns : board.BlackPawns;
 		var opponentPiecesAt = color == Color.White ? blackPiecesAt : whitePiecesAt;
@@ -56,7 +56,7 @@ public class PawnMoveGenerator : IMoveGenerator
 
 					if (atStartingRow)
 					{
-						toRow = toRow + deltaRow;
+						toRow += deltaRow;
 						to = (byte)(8 * toRow + toColumn);
 						toFilter = (ulong)1 << to;
 						if ((piecesAt & toFilter) == 0)

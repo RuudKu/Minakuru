@@ -4,8 +4,8 @@ public class KingMoveGenerator : IMoveGenerator
 {
 	public IEnumerable<Move> GenerateMove(Board board, Color color)
 	{
-		var whitePiecesAt = board.WhiteKing | board.WhiteQueens | board.WhiteRooks | board.WhiteBishops | board.WhiteKnights | board.WhitePawns;
-		var blackPiecesAt = board.BlackKing | board.BlackQueens | board.BlackRooks | board.BlackBishops | board.BlackKnights | board.BlackPawns;
+		var whitePiecesAt = board.WhitePieces;
+		var blackPiecesAt = board.BlackPieces;
 
 		var king = color == Color.White ? board.WhiteKing : board.BlackKing;
 		var ownPiecesAt = color == Color.White ? whitePiecesAt : blackPiecesAt;

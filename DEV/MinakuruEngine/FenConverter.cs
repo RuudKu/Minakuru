@@ -210,17 +210,12 @@ public static class FenConverter
 
 		void SetSideToMove(Board board, string part)
 		{
-			switch (part)
+			board.ColorToMove = part switch
 			{
-				case "w":
-					board.ColorToMove = Color.White;
-					break;
-				case "b":
-					board.ColorToMove = Color.Black;
-					break;
-				default:
-					throw new NotSupportedException();
-			}
+				"w" => Color.White,
+				"b" => Color.Black,
+				_ => throw new NotSupportedException(),
+			};
 		}
 
 		void SetCastlingAbility(Board board, string part)

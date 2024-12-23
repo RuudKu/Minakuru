@@ -14,19 +14,19 @@ public record Board
 	private const ulong BlackCantCastleShortFilter = 1 << 7;
 	private const ulong BlackCantCastleLongFilter = 1 << 8;
 
-	public ulong WhitePawns { get; private set; }
-	public ulong WhiteKnights { get; private set; }
-	public ulong WhiteBishops { get; private set; }
-	public ulong WhiteRooks { get; private set; }
-	public ulong WhiteQueens { get; private set; }
-	public ulong WhiteKing { get; private set; }
+	internal ulong WhitePawns { get; private set; }
+	internal ulong WhiteKnights { get; private set; }
+	internal ulong WhiteBishops { get; private set; }
+	internal ulong WhiteRooks { get; private set; }
+	internal ulong WhiteQueens { get; private set; }
+	internal ulong WhiteKing { get; private set; }
 
-	public ulong BlackPawns { get; private set; }
-	public ulong BlackKnights { get; private set; }
-	public ulong BlackBishops { get; private set; }
-	public ulong BlackRooks { get; private set; }
-	public ulong BlackQueens { get; private set; }
-	public ulong BlackKing { get; private set; }
+	internal ulong BlackPawns { get; private set; }
+	internal ulong BlackKnights { get; private set; }
+	internal ulong BlackBishops { get; private set; }
+	internal ulong BlackRooks { get; private set; }
+	internal ulong BlackQueens { get; private set; }
+	internal ulong BlackKing { get; private set; }
 
 	private ulong Specials;
 	public byte HalfMoveClock { get; set; }
@@ -176,6 +176,71 @@ public record Board
 		if ((BlackKing & filter) != 0)
 		{
 			return ColoredPiece.BlackKing;
+		}
+		return null;
+	}
+
+	public ColoredPiece? GetColoredPieceAt(byte fieldNo, Color color)
+	{
+		var filter = (ulong)1 << fieldNo;
+		switch (color)
+		{
+			case Color.White:
+				if ((WhitePawns & filter) != 0)
+				{
+					return ColoredPiece.WhitePawn;
+				}
+				if ((WhiteKnights & filter) != 0)
+				{
+					return ColoredPiece.WhiteKnight;
+				}
+				if ((WhiteBishops & filter) != 0)
+				{
+					return ColoredPiece.WhiteBishop;
+				}
+				if ((WhiteRooks & filter) != 0)
+				{
+					return ColoredPiece.WhiteRook;
+				}
+				if ((WhiteQueens & filter) != 0)
+				{
+					return ColoredPiece.WhiteQueen;
+				}
+				if ((WhiteKing & filter) != 0)
+				{
+					return ColoredPiece.WhiteKing;
+				}
+				break;
+
+			case Color.Black:
+				if ((BlackPawns & filter) != 0)
+				{
+					return ColoredPiece.BlackPawn;
+				}
+				if ((BlackKnights& filter) != 0)
+				{
+					return ColoredPiece.BlackKnight;
+				}
+				if ((BlackBishops & filter) != 0)
+				{
+					return ColoredPiece.BlackBishop;
+				}
+				if ((BlackRooks & filter) != 0)
+				{
+					return ColoredPiece.BlackRook;
+				}
+				if ((BlackQueens & filter) != 0)
+				{
+					return ColoredPiece.BlackQueen;
+				}
+				if ((BlackKing & filter) != 0)
+				{
+					return ColoredPiece.BlackKing;
+				}
+				break;
+
+			default:
+				throw new NotImplementedException();
 		}
 		return null;
 	}
@@ -412,22 +477,24 @@ public record Board
 
 	public static Board Init()
 	{
-		var board = new Board();
-		board.WhiteKing = 0b_00010000;
-		board.WhiteQueens = 0b_00001000;
-		board.WhiteRooks = 0b_10000001;
-		board.WhiteBishops = 0b_00100100;
-		board.WhiteKnights = 0b_01000010;
-		board.WhitePawns = ((ulong)0b_11111111) << 8;
+		var board = new Board
+		{
+			WhiteKing = 0b_00010000,
+			WhiteQueens = 0b_00001000,
+			WhiteRooks = 0b_10000001,
+			WhiteBishops = 0b_00100100,
+			WhiteKnights = 0b_01000010,
+			WhitePawns = ((ulong)0b_11111111) << 8,
 
-		board.BlackKing = ((ulong)0b_00010000) << 56;
-		board.BlackQueens = ((ulong)0b_00001000) << 56;
-		board.BlackRooks = ((ulong)0b_10000001) << 56;
-		board.BlackBishops = ((ulong)0b_00100100) << 56;
-		board.BlackKnights = ((ulong)0b_01000010) << 56;
-		board.BlackPawns = ((ulong)0b_11111111) << 48;
+			BlackKing = ((ulong)0b_00010000) << 56,
+			BlackQueens = ((ulong)0b_00001000) << 56,
+			BlackRooks = ((ulong)0b_10000001) << 56,
+			BlackBishops = ((ulong)0b_00100100) << 56,
+			BlackKnights = ((ulong)0b_01000010) << 56,
+			BlackPawns = ((ulong)0b_11111111) << 48,
 
-		board.Specials = 0;
+			Specials = 0
+		};
 		return board;
 	}
 }
