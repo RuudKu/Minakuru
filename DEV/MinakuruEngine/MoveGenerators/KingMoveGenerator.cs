@@ -49,5 +49,31 @@ public class KingMoveGenerator : IMoveGenerator
 				}
 			}
 		}
+
+		switch (color)
+		{
+			case Color.White:
+				if (board.WhiteCanCastleShort && board.IsEmpty(Field.F1FieldNo) && board.IsEmpty(Field.G1FieldNo))
+				{
+					yield return new Move(Field.E1FieldNo, Field.G1FieldNo);
+				}
+				if (board.WhiteCanCastleLong && board.IsEmpty(Field.D1FieldNo) && board.IsEmpty(Field.C1FieldNo) && board.IsEmpty(Field.B1FieldNo))
+				{
+					yield return new Move(Field.E1FieldNo, Field.C1FieldNo);
+				}
+				break;
+			case Color.Black:
+				if (board.BlackCanCastleShort && board.IsEmpty(Field.F8FieldNo) && board.IsEmpty(Field.G8FieldNo))
+				{
+					yield return new Move(Field.E8FieldNo, Field.G8FieldNo);
+				}
+				if (board.BlackCanCastleLong && board.IsEmpty(Field.D8FieldNo) && board.IsEmpty(Field.C8FieldNo) && board.IsEmpty(Field.B8FieldNo))
+				{
+					yield return new Move(Field.E8FieldNo, Field.C8FieldNo);
+				}
+				break;
+			default:
+				throw new NotSupportedException();
+		}
 	}
 }

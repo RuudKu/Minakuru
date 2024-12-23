@@ -217,7 +217,7 @@ public record Board
 				{
 					return ColoredPiece.BlackPawn;
 				}
-				if ((BlackKnights& filter) != 0)
+				if ((BlackKnights & filter) != 0)
 				{
 					return ColoredPiece.BlackKnight;
 				}
@@ -496,5 +496,11 @@ public record Board
 			Specials = 0
 		};
 		return board;
+	}
+
+	public bool IsEmpty(byte fieldNo)
+	{
+		var filter = (ulong)1 << fieldNo;
+		return (Pieces & filter) == 0;
 	}
 }
