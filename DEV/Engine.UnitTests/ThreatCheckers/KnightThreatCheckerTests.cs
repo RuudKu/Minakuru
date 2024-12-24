@@ -31,4 +31,3 @@ public class KnightThreatCheckerTests
 		actual.Should().Be(expected);
 	}
 }
-
