@@ -126,7 +126,7 @@ public static class MoveMaker
 			}
 			else
 			{
-				throw new Exception();
+				throw new IllegalMoveException();
 			}
 		}
 		else if (coloredPieceFrom == ColoredPiece.WhiteKing && move.From == Field.E1FieldNo && move.To == Field.C1FieldNo)
@@ -138,7 +138,7 @@ public static class MoveMaker
 			}
 			else
 			{
-				throw new Exception();
+				throw new IllegalMoveException();
 			}
 		}
 		else if (coloredPieceFrom == ColoredPiece.BlackKing && move.From == Field.E8FieldNo && move.To == Field.G8FieldNo)
@@ -150,7 +150,7 @@ public static class MoveMaker
 			}
 			else
 			{
-				throw new Exception();
+				throw new IllegalMoveException();
 			}
 		}
 		else if (coloredPieceFrom == ColoredPiece.BlackKing && move.From == Field.E8FieldNo && move.To == Field.C8FieldNo)
@@ -162,15 +162,15 @@ public static class MoveMaker
 			}
 			else
 			{
-				throw new Exception();
+				throw new IllegalMoveException();
 			}
 		}
 
-
 		if (coloredPieceFrom == ColoredPiece.Empty)
 		{
-			throw new Exception("No Piece at from-Field");
+			throw new IllegalMoveException("No Piece at from-Field");
 		}
+
 
 		newBoard.EmptyField(move.From, coloredPieceFrom);
 		newBoard.SetColoredPieceAt(move.To, coloredPieceFrom);
