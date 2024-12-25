@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSTest.Sdk/3.6.1">
+﻿<Project Sdk="MSTest.Sdk">
 
 	<PropertyGroup>
 		<RootNamespace>Minakuru.Engine.PerftTests</RootNamespace>
@@ -10,5 +10,13 @@
 		<UseVSTest>true</UseVSTest>
 		<IsTestProject>true</IsTestProject>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\MinakuruEngine\Engine.csproj" />
+	</ItemGroup>
 
 </Project>
