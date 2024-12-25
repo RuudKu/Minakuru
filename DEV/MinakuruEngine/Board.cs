@@ -261,6 +261,27 @@ public record Board
 		return ColoredPiece.Empty;
 	}
 
+	public bool HasColoredPieceAt(byte fieldNo, ColoredPiece coloredPiece)
+	{
+		var filter = (ulong)1 << fieldNo;
+		return coloredPiece switch
+		{
+			ColoredPiece.WhiteKing => (WhiteKing & filter) != 0,
+			ColoredPiece.WhiteQueen => (WhiteQueens & filter) != 0,
+			ColoredPiece.WhiteRook => (WhiteRooks & filter) != 0,
+			ColoredPiece.WhiteBishop => (WhiteBishops & filter) != 0,
+			ColoredPiece.WhiteKnight => (WhiteKnights & filter) != 0,
+			ColoredPiece.WhitePawn => (WhitePawns & filter) != 0,
+			ColoredPiece.BlackKing => (BlackKing & filter) != 0,
+			ColoredPiece.BlackQueen => (BlackQueens & filter) != 0,
+			ColoredPiece.BlackRook => (BlackRooks & filter) != 0,
+			ColoredPiece.BlackBishop => (BlackBishops & filter) != 0,
+			ColoredPiece.BlackKnight => (BlackKnights & filter) != 0,
+			ColoredPiece.BlackPawn => (BlackPawns & filter) != 0,
+			_ => throw new NotImplementedException(),
+		};
+	}
+
 	public void SetColoredPieceAt(byte fieldNo, ColoredPiece coloredPiece)
 	{
 		var filter = (ulong)1 << fieldNo;

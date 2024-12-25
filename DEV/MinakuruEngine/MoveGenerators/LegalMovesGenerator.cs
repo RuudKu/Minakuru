@@ -16,14 +16,52 @@ public class LegalMovesGenerator(PseudoLegalMoveGenerator pseudoLegalMovesGenera
 		var enumerator = _pseudoLegalMovesGenerator.GenerateMove(board, color).GetEnumerator();
 		while (enumerator.MoveNext())
 		{
-			var newBoard = MoveMaker.MakeMove(board, enumerator.Current);
+			var pseudoLegalMove = enumerator.Current;
+			Color opponentColor = color.OtherColor();
+
+			var newBoard = MoveMaker.MakeMove(board, pseudoLegalMove);
+			if (pseudoLegalMove.From == Field.E1FieldNo && pseudoLegalMove.To == Field.C1FieldNo)
+			{
+				if (board.HasColoredPieceAt(Field.E1FieldNo, ColoredPiece.WhiteKing) &&
+					(_threatChecker.IsUnderAttack(newBoard, Field.E1FieldNo, opponentColor) ||
+						_threatChecker.IsUnderAttack(newBoard, Field.D1FieldNo, opponentColor)))
+				{
+					continue;
+				}
+			}
+			else if (pseudoLegalMove.From == Field.E1FieldNo && pseudoLegalMove.To == Field.G1FieldNo)
+			{
+				if (board.HasColoredPieceAt(Field.E1FieldNo, ColoredPiece.WhiteKing) &&
+					(_threatChecker.IsUnderAttack(newBoard, Field.E1FieldNo, opponentColor) ||
+						_threatChecker.IsUnderAttack(newBoard, Field.F1FieldNo, opponentColor)))
+				{
+					continue;
+				}
+			}
+			else if(pseudoLegalMove.From == Field.E8FieldNo && pseudoLegalMove.To == Field.C8FieldNo)
+			{
+				if (board.HasColoredPieceAt(Field.E8FieldNo, ColoredPiece.BlackKing) &&
+					(_threatChecker.IsUnderAttack(newBoard, Field.E8FieldNo, opponentColor) ||
+						_threatChecker.IsUnderAttack(newBoard, Field.D8FieldNo, opponentColor)))
+				{
+					continue;
+				}
+			}
+			else if (pseudoLegalMove.From == Field.E8FieldNo && pseudoLegalMove.To == Field.G8FieldNo
+				&& board.HasColoredPieceAt(Field.E8FieldNo, ColoredPiece.BlackKing)
+					&& (_threatChecker.IsUnderAttack(newBoard, Field.E8FieldNo, opponentColor) ||
+						_threatChecker.IsUnderAttack(newBoard, Field.F8FieldNo, opponentColor)))
+			{
+				continue;
+			}
+
 			Color colorToMove = board.ColorToMove;
 			byte kingFieldNo = newBoard.KingAt(colorToMove);
 
 			bool check = _threatChecker.IsUnderAttack(newBoard, kingFieldNo, colorToMove.OtherColor());
 			if (!check)
 			{
-				yield return enumerator.Current;
+				yield return pseudoLegalMove;
 			}
 		}
 	}
