@@ -117,6 +117,55 @@ public static class MoveMaker
 				// en passant capture by black
 			}
 		}
+		else if (coloredPieceFrom == ColoredPiece.WhiteKing && move.From == Field.E1FieldNo && move.To == Field.G1FieldNo)
+		{
+			if (board.WhiteCanCastleShort)
+			{
+				newBoard.EmptyField(Field.H1FieldNo, ColoredPiece.WhiteRook);
+				newBoard.SetColoredPieceAt(Field.F1FieldNo, ColoredPiece.WhiteRook);
+			}
+			else
+			{
+				throw new Exception();
+			}
+		}
+		else if (coloredPieceFrom == ColoredPiece.WhiteKing && move.From == Field.E1FieldNo && move.To == Field.C1FieldNo)
+		{
+			if (board.WhiteCanCastleLong)
+			{
+				newBoard.EmptyField(Field.A1FieldNo, ColoredPiece.WhiteRook);
+				newBoard.SetColoredPieceAt(Field.D1FieldNo, ColoredPiece.WhiteRook);
+			}
+			else
+			{
+				throw new Exception();
+			}
+		}
+		else if (coloredPieceFrom == ColoredPiece.BlackKing && move.From == Field.E8FieldNo && move.To == Field.G8FieldNo)
+		{
+			if (board.BlackCanCastleShort)
+			{
+				newBoard.EmptyField(Field.H8FieldNo, ColoredPiece.BlackRook);
+				newBoard.SetColoredPieceAt(Field.F8FieldNo, ColoredPiece.BlackRook);
+			}
+			else
+			{
+				throw new Exception();
+			}
+		}
+		else if (coloredPieceFrom == ColoredPiece.BlackKing && move.From == Field.E8FieldNo && move.To == Field.C8FieldNo)
+		{
+			if (board.BlackCanCastleLong)
+			{
+				newBoard.EmptyField(Field.A8FieldNo, ColoredPiece.BlackRook);
+				newBoard.SetColoredPieceAt(Field.D8FieldNo, ColoredPiece.BlackRook);
+			}
+			else
+			{
+				throw new Exception();
+			}
+		}
+
 
 		if (coloredPieceFrom == ColoredPiece.Empty)
 		{

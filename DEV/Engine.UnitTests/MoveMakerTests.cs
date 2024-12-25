@@ -61,6 +61,34 @@ public class MoveMakerTests
 	}
 
 	[TestMethod]
+	public void WhiteShortCastlingInhibitsWhiteCastling()
+	{
+		var originalFen = "7k/7p/8/8/8/8/8/R3K2R w KQ - 0 1";
+		var board = originalFen.ToBoard();
+
+		Move move = new(Field.E1FieldNo, Field.G1FieldNo);
+		var newBoard = MoveMaker.MakeMove(board, move);
+
+		var newFen = newBoard.ToFen();
+		var expected = "7k/7p/8/8/8/8/8/R4RK1 b - - 1 1";
+		newFen.Should().Be(expected);
+	}
+
+	[TestMethod]
+	public void WhiteLongCastlingInhibitsWhiteCastling()
+	{
+		var originalFen = "7k/7p/8/8/8/8/8/R3K2R w KQ - 0 1";
+		var board = originalFen.ToBoard();
+
+		Move move = new(Field.E1FieldNo, Field.C1FieldNo);
+		var newBoard = MoveMaker.MakeMove(board, move);
+
+		var newFen = newBoard.ToFen();
+		var expected = "7k/7p/8/8/8/8/8/2KR3R b - - 1 1";
+		newFen.Should().Be(expected);
+	}
+
+	[TestMethod]
 	public void BlackKingMovesInhibitsCastling()
 	{
 		var originalFen = "r3k2r/8/8/8/8/8/4P3/4K3 b kq - 1 1";
@@ -99,6 +127,34 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "r3k3/7r/8/8/8/8/4P3/4K3 w q - 2 2";
+		newFen.Should().Be(expected);
+	}
+
+	[TestMethod]
+	public void BlackShortCastlingInhibitsCastling()
+	{
+		var originalFen = "r3k2r/8/8/8/8/8/4P3/4K3 b kq - 1 1";
+		var board = originalFen.ToBoard();
+
+		Move move = new(Field.E8FieldNo, Field.G8FieldNo);
+		var newBoard = MoveMaker.MakeMove(board, move);
+
+		var newFen = newBoard.ToFen();
+		var expected = "r4rk1/8/8/8/8/8/4P3/4K3 w - - 2 2";
+		newFen.Should().Be(expected);
+	}
+
+	[TestMethod]
+	public void BlackLongCastlingInhibitsCastling()
+	{
+		var originalFen = "r3k2r/8/8/8/8/8/4P3/4K3 b kq - 1 1";
+		var board = originalFen.ToBoard();
+
+		Move move = new(Field.E8FieldNo, Field.C8FieldNo);
+		var newBoard = MoveMaker.MakeMove(board, move);
+
+		var newFen = newBoard.ToFen();
+		var expected = "2kr3r/8/8/8/8/8/4P3/4K3 w - - 2 2";
 		newFen.Should().Be(expected);
 	}
 
