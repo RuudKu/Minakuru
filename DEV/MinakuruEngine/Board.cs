@@ -376,7 +376,7 @@ public record Board
 	{
 		get
 		{
-			return (Specials & (WhiteCantCastleShortFilter | WhiteCantCastleLongFilter)) == 0;
+			return (~Specials & (WhiteCantCastleShortFilter | WhiteCantCastleLongFilter)) != 0;
 		}
 	}
 
@@ -422,7 +422,7 @@ public record Board
 	{
 		get
 		{
-			return (Specials & (BlackCantCastleShortFilter | BlackCantCastleLongFilter)) == 0;
+			return (~Specials & (BlackCantCastleShortFilter | BlackCantCastleLongFilter)) != 0;
 		}
 	}
 

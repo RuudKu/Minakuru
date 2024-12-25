@@ -224,6 +224,10 @@ public static class FenConverter
 
 		void SetCastlingAbility(Board board, string part)
 		{
+			board.WhiteCanCastleShort = false;
+			board.WhiteCanCastleLong = false;
+			board.BlackCanCastleShort = false;
+			board.BlackCanCastleLong = false;
 			foreach (var c in part)
 			{
 				switch (c)
@@ -241,10 +245,6 @@ public static class FenConverter
 						board.BlackCanCastleLong = true;
 						break;
 					case '-':
-						board.WhiteCanCastleShort = false;
-						board.WhiteCanCastleLong = false;
-						board.BlackCanCastleShort = false;
-						board.BlackCanCastleLong = false;
 						break;
 					default:
 						throw new InvalidCastException();

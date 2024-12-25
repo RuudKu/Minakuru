@@ -1,6 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-
-namespace Minakuru.Engine;
+﻿namespace Minakuru.Engine;
 
 public static class MoveMaker
 {
