@@ -1,38 +1,37 @@
-﻿
-namespace Engine.ThreatCheckers;
+﻿namespace Minakuru.Engine.ThreatCheckers;
 
 public class PawnThreatChecker : IThreatChecker
 {
-	public bool IsUnderAttack(Board board, byte targetFieldNo, Color color)
+	public bool IsUnderAttack(Board board, byte targetFieldNo, Color attackedByColor)
 	{
-		var pawns = color == Color.White ? board.WhitePawns : board.BlackPawns;
+		var opponentPawns = attackedByColor == Color.White ? board.WhitePawns : board.BlackPawns;
 
 		var fromColumnNo = targetFieldNo % 8;
 		ulong pawnsFilter = 0L;
 
 		if (fromColumnNo > 0)
 		{
-			if (color == Color.White)
+			if (attackedByColor == Color.White)
 			{
-				pawnsFilter |= (ulong)1 << (targetFieldNo - 8 - 1);
+				pawnsFilter |= (ulong)1 << targetFieldNo - 8 - 1;
 			}
-			else if (color == Color.Black)
+			else if (attackedByColor == Color.Black)
 			{
-				pawnsFilter |= (ulong)1 << (targetFieldNo + 8 - 1);
+				pawnsFilter |= (ulong)1 << targetFieldNo + 8 - 1;
 			}
 		}
 		if (fromColumnNo < 7)
 		{
-			if (color == Color.White)
+			if (attackedByColor == Color.White)
 			{
-				pawnsFilter |= (ulong)1 << (targetFieldNo - 8 + 1);
+				pawnsFilter |= (ulong)1 << targetFieldNo - 8 + 1;
 			}
-			else if (color == Color.Black)
+			else if (attackedByColor == Color.Black)
 			{
-				pawnsFilter |= (ulong)1 << (targetFieldNo + 8 + 1);
+				pawnsFilter |= (ulong)1 << targetFieldNo + 8 + 1;
 			}
 		}
 
-		return (pawns & pawnsFilter) != 0;
+		return (opponentPawns & pawnsFilter) != 0;
 	}
 }

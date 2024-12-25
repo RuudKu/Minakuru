@@ -1,49 +1,47 @@
-﻿
-namespace Engine.ThreatCheckers
+﻿namespace Minakuru.Engine.ThreatCheckers;
+
+public class DiagonalThreatChecker : IThreatChecker
 {
-	public class DiagonalThreatChecker : IThreatChecker
+	public bool IsUnderAttack(Board board, byte targetFieldNo, Color attackedByColor)
 	{
-		public bool IsUnderAttack(Board board, byte targetFieldNo, Color color)
+		var piecesAt = board.Pieces;
+
+		var opponentBishopsQueens = attackedByColor == Color.White ? board.WhiteQueens | board.WhiteBishops : board.BlackQueens | board.BlackBishops;
+
+		var toColumnNo = targetFieldNo % 8;
+		var toRowNo = targetFieldNo / 8;
+
+		int currentColumn;
+		int currentRow;
+
+		for (int direction = 0; direction < 4; direction++)
 		{
-			var piecesAt = board.Pieces;
+			int deltaColumn = new int[] { -1, -1, +1, +1 }[direction];
+			int deltaRow = new int[] { -1, +1, -1, +1 }[direction];
+			currentColumn = toColumnNo + deltaColumn;
+			currentRow = toRowNo + deltaRow;
 
-			var bishopsQueens = color == Color.White ? board.WhiteQueens | board.WhiteBishops : board.BlackQueens | board.BlackBishops;
-
-			var toColumnNo = targetFieldNo % 8;
-			var toRowNo = targetFieldNo / 8;
-
-			int currentColumn;
-			int currentRow;
-
-			for (int direction = 0; direction < 4; direction++)
+			bool ownPiece = false;
+			bool occupied = false;
+			while (currentColumn >= 0 && currentColumn < 8 && currentRow >= 0 && currentRow < 8 && !ownPiece && !occupied)
 			{
-				int deltaColumn = new int[] { -1, -1, +1, +1 }[direction];
-				int deltaRow = new int[] { -1, +1, -1, +1 }[direction];
-				currentColumn = toColumnNo + deltaColumn;
-				currentRow = toRowNo + deltaRow;
+				byte to = (byte)(8 * currentRow + currentColumn);
+				ulong toFilter = (ulong)1 << to;
 
-				bool ownPiece = false;
-				bool occupied = false;
-				while (currentColumn >= 0 && currentColumn < 8 && currentRow >= 0 && currentRow < 8 && !ownPiece && !occupied)
+				if ((piecesAt & toFilter) != 0)
 				{
-					byte to = (byte)(8 * currentRow + currentColumn);
-					ulong toFilter = (ulong)1 << to;
-
-					if ((piecesAt & toFilter) != 0)
+					if ((opponentBishopsQueens & toFilter) != 0)
 					{
-						if ((bishopsQueens & toFilter) != 0)
-						{
-							return true;
-						}
-						occupied = true;
+						return true;
 					}
-
-					currentColumn += deltaColumn;
-					currentRow += deltaRow;
+					occupied = true;
 				}
-			}
 
-			return false;
+				currentColumn += deltaColumn;
+				currentRow += deltaRow;
+			}
 		}
+
+		return false;
 	}
 }

@@ -1,10 +1,10 @@
-﻿namespace Engine.ThreatCheckers;
+﻿namespace Minakuru.Engine.ThreatCheckers;
 
 public class KingThreatChecker : IThreatChecker
 {
-	public bool IsUnderAttack(Board board, byte targetFieldNo, Color color)
+	public bool IsUnderAttack(Board board, byte targetFieldNo, Color attackedByColor)
 	{
-		var king = color == Color.White ? board.WhiteKing : board.BlackKing;
+		var opponentKing = attackedByColor == Color.White ? board.WhiteKing : board.BlackKing;
 
 		var toColumnNo = targetFieldNo % 8;
 		var toRowNo = targetFieldNo / 8;
@@ -23,6 +23,6 @@ public class KingThreatChecker : IThreatChecker
 				kingFilter |= fromFilter;
 			}
 		}
-		return (king & kingFilter) != 0;
+		return (opponentKing & kingFilter) != 0;
 	}
 }

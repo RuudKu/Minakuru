@@ -1,4 +1,4 @@
-﻿namespace Engine.MoveGenerators;
+﻿namespace Minakuru.Engine.MoveGenerators;
 
 public class QueenMoveGenerator : IMoveGenerator
 {
@@ -44,7 +44,7 @@ public class QueenMoveGenerator : IMoveGenerator
 						ownPiece = (ownPiecesAt & toFilter) != 0;
 
 						toColumn += deltaColumn;
-						toRow += + deltaRow;
+						toRow += +deltaRow;
 					}
 				}
 

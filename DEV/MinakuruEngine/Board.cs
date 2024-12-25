@@ -1,6 +1,7 @@
-﻿using System.Text;
+﻿using System.Linq.Expressions;
+using System.Text;
 
-namespace Engine;
+namespace Minakuru.Engine;
 
 public record Board
 {
@@ -101,8 +102,23 @@ public record Board
 				break;
 
 			default:
-				throw new Exception();
+				throw new NotSupportedException();
 		}
+	}
+
+	public byte KingAt(Color color)
+	{
+		var king = color == Color.White ? WhiteKing : BlackKing;
+		ulong filter = 1;
+		for (byte fieldNo = 0; fieldNo < 64; fieldNo++)
+		{
+			if ((king & filter) != 0)
+			{
+				return fieldNo;
+			}
+			filter = filter << 1;
+		}
+		return byte.MaxValue;
 	}
 
 	public void Clear()
@@ -436,7 +452,7 @@ public record Board
 			{
 				for (int columnNo = 0; columnNo < 8; columnNo++)
 				{
-					var filter = (ulong)1 << (rowNo * 8 + columnNo);
+					var filter = (ulong)1 << rowNo * 8 + columnNo;
 					if ((bits & filter) != 0)
 					{
 						if (count > 0)
@@ -484,14 +500,14 @@ public record Board
 			WhiteRooks = 0b_10000001,
 			WhiteBishops = 0b_00100100,
 			WhiteKnights = 0b_01000010,
-			WhitePawns = ((ulong)0b_11111111) << 8,
+			WhitePawns = (ulong)0b_11111111 << 8,
 
-			BlackKing = ((ulong)0b_00010000) << 56,
-			BlackQueens = ((ulong)0b_00001000) << 56,
-			BlackRooks = ((ulong)0b_10000001) << 56,
-			BlackBishops = ((ulong)0b_00100100) << 56,
-			BlackKnights = ((ulong)0b_01000010) << 56,
-			BlackPawns = ((ulong)0b_11111111) << 48,
+			BlackKing = (ulong)0b_00010000 << 56,
+			BlackQueens = (ulong)0b_00001000 << 56,
+			BlackRooks = (ulong)0b_10000001 << 56,
+			BlackBishops = (ulong)0b_00100100 << 56,
+			BlackKnights = (ulong)0b_01000010 << 56,
+			BlackPawns = (ulong)0b_11111111 << 48,
 
 			Specials = 0
 		};

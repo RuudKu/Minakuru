@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 
-namespace Engine.UnitTests;
+namespace Minakuru.Engine.UnitTests;
 
 [TestClass]
 public sealed class FenTests
@@ -27,7 +27,7 @@ public sealed class FenTests
 
 		// Act
 		var actual = fen.ToBoard();
-		var boardAsString = actual.ToString();
+		// var boardAsString = actual.ToString();
 
 		// Assert
 		var expected = Board.Init();

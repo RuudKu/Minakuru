@@ -1,4 +1,4 @@
-﻿namespace Engine.MoveGenerators;
+﻿namespace Minakuru.Engine.MoveGenerators;
 
 public class KingMoveGenerator : IMoveGenerator
 {

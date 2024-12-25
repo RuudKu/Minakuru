@@ -1,8 +1,8 @@
-﻿namespace Engine;
+﻿namespace Minakuru.Engine;
 
 public enum Color
 {
-	Any=3,
+	Any = 3,
 	White = 1,
 	Black = 2
 }

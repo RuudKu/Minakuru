@@ -1,4 +1,4 @@
-﻿namespace Engine;
+﻿namespace Minakuru.Engine;
 
 [Flags]
 public enum Piece

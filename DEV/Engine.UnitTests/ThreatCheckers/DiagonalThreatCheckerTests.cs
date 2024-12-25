@@ -1,7 +1,8 @@
-﻿using Engine.ThreatCheckers;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Minakuru.Engine;
+using Minakuru.Engine.ThreatCheckers;
 
-namespace Engine.UnitTests.ThreatCheckers;
+namespace Minakuru.Engine.UnitTests.ThreatCheckers;
 
 [TestClass]
 public class DiagonalThreatCheckerTests

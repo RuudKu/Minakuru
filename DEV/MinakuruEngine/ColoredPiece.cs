@@ -1,5 +1,4 @@
-﻿
-namespace Engine;
+﻿namespace Minakuru.Engine;
 
 public enum ColoredPiece
 {

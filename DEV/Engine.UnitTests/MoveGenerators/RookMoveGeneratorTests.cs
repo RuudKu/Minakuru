@@ -1,7 +1,7 @@
-﻿using Engine.MoveGenerators;
-using FluentAssertions;
+﻿using FluentAssertions;
+using Minakuru.Engine.MoveGenerators;
 
-namespace Engine.UnitTests.MoveGenerators;
+namespace Minakuru.Engine.UnitTests.MoveGenerators;
 
 [TestClass]
 public class RookMoveGeneratorTests

@@ -1,7 +1,6 @@
-﻿namespace Engine.MoveGenerators
+﻿namespace Minakuru.Engine.MoveGenerators;
+
+public interface IMoveGenerator
 {
-	public interface IMoveGenerator
-	{
-		public IEnumerable<Move> GenerateMove(Board board, Color color);
-	}
+	public IEnumerable<Move> GenerateMove(Board board, Color color);
 }

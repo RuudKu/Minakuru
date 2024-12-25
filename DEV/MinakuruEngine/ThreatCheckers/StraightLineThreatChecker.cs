@@ -1,13 +1,12 @@
-﻿
-namespace Engine.ThreatCheckers;
+﻿namespace Minakuru.Engine.ThreatCheckers;
 
 public class StraightLineThreatChecker : IThreatChecker
 {
-	public bool IsUnderAttack(Board board, byte targetFieldNo, Color color)
+	public bool IsUnderAttack(Board board, byte targetFieldNo, Color attackedByColor)
 	{
 		var piecesAt = board.Pieces;
 
-		var rooksQueens = color == Color.White ? board.WhiteQueens | board.WhiteRooks : board.BlackQueens | board.BlackRooks;
+		var opponentRooksQueens = attackedByColor == Color.White ? board.WhiteQueens | board.WhiteRooks : board.BlackQueens | board.BlackRooks;
 
 		var toColumnNo = targetFieldNo % 8;
 		var toRowNo = targetFieldNo / 8;
@@ -31,7 +30,7 @@ public class StraightLineThreatChecker : IThreatChecker
 
 				if ((piecesAt & toFilter) != 0)
 				{
-					if ((rooksQueens & toFilter) != 0)
+					if ((opponentRooksQueens & toFilter) != 0)
 					{
 						return true;
 					}

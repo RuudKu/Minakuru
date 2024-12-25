@@ -1,0 +1,14 @@
+﻿<Project Sdk="MSTest.Sdk/3.6.1">
+
+	<PropertyGroup>
+		<RootNamespace>Minakuru.Engine.PerftTests</RootNamespace>
+		<AssemblyName>Minakuru.Engine.PerftTests</AssemblyName>
+		<TargetFramework>net9.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<UseVSTest>true</UseVSTest>
+		<IsTestProject>true</IsTestProject>
+	</PropertyGroup>
+
+</Project>

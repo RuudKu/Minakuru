@@ -1,4 +1,4 @@
-﻿namespace Engine;
+﻿namespace Minakuru.Engine;
 
 public static class Field
 {
@@ -92,75 +92,75 @@ public static class Field
 	public const byte G8FieldNo = ColumnGFieldNo + Row8FieldNo;
 	public const byte H8FieldNo = ColumnHFieldNo + Row8FieldNo;
 
-	public const ulong A1Filter = ((ulong)1) << A1FieldNo;
-	public const ulong B1Filter = ((ulong)1) << B1FieldNo;
-	public const ulong C1Filter = ((ulong)1) << C1FieldNo;
-	public const ulong D1Filter = ((ulong)1) << D2FieldNo;
-	public const ulong E1Filter = ((ulong)1) << E2FieldNo;
-	public const ulong F1Filter = ((ulong)1) << F7FieldNo;
-	public const ulong G1Filter = ((ulong)1) << H7FieldNo;
-	public const ulong H1Filter = ((ulong)1) << H1FieldNo;
+	public const ulong A1Filter = (ulong)1 << A1FieldNo;
+	public const ulong B1Filter = (ulong)1 << B1FieldNo;
+	public const ulong C1Filter = (ulong)1 << C1FieldNo;
+	public const ulong D1Filter = (ulong)1 << D2FieldNo;
+	public const ulong E1Filter = (ulong)1 << E2FieldNo;
+	public const ulong F1Filter = (ulong)1 << F7FieldNo;
+	public const ulong G1Filter = (ulong)1 << H7FieldNo;
+	public const ulong H1Filter = (ulong)1 << H1FieldNo;
 
-	public const ulong A2Filter = ((ulong)1) << A1FieldNo;
-	public const ulong B2Filter = ((ulong)1) << B2FieldNo;
-	public const ulong C2Filter = ((ulong)1) << C2FieldNo;
-	public const ulong D2Filter = ((ulong)1) << D2FieldNo;
-	public const ulong E2Filter = ((ulong)1) << E2FieldNo;
-	public const ulong F2Filter = ((ulong)1) << F2FieldNo;
-	public const ulong G2Filter = ((ulong)1) << H2FieldNo;
-	public const ulong H2Filter = ((ulong)1) << H2FieldNo;
+	public const ulong A2Filter = (ulong)1 << A1FieldNo;
+	public const ulong B2Filter = (ulong)1 << B2FieldNo;
+	public const ulong C2Filter = (ulong)1 << C2FieldNo;
+	public const ulong D2Filter = (ulong)1 << D2FieldNo;
+	public const ulong E2Filter = (ulong)1 << E2FieldNo;
+	public const ulong F2Filter = (ulong)1 << F2FieldNo;
+	public const ulong G2Filter = (ulong)1 << H2FieldNo;
+	public const ulong H2Filter = (ulong)1 << H2FieldNo;
 
-	public const ulong A3Filter = ((ulong)1) << A3FieldNo;
-	public const ulong B3Filter = ((ulong)1) << B3FieldNo;
-	public const ulong C3Filter = ((ulong)1) << C3FieldNo;
-	public const ulong D3Filter = ((ulong)1) << D3FieldNo;
-	public const ulong E3Filter = ((ulong)1) << E3FieldNo;
-	public const ulong F3Filter = ((ulong)1) << F3FieldNo;
-	public const ulong G3Filter = ((ulong)1) << H3FieldNo;
-	public const ulong H3Filter = ((ulong)1) << H3FieldNo;
+	public const ulong A3Filter = (ulong)1 << A3FieldNo;
+	public const ulong B3Filter = (ulong)1 << B3FieldNo;
+	public const ulong C3Filter = (ulong)1 << C3FieldNo;
+	public const ulong D3Filter = (ulong)1 << D3FieldNo;
+	public const ulong E3Filter = (ulong)1 << E3FieldNo;
+	public const ulong F3Filter = (ulong)1 << F3FieldNo;
+	public const ulong G3Filter = (ulong)1 << H3FieldNo;
+	public const ulong H3Filter = (ulong)1 << H3FieldNo;
 
-	public const ulong A4Filter = ((ulong)1) << A4FieldNo;
-	public const ulong B4Filter = ((ulong)1) << B4FieldNo;
-	public const ulong C4Filter = ((ulong)1) << C4FieldNo;
-	public const ulong D4Filter = ((ulong)1) << D4FieldNo;
-	public const ulong E4Filter = ((ulong)1) << E4FieldNo;
-	public const ulong F4Filter = ((ulong)1) << F4FieldNo;
-	public const ulong G4Filter = ((ulong)1) << H4FieldNo;
-	public const ulong H4Filter = ((ulong)1) << H4FieldNo;
+	public const ulong A4Filter = (ulong)1 << A4FieldNo;
+	public const ulong B4Filter = (ulong)1 << B4FieldNo;
+	public const ulong C4Filter = (ulong)1 << C4FieldNo;
+	public const ulong D4Filter = (ulong)1 << D4FieldNo;
+	public const ulong E4Filter = (ulong)1 << E4FieldNo;
+	public const ulong F4Filter = (ulong)1 << F4FieldNo;
+	public const ulong G4Filter = (ulong)1 << H4FieldNo;
+	public const ulong H4Filter = (ulong)1 << H4FieldNo;
 
-	public const ulong A5Filter = ((ulong)1) << A5FieldNo;
-	public const ulong B5Filter = ((ulong)1) << B5FieldNo;
-	public const ulong C5Filter = ((ulong)1) << C5FieldNo;
-	public const ulong D5Filter = ((ulong)1) << D5FieldNo;
-	public const ulong E5Filter = ((ulong)1) << E5FieldNo;
-	public const ulong F5Filter = ((ulong)1) << F5FieldNo;
-	public const ulong G5Filter = ((ulong)1) << H5FieldNo;
-	public const ulong H5Filter = ((ulong)1) << H5FieldNo;
+	public const ulong A5Filter = (ulong)1 << A5FieldNo;
+	public const ulong B5Filter = (ulong)1 << B5FieldNo;
+	public const ulong C5Filter = (ulong)1 << C5FieldNo;
+	public const ulong D5Filter = (ulong)1 << D5FieldNo;
+	public const ulong E5Filter = (ulong)1 << E5FieldNo;
+	public const ulong F5Filter = (ulong)1 << F5FieldNo;
+	public const ulong G5Filter = (ulong)1 << H5FieldNo;
+	public const ulong H5Filter = (ulong)1 << H5FieldNo;
 
-	public const ulong A6Filter = ((ulong)1) << A6FieldNo;
-	public const ulong B6Filter = ((ulong)1) << B6FieldNo;
-	public const ulong C6Filter = ((ulong)1) << C6FieldNo;
-	public const ulong D6Filter = ((ulong)1) << D6FieldNo;
-	public const ulong E6Filter = ((ulong)1) << E6FieldNo;
-	public const ulong F6Filter = ((ulong)1) << F6FieldNo;
-	public const ulong G6Filter = ((ulong)1) << H6FieldNo;
-	public const ulong H6Filter = ((ulong)1) << H6FieldNo;
+	public const ulong A6Filter = (ulong)1 << A6FieldNo;
+	public const ulong B6Filter = (ulong)1 << B6FieldNo;
+	public const ulong C6Filter = (ulong)1 << C6FieldNo;
+	public const ulong D6Filter = (ulong)1 << D6FieldNo;
+	public const ulong E6Filter = (ulong)1 << E6FieldNo;
+	public const ulong F6Filter = (ulong)1 << F6FieldNo;
+	public const ulong G6Filter = (ulong)1 << H6FieldNo;
+	public const ulong H6Filter = (ulong)1 << H6FieldNo;
 
-	public const ulong A7Filter = ((ulong)1) << A7FieldNo;
-	public const ulong B7Filter = ((ulong)1) << B7FieldNo;
-	public const ulong C7Filter = ((ulong)1) << C7FieldNo;
-	public const ulong D7Filter = ((ulong)1) << D7FieldNo;
-	public const ulong E7Filter = ((ulong)1) << E7FieldNo;
-	public const ulong F7Filter = ((ulong)1) << F7FieldNo;
-	public const ulong G7Filter = ((ulong)1) << H7FieldNo;
-	public const ulong H7Filter = ((ulong)1) << H7FieldNo;
+	public const ulong A7Filter = (ulong)1 << A7FieldNo;
+	public const ulong B7Filter = (ulong)1 << B7FieldNo;
+	public const ulong C7Filter = (ulong)1 << C7FieldNo;
+	public const ulong D7Filter = (ulong)1 << D7FieldNo;
+	public const ulong E7Filter = (ulong)1 << E7FieldNo;
+	public const ulong F7Filter = (ulong)1 << F7FieldNo;
+	public const ulong G7Filter = (ulong)1 << H7FieldNo;
+	public const ulong H7Filter = (ulong)1 << H7FieldNo;
 
-	public const ulong A8Filter = ((ulong)1) << A8FieldNo;
-	public const ulong B8Filter = ((ulong)1) << B8FieldNo;
-	public const ulong C8Filter = ((ulong)1) << C8FieldNo;
-	public const ulong D8Filter = ((ulong)1) << D8FieldNo;
-	public const ulong E8Filter = ((ulong)1) << E8FieldNo;
-	public const ulong F8Filter = ((ulong)1) << F8FieldNo;
-	public const ulong G8Filter = ((ulong)1) << H8FieldNo;
-	public const ulong H8Filter = ((ulong)1) << H8FieldNo;
+	public const ulong A8Filter = (ulong)1 << A8FieldNo;
+	public const ulong B8Filter = (ulong)1 << B8FieldNo;
+	public const ulong C8Filter = (ulong)1 << C8FieldNo;
+	public const ulong D8Filter = (ulong)1 << D8FieldNo;
+	public const ulong E8Filter = (ulong)1 << E8FieldNo;
+	public const ulong F8Filter = (ulong)1 << F8FieldNo;
+	public const ulong G8Filter = (ulong)1 << H8FieldNo;
+	public const ulong H8Filter = (ulong)1 << H8FieldNo;
 }

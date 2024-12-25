@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Engine;
+namespace Minakuru.Engine;
 
 public static class FenConverter
 {

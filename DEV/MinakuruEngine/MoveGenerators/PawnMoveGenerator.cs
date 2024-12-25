@@ -1,4 +1,4 @@
-﻿namespace Engine.MoveGenerators;
+﻿namespace Minakuru.Engine.MoveGenerators;
 
 public class PawnMoveGenerator : IMoveGenerator
 {
@@ -52,7 +52,7 @@ public class PawnMoveGenerator : IMoveGenerator
 					// move 2 up
 					// note: only possible if at least 1 up was possible
 					// note: only from 2nd rw (white) or 7th row (black)
-					bool atStartingRow = (color == Color.White && fromRow == 1) || (color == Color.Black && fromRow == 6);
+					bool atStartingRow = color == Color.White && fromRow == 1 || color == Color.Black && fromRow == 6;
 
 					if (atStartingRow)
 					{
@@ -124,7 +124,7 @@ public class PawnMoveGenerator : IMoveGenerator
 					{
 						toRow = fromRow + deltaRow;
 						toColumn = enPassantTargetColumn;
-						if ((toColumn == fromColumn + 1) || (toColumn == fromColumn - 1))
+						if (toColumn == fromColumn + 1 || toColumn == fromColumn - 1)
 						{
 							to = (byte)(8 * toRow + toColumn);
 							yield return new Move(from, to, true);
