@@ -101,7 +101,35 @@ public class LegalMoveGeneratorTests
 		var actualCastlingOptions = new CastlingOptions(actualLongCastling, actualShortCastling);
 		actualCastlingOptions.Should().BeEquivalentTo(expectedCastlingOptions);
 	}
-	
+
+	[DataRow(Field.A7FieldNo, true, true, DisplayName = "Rook a2 allows both sides")]
+	[DataRow(Field.B7FieldNo, true, true, DisplayName = "Rook b2 allows both sides")]
+	[DataRow(Field.C7FieldNo, false, true, DisplayName = "Rook c2 prevents long castling")]
+	[DataRow(Field.D7FieldNo, false, true, DisplayName = "Rook d2 prevents long castling")]
+	[DataRow(Field.E7FieldNo, false, false, DisplayName = "Rook e2 prevents castling")]
+	[DataRow(Field.F7FieldNo, true, false, DisplayName = "Rook f2 prevents short castling")]
+	[DataRow(Field.G7FieldNo, true, false, DisplayName = "Rook g2 prevents short castling")]
+	[DataRow(Field.H7FieldNo, true, true, DisplayName = "Rook h2 allows both sides")]
+	[DataTestMethod]
+	public void BlackCastlingOnlyWithoutSelfCheckTest(byte extraRookFieldNo, bool longCastlingAllowed, bool shortCastlingAllowed)
+	{
+		var fen = "r3k2r/8/8/8/8/8/8/4K3 b kq - 0 1";
+		var board = fen.ToBoard();
+
+		board.SetColoredPieceAt(extraRookFieldNo, ColoredPiece.WhiteRook);
+
+		var legalMovesGenerator = new LegalMovesGenerator();
+
+		var allMoves = legalMovesGenerator.GenerateMove(board, Color.Black);
+		var allReadableMoves = allMoves.ToReadableMoves().ToArray();
+		bool actualShortCastling = allReadableMoves.Any(m => m.From == "e8" && m.To == "g8");
+		bool actualLongCastling = allReadableMoves.Any(m => m.From == "e8" && m.To == "c8");
+
+		var expectedCastlingOptions = new CastlingOptions(longCastlingAllowed, shortCastlingAllowed);
+		var actualCastlingOptions = new CastlingOptions(actualLongCastling, actualShortCastling);
+		actualCastlingOptions.Should().BeEquivalentTo(expectedCastlingOptions);
+	}
+
 	record CastlingOptions(bool Long, bool Short)
 	{
 	}
