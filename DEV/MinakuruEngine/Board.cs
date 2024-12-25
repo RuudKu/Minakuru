@@ -116,7 +116,7 @@ public record Board
 			{
 				return fieldNo;
 			}
-			filter = filter << 1;
+			filter <<= 1;
 		}
 		return byte.MaxValue;
 	}
@@ -142,7 +142,7 @@ public record Board
 		FullMoveCounter = 1;
 	}
 
-	public ColoredPiece? GetColoredPieceAt(byte fieldNo)
+	public ColoredPiece GetColoredPieceAt(byte fieldNo)
 	{
 		var filter = (ulong)1 << fieldNo;
 		if ((WhitePawns & filter) != 0)
@@ -193,10 +193,10 @@ public record Board
 		{
 			return ColoredPiece.BlackKing;
 		}
-		return null;
+		return ColoredPiece.Empty;
 	}
 
-	public ColoredPiece? GetColoredPieceAt(byte fieldNo, Color color)
+	public ColoredPiece GetColoredPieceAt(byte fieldNo, Color color)
 	{
 		var filter = (ulong)1 << fieldNo;
 		switch (color)
@@ -258,7 +258,7 @@ public record Board
 			default:
 				throw new NotImplementedException();
 		}
-		return null;
+		return ColoredPiece.Empty;
 	}
 
 	public void SetColoredPieceAt(byte fieldNo, ColoredPiece coloredPiece)
@@ -372,6 +372,14 @@ public record Board
 		}
 	}
 
+	public bool WhiteCanCastle
+	{
+		get
+		{
+			return (Specials & (WhiteCantCastleShortFilter | WhiteCantCastleLongFilter)) == 0;
+		}
+	}
+
 	public bool BlackCanCastleShort
 	{
 		get
@@ -407,6 +415,14 @@ public record Board
 			{
 				Specials |= BlackCantCastleLongFilter;
 			}
+		}
+	}
+
+	public bool BlackCanCastle
+	{
+		get
+		{
+			return (Specials & (BlackCantCastleShortFilter | BlackCantCastleLongFilter)) == 0;
 		}
 	}
 

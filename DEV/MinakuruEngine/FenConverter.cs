@@ -39,13 +39,13 @@ public static class FenConverter
 					byte fieldNo = (byte)(8 * rowNo + columnNo);
 					var coloredPiece = board.GetColoredPieceAt(fieldNo);
 
-					if (!coloredPiece.HasValue)
+					if (coloredPiece == ColoredPiece.Empty)
 					{
 						emptyFieldsInARow++;
 					}
 					else
 					{
-						var c = ToChar(coloredPiece.Value);
+						var c = ToChar(coloredPiece);
 						if (emptyFieldsInARow > 0)
 						{
 							sb.Append(emptyFieldsInARow);
@@ -94,6 +94,10 @@ public static class FenConverter
 			if (board.BlackCanCastleLong)
 			{
 				sb.Append('q');
+			}
+			if (!(board.WhiteCanCastle || board.BlackCanCastle))
+			{
+				sb.Append('-');
 			}
 		}
 

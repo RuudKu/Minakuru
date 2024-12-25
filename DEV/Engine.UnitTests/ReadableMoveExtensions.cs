@@ -1,6 +1,4 @@
-﻿using Minakuru.Engine;
-
-namespace Minakuru.Engine.UnitTests;
+﻿namespace Minakuru.Engine.UnitTests;
 
 public static class ReadableMoveExtensions
 {

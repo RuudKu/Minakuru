@@ -1,4 +1,6 @@
-﻿namespace Minakuru.Engine;
+﻿using System.Reflection.Metadata.Ecma335;
+
+namespace Minakuru.Engine;
 
 public static class MoveMaker
 {
@@ -98,14 +100,34 @@ public static class MoveMaker
 	{
 		var coloredPieceFrom = board.GetColoredPieceAt(move.From, colorToMove);
 
-		if (!coloredPieceFrom.HasValue)
+		ColoredPiece coloredPieceTo;
+		if (coloredPieceFrom == ColoredPiece.WhitePawn && move.Capture)
+		{
+			coloredPieceTo = board.GetColoredPieceAt(move.To, colorToMove.OtherColor());
+			if (coloredPieceTo == ColoredPiece.Empty)
+			{
+				// en passant capture by white
+				byte enPassantFieldNo = (byte)((byte)(move.From & (~7)) | (byte)(move.To % Field.TotalColumns));
+				newBoard.EmptyField(enPassantFieldNo, ColoredPiece.BlackPawn);
+			}
+		}
+		else if (coloredPieceFrom == ColoredPiece.BlackPawn && move.Capture)
+		{
+			coloredPieceTo = board.GetColoredPieceAt(move.To, colorToMove.OtherColor());
+			if (coloredPieceTo == ColoredPiece.Empty)
+			{
+				// en passant capture by black
+			}
+		}
+
+		if (coloredPieceFrom == ColoredPiece.Empty)
 		{
 			throw new Exception("No Piece at from-Field");
 		}
 
-		newBoard.EmptyField(move.From, coloredPieceFrom.Value);
-		newBoard.SetColoredPieceAt(move.To, coloredPieceFrom.Value);
+		newBoard.EmptyField(move.From, coloredPieceFrom);
+		newBoard.SetColoredPieceAt(move.To, coloredPieceFrom);
 
-		return coloredPieceFrom.Value;
+		return coloredPieceFrom;
 	}
 }

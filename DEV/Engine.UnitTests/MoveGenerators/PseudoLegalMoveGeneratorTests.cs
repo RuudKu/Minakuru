@@ -31,17 +31,17 @@ public class PseudoLegalMoveGeneratorTests
 		var actualPerftStats = new PerftStats(
 			allMoves.Length,
 			allMoves.Count(m => m.Capture),
-			allMoves.Count(m => m.PromotedTo.HasValue));
+			allMoves.Count(m => m.PromotedTo != Piece.None));
 
-		ReadableMove[] readableAllMoves = Array.Empty<ReadableMove>();
-		ReadableMove[] readableCaptureMoves = Array.Empty<ReadableMove>();
-		ReadableMove[] readablePromotionMoves = Array.Empty<ReadableMove>();
+		ReadableMove[] readableAllMoves = [];
+		ReadableMove[] readableCaptureMoves = [];
+		ReadableMove[] readablePromotionMoves = [];
 
 		if (expectedPerftStats != actualPerftStats)
 		{
 			readableAllMoves = allMoves.ToReadableMoves().ToArray();
 			readableCaptureMoves = allMoves.Where(m => m.Capture).ToReadableMoves().ToArray();
-			readablePromotionMoves = allMoves.Where(m => m.PromotedTo.HasValue).ToReadableMoves().ToArray();
+			readablePromotionMoves = allMoves.Where(m => m.PromotedTo != Piece.None).ToReadableMoves().ToArray();
 		}
 		actualPerftStats.Should().Be(expectedPerftStats);
 	}

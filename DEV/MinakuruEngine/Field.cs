@@ -2,6 +2,10 @@
 
 public static class Field
 {
+	public const byte TotalColumns = 8;
+	public const byte TotalRows = 8;
+	public const byte TotalFields = TotalColumns * TotalRows;
+
 	public const byte ColumnAFieldNo = 0;
 	public const byte ColumnBFieldNo = 1;
 	public const byte ColumnCFieldNo = 2;

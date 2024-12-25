@@ -3,6 +3,7 @@
 [Flags]
 public enum Piece
 {
+	None = 0,
 	Pawn = 1,
 	Knight = 1 << 1,
 	Bishop = 1 << 2,
