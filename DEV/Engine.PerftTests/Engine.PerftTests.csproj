@@ -19,4 +19,10 @@
 		<ProjectReference Include="..\MinakuruEngine\Engine.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Files\PerftTestset.epd">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>

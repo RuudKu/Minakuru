@@ -7,8 +7,6 @@ namespace Minakuru.Engine.PerftTests;
 [TestClass]
 public sealed class FromStartPositionTests
 {
-	private readonly LegalMovesGenerator _legalMovesGenerator = new();
-
 	[DataRow(1, 20UL, DisplayName = "Depth 1")]
 	[DataRow(2, 400UL, DisplayName = "Depth 2")]
 	[DataRow(3, 8_902UL, DisplayName = "Depth 3")]
@@ -19,7 +17,7 @@ public sealed class FromStartPositionTests
 	{
 		var board = Board.Init();
 
-		var actual = CountNodes(board, depth);
+		var actual = PerftHelper.CountNodes(board, depth);
 
 		actual.Should().Be(expectedNodes);
 	}
@@ -35,7 +33,7 @@ public sealed class FromStartPositionTests
 		var fen = "r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w KQkq - 0 1";
 		var board = fen.ToBoard();
 
-		var actual = CountNodes(board, depth);
+		var actual = PerftHelper.CountNodes(board, depth);
 
 		actual.Should().Be(expectedNodes);
 	}
@@ -50,7 +48,7 @@ public sealed class FromStartPositionTests
 		var fen = "8/2p5/3p4/KP5r/1R3p1k/8/4P1P1/8 w - - 0 1";
 		var board = fen.ToBoard();
 
-		var actual = CountNodes(board, depth);
+		var actual = PerftHelper.CountNodes(board, depth);
 
 		actual.Should().Be(expectedNodes);
 	}
@@ -74,7 +72,7 @@ public sealed class FromStartPositionTests
 	{
 		var board = fen.ToBoard();
 
-		var legalMoves = _legalMovesGenerator.GenerateMove(board).Select(ToString).ToArray();
+		var legalMoves = PerftHelper.LegalMovesGenerator.GenerateMove(board).Select(PerftHelper.ToString).ToArray();
 
 		var actual = legalMoves.Length;
 
@@ -91,7 +89,7 @@ public sealed class FromStartPositionTests
 		var fen = "r3k2r/Pppp1ppp/1b3nbN/nP6/BBP1P3/q4N2/Pp1P2PP/R2Q1RK1 w kq - 0 1";
 		var board = fen.ToBoard();
 
-		var actual = CountNodes(board, depth);
+		var actual = PerftHelper.CountNodes(board, depth);
 
 		actual.Should().Be(expectedNodes);
 	}
@@ -106,7 +104,7 @@ public sealed class FromStartPositionTests
 		var fen = "r2q1rk1/pP1p2pp/Q4n2/bbp1p3/Np6/1B3NBn/pPPP1PPP/R3K2R b KQ - 0 1";
 		var board = fen.ToBoard();
 
-		var actual = CountNodes(board, depth);
+		var actual = PerftHelper.CountNodes(board, depth);
 
 		actual.Should().Be(expectedNodes);
 	}
@@ -121,7 +119,7 @@ public sealed class FromStartPositionTests
 		var fen = "rnbq1k1r/pp1Pbppp/2p5/8/2B5/8/PPP1NnPP/RNBQK2R w KQ - 1 8";
 		var board = fen.ToBoard();
 
-		var actual = CountNodes(board, depth);
+		var actual = PerftHelper.CountNodes(board, depth);
 
 		actual.Should().Be(expectedNodes);
 	}
@@ -136,7 +134,7 @@ public sealed class FromStartPositionTests
 		var fen = "r4rk1/1pp1qppp/p1np1n2/2b1p1B1/2B1P1b1/P1NP1N2/1PP1QPPP/R4RK1 w - - 0 10";
 		var board = fen.ToBoard();
 
-		var actual = CountNodes(board, depth);
+		var actual = PerftHelper.CountNodes(board, depth);
 
 		actual.Should().Be(expectedNodes);
 	}
@@ -151,7 +149,7 @@ public sealed class FromStartPositionTests
 		var fen = "n1n5/PPPk4/8/8/8/8/4Kppp/5N1N w - - 0 1";
 		var board = fen.ToBoard();
 
-		var actual = CountNodes(board, depth);
+		var actual = PerftHelper.CountNodes(board, depth);
 
 		actual.Should().Be(expectedNodes);
 	}
@@ -166,7 +164,7 @@ public sealed class FromStartPositionTests
 		var fen = "n1n5/PPPk4/8/8/8/8/4Kppp/5N1N b - - 0 1";
 		var board = fen.ToBoard();
 
-		var actual = CountNodes(board, depth);
+		var actual = PerftHelper.CountNodes(board, depth);
 
 		actual.Should().Be(expectedNodes);
 	}
@@ -238,51 +236,11 @@ public sealed class FromStartPositionTests
 			foreach (var legalMove in legalMoves)
 			{
 				var newBoard = MoveMaker.MakeMove(board, legalMove);
-				var count = CountNodes(newBoard, remainingDepth - 1);
-				var readableMove = ToString(legalMove);
+				var count = PerftHelper.CountNodes(newBoard, remainingDepth - 1);
+				var readableMove = PerftHelper.ToString(legalMove);
 				result.Add(readableMove, count);
 			}
 			return result;
 		}
-	}
-
-	private static string ToString(Move result)
-	{
-		var @string = string.Empty;
-		byte columnFrom = (byte)(result.From % 8);
-		byte rowFrom = (byte)(result.From / 8);
-		byte columnTo = (byte)(result.To % 8);
-		byte rowTo = (byte)(result.To / 8);
-		@string += (char)('a' + columnFrom);
-		@string += (char)('1' + rowFrom);
-		@string += (char)('a' + columnTo);
-		@string += (char)('1' + rowTo);
-		return @string;
-	}
-
-	private ulong CountNodes(Board board, int remainingDepth)
-	{
-		var legalMoves = _legalMovesGenerator.GenerateMove(board).ToArray();
-
-		if (remainingDepth == 0)
-		{
-			return 1;
-		}
-
-		if (remainingDepth == 1)
-		{
-			return (ulong)legalMoves.Length;
-		}
-
-		ulong count = 0;
-
-		foreach (var legalMove in legalMoves)
-		{
-			var newBoard = MoveMaker.MakeMove(board, legalMove);
-			var nodesCurrentMove = CountNodes(newBoard, remainingDepth - 1);
-			count += nodesCurrentMove;
-			Debug.WriteLine(ToString(legalMove) + " : " + nodesCurrentMove);
-		}
-		return count;
 	}
 }
