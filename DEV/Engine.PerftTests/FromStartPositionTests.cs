@@ -112,7 +112,7 @@ public sealed class FromStartPositionTests
 	}
 
 	[DataRow(1, 44UL, DisplayName = "Depth 1")]
-	// [DataRow(2, 1_486UL, DisplayName = "Depth 2")]
+	[DataRow(2, 1_486UL, DisplayName = "Depth 2")]
 	// [DataRow(3, 62_379UL, DisplayName = "Depth 3")]
 	// [DataRow(4, 4_085_603UL, DisplayName = "Depth 4")]
 	[DataTestMethod]
