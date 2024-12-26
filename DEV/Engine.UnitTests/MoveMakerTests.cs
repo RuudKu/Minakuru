@@ -174,4 +174,22 @@ public class MoveMakerTests
 
 		actualFen.Should().Be(expectedFen);
 	}
+
+	[TestMethod]
+	public void PawnCapturesAndPromotesToQueenToLowerColumnTest()
+	{
+		var originalFen = "n1n5/PPPk4/8/8/8/8/4Kppp/5N1N w - - 0 1";
+		var originalBoard = originalFen.ToBoard();
+
+		var readableMove = new ReadableMove("b7", "a8", true, Piece.Queen);
+		var move = readableMove.ToMove();
+
+		var newBoard = MoveMaker.MakeMove(originalBoard, move);
+
+		var actualFen = newBoard.ToFen();
+		var expectedFen = "Q1n5/P1Pk4/8/8/8/8/4Kppp/5N1N b - - 0 1";
+
+		actualFen.Should().Be(expectedFen);
+	}
+
 }

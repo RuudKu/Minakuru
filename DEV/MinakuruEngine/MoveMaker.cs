@@ -115,6 +115,8 @@ public static class MoveMaker
 			if (coloredPieceTo == ColoredPiece.Empty)
 			{
 				// en passant capture by black
+				byte enPassantFieldNo = (byte)((byte)(move.From & (~7)) | (byte)(move.To % Field.TotalColumns));
+				newBoard.EmptyField(enPassantFieldNo, ColoredPiece.WhitePawn);
 			}
 		}
 		else if (coloredPieceFrom == ColoredPiece.WhiteKing && move.From == Field.E1FieldNo && move.To == Field.G1FieldNo)
@@ -173,7 +175,13 @@ public static class MoveMaker
 
 
 		newBoard.EmptyField(move.From, coloredPieceFrom);
-		newBoard.SetColoredPieceAt(move.To, coloredPieceFrom);
+		if (move.Capture)
+		{
+			newBoard.EmptyField(move.To, colorToMove.OtherColor());
+		}
+
+		var pieceToPlace = move.PromotedTo == Piece.None ? coloredPieceFrom : move.PromotedTo.ToColoredPiece(colorToMove);
+		newBoard.SetColoredPieceAt(move.To, pieceToPlace);
 
 		return coloredPieceFrom;
 	}

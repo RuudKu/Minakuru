@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 
 namespace Minakuru.Engine;
@@ -103,6 +104,32 @@ public record Board
 
 			default:
 				throw new NotSupportedException();
+		}
+	}
+
+	public void EmptyField(byte fieldNo, Color color)
+	{
+		ulong filter = ~((ulong)1 << fieldNo);
+		switch (color)
+		{
+			case Color.White:
+				WhiteKing &= filter;
+				WhiteQueens &= filter;
+				WhiteRooks &= filter;
+				WhiteBishops &= filter;
+				WhiteKnights &= filter;
+				WhitePawns &= filter;
+				break;
+			case Color.Black:
+				BlackKing &= filter;
+				BlackQueens &= filter;
+				BlackRooks &= filter;
+				BlackBishops &= filter;
+				BlackKnights &= filter;
+				BlackPawns &= filter;
+				break;
+			default:
+				throw new NotImplementedException();
 		}
 	}
 
