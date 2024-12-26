@@ -192,4 +192,20 @@ public class MoveMakerTests
 		actualFen.Should().Be(expectedFen);
 	}
 
+	[TestMethod]
+	public void WhiteCapturesA8InhibitsBlackLongCastlingTest()
+	{
+		var originalFen = "r3k3/1K6/8/8/8/8/8/8 w q - 0 1";
+		var originalBoard = originalFen.ToBoard();
+
+		var readableMove = new ReadableMove("b7", "a8", true);
+		var move = readableMove.ToMove();
+
+		var newBoard = MoveMaker.MakeMove(originalBoard, move);
+
+		var actualFen = newBoard.ToFen();
+		var expectedFen = "K3k3/8/8/8/8/8/8/8 b - - 0 1";
+
+		actualFen.Should().Be(expectedFen);
+	}
 }

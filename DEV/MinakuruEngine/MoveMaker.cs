@@ -87,6 +87,31 @@ public static class MoveMaker
 			default:
 				break;
 		}
+		switch (move.To)
+		{
+			case Field.A1FieldNo:
+				newBoard.WhiteCanCastleLong = false;
+				break;
+			case Field.E1FieldNo:
+				newBoard.WhiteCanCastleShort = false;
+				newBoard.WhiteCanCastleLong = false;
+				break;
+			case Field.H1FieldNo:
+				newBoard.WhiteCanCastleShort = false;
+				break;
+			case Field.A8FieldNo:
+				newBoard.BlackCanCastleLong = false;
+				break;
+			case Field.E8FieldNo:
+				newBoard.BlackCanCastleShort = false;
+				newBoard.BlackCanCastleLong = false;
+				break;
+			case Field.H8FieldNo:
+				newBoard.BlackCanCastleShort = false;
+				break;
+			default:
+				break;
+		}
 	}
 
 	private static void UpdateSideToMove(Board newBoard)

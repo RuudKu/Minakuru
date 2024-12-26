@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Minakuru.Engine;
 using Minakuru.Engine.ThreatCheckers;
 
 namespace Minakuru.Engine.UnitTests.ThreatCheckers;
