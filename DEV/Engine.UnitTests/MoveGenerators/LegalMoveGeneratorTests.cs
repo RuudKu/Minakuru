@@ -15,7 +15,7 @@ public class LegalMoveGeneratorTests
 
 		var legalMovesGenerator = new LegalMovesGenerator();
 
-		var allMoves = legalMovesGenerator.GenerateMove(board, Color.White);
+		var allMoves = legalMovesGenerator.GenerateMove(board);
 		var allReadableMoves = allMoves.ToReadableMoves().ToArray();
 
 		var expected = new ReadableMove[]
@@ -34,7 +34,7 @@ public class LegalMoveGeneratorTests
 
 		var legalMovesGenerator = new LegalMovesGenerator();
 
-		var allMoves = legalMovesGenerator.GenerateMove(board, Color.White);
+		var allMoves = legalMovesGenerator.GenerateMove(board);
 		var allReadableMoves = allMoves.ToReadableMoves().ToArray();
 
 		var expected = new ReadableMove[]
@@ -56,7 +56,7 @@ public class LegalMoveGeneratorTests
 
 		var legalMovesGenerator = new LegalMovesGenerator();
 
-		var allMoves = legalMovesGenerator.GenerateMove(board, Color.White);
+		var allMoves = legalMovesGenerator.GenerateMove(board);
 		var allReadableMoves = allMoves.ToReadableMoves().ToArray();
 
 		var expected = new ReadableMove[]
@@ -92,7 +92,7 @@ public class LegalMoveGeneratorTests
 
 		var legalMovesGenerator = new LegalMovesGenerator();
 
-		var allMoves = legalMovesGenerator.GenerateMove(board, Color.White);
+		var allMoves = legalMovesGenerator.GenerateMove(board);
 		var allReadableMoves = allMoves.ToReadableMoves().ToArray();
 		bool actualShortCastling = allReadableMoves.Any(m => m.From == "e1" && m.To == "g1");
 		bool actualLongCastling = allReadableMoves.Any(m => m.From == "e1" && m.To == "c1");
@@ -120,7 +120,7 @@ public class LegalMoveGeneratorTests
 
 		var legalMovesGenerator = new LegalMovesGenerator();
 
-		var allMoves = legalMovesGenerator.GenerateMove(board, Color.Black);
+		var allMoves = legalMovesGenerator.GenerateMove(board);
 		var allReadableMoves = allMoves.ToReadableMoves().ToArray();
 		bool actualShortCastling = allReadableMoves.Any(m => m.From == "e8" && m.To == "g8");
 		bool actualLongCastling = allReadableMoves.Any(m => m.From == "e8" && m.To == "c8");

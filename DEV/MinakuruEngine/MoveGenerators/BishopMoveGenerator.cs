@@ -2,8 +2,9 @@
 
 public class BishopMoveGenerator : IMoveGenerator
 {
-	public IEnumerable<Move> GenerateMove(Board board, Color color)
+	public IEnumerable<Move> GenerateMove(Board board)
 	{
+		var color = board.ColorToMove;
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
 

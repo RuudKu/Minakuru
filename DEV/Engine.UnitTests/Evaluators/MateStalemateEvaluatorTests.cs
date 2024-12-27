@@ -8,7 +8,7 @@ public class MateStalemateEvaluatorTests
 {
 
 	[TestMethod]
-	public void WhiteGivingMateTest()
+	public void WhiteGaveMateTest()
 	{
 		var fen = "1R2k3/8/4K3/8/8/8/8/8 b - - 0 1";
 		Board board = fen.ToBoard();
@@ -20,7 +20,7 @@ public class MateStalemateEvaluatorTests
 	}
 
 	[TestMethod]
-	public void BlackGivingMateTest()
+	public void BlackGaveMateTest()
 	{
 		var fen = "4k3/7n/8/8/8/8/1r6/r3K3 w - - 0 1";
 		Board board = fen.ToBoard();

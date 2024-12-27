@@ -4,8 +4,9 @@ public class PawnMoveGenerator : IMoveGenerator
 {
 	private readonly Piece[] PromotionToPieces = [Piece.Queen, Piece.Rook, Piece.Bishop, Piece.Knight];
 
-	public IEnumerable<Move> GenerateMove(Board board, Color color)
+	public IEnumerable<Move> GenerateMove(Board board)
 	{
+		var color = board.ColorToMove;
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
 

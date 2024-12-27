@@ -14,7 +14,7 @@ public class KnightMoveGeneratorTests
 
 		var sut = new KnightMoveGenerator();
 
-		var actual = sut.GenerateMove(board, Color.White).ToArray();
+		var actual = sut.GenerateMove(board).ToArray();
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -40,7 +40,7 @@ public class KnightMoveGeneratorTests
 
 		var sut = new KnightMoveGenerator();
 
-		var actual = sut.GenerateMove(board, Color.White).ToArray();
+		var actual = sut.GenerateMove(board).ToArray();
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]

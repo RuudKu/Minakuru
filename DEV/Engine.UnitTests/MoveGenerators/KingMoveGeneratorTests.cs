@@ -14,7 +14,7 @@ public class KingMoveGeneratorTests
 
 		var sut = new KingMoveGenerator();
 
-		var actual = sut.GenerateMove(board, Color.White).ToArray();
+		var actual = sut.GenerateMove(board).ToArray();
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -48,7 +48,7 @@ public class KingMoveGeneratorTests
 
 		var sut = new KingMoveGenerator();
 
-		var actual = sut.GenerateMove(board, Color.White).ToArray();
+		var actual = sut.GenerateMove(board).ToArray();
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]

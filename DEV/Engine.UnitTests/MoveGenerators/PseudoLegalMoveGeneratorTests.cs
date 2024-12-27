@@ -12,7 +12,7 @@ public class PseudoLegalMoveGeneratorTests
 		var board = Board.Init();
 		var sut = new PseudoLegalMoveGenerator();
 
-		var allMoves = sut.GenerateMove(board, Color.White);
+		var allMoves = sut.GenerateMove(board);
 
 		allMoves.Should().HaveCount(20);
 	}
@@ -26,7 +26,7 @@ public class PseudoLegalMoveGeneratorTests
 		var board = fen.ToBoard();
 		var sut = new PseudoLegalMoveGenerator();
 
-		var allMoves = sut.GenerateMove(board, Color.White).ToArray();
+		var allMoves = sut.GenerateMove(board).ToArray();
 
 		var actualPerftStats = new PerftStats(
 			allMoves.Length,

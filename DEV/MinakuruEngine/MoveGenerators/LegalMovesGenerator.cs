@@ -13,12 +13,8 @@ public class LegalMovesGenerator(PseudoLegalMoveGenerator pseudoLegalMovesGenera
 
 	public IEnumerable<Move> GenerateMove(Board board)
 	{
-		return GenerateMove(board, board.ColorToMove);
-	}
-
-	public IEnumerable<Move> GenerateMove(Board board, Color color)
-	{
-		var enumerator = _pseudoLegalMovesGenerator.GenerateMove(board, color).GetEnumerator();
+		var color = board.ColorToMove;
+		var enumerator = _pseudoLegalMovesGenerator.GenerateMove(board).GetEnumerator();
 		while (enumerator.MoveNext())
 		{
 			var pseudoLegalMove = enumerator.Current;
