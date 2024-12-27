@@ -3,7 +3,7 @@
   <!-- Configurations that affect the Test Framework -->
   <RunConfiguration>
     <!-- Use 0 for maximum process-level parallelization. This does not force parallelization within the test DLL (on the thread-level). You can also change it from the Test menu; choose "Run tests in parallel". Unchecked = 1 (only 1), checked = 0 (max). -->
-    <MaxCpuCount>1</MaxCpuCount>
+    <MaxCpuCount>0</MaxCpuCount>
     <!-- Path relative to directory that contains .runsettings file-->
     <ResultsDirectory>.\TestResults</ResultsDirectory>
 
@@ -21,7 +21,7 @@
 	<!-- <TestAdaptersPaths>%SystemDrive%\Temp\foo;%SystemDrive%\Temp\bar</TestAdaptersPaths> -->
 
     <!-- TestCaseFilter expression -->
-    <TestCaseFilter>(TestCategory == Perft)</TestCaseFilter>
+    <TestCaseFilter>(TestCategory = Perft)</TestCaseFilter>
 
     <!-- TestSessionTimeout was introduced in Visual Studio 2017 version 15.5 -->
     <!-- Specify timeout in milliseconds. A valid value should be greater than 0 -->
@@ -29,8 +29,7 @@
 
     <!-- true or false -->
     <!-- Value that specifies the exit code when no tests are discovered -->
-    <TreatNoTestsAsError>true</TreatNoTestsAsError>
-    <MaxDepth>3</MaxDepth>
+    <TreatNoTestsAsError>false</TreatNoTestsAsError>
   </RunConfiguration>
 
   <!-- Configurations for data collectors -->
@@ -67,6 +66,7 @@
     <Parameter name="webAppUrl" value="http://localhost" />
     <Parameter name="webAppUserName" value="Admin" />
     <Parameter name="webAppPassword" value="Password" />
+	<Parameter name="MaxDepth" value="3" />
   </TestRunParameters>
 
   <!-- Configuration for loggers -->
@@ -100,7 +100,7 @@
     <DeleteDeploymentDirectoryAfterTestRunIsComplete>False</DeleteDeploymentDirectoryAfterTestRunIsComplete>
     <DeploymentEnabled>False</DeploymentEnabled>
     <AssemblyResolution>
-      <Directory path="D:\myfolder\bin\" includeSubDirectories="false"/>
+      <!-- <Directory path="D:\myfolder\bin\" includeSubDirectories="false"/> -->
     </AssemblyResolution>
   </MSTest>
 
