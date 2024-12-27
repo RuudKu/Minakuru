@@ -21,7 +21,7 @@
 	<!-- <TestAdaptersPaths>%SystemDrive%\Temp\foo;%SystemDrive%\Temp\bar</TestAdaptersPaths> -->
 
     <!-- TestCaseFilter expression -->
-    <TestCaseFilter>(TestCategory != Perft)</TestCaseFilter>
+    <TestCaseFilter>(TestCategory == Perft)</TestCaseFilter>
 
     <!-- TestSessionTimeout was introduced in Visual Studio 2017 version 15.5 -->
     <!-- Specify timeout in milliseconds. A valid value should be greater than 0 -->

@@ -4,6 +4,7 @@ using FluentAssertions;
 
 namespace Minakuru.Engine.PerftTests;
 
+[TestCategory("Perft")]
 [TestClass]
 public partial class FromEpdFile
 {

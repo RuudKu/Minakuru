@@ -3,6 +3,7 @@ using Minakuru.Engine.MoveGenerators;
 
 namespace Minakuru.Engine.PerftTests;
 
+[TestCategory("Perft")]
 [TestClass]
 public sealed class FromPerftPositionsTests
 {
