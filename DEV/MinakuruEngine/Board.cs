@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
 
@@ -58,6 +59,18 @@ public record Board
 				BlackKing | BlackQueens | BlackRooks | BlackBishops | BlackKnights | BlackPawns;
 		}
 	}
+
+	public byte WhiteQueensCount => (byte)BitOperations.PopCount(WhiteQueens);
+	public byte WhiteRooksCount => (byte)BitOperations.PopCount(WhiteRooks);
+	public byte WhiteBishopsCount => (byte)BitOperations.PopCount(WhiteBishops);
+	public byte WhiteKnightsCount => (byte)BitOperations.PopCount(WhiteKnights);
+	public byte WhitePawnsCount => (byte)BitOperations.PopCount(WhitePawns);
+
+	public byte BlackQueensCount => (byte)BitOperations.PopCount(BlackQueens);
+	public byte BlackRooksCount => (byte)BitOperations.PopCount(BlackRooks);
+	public byte BlackBishopsCount => (byte)BitOperations.PopCount(BlackBishops);
+	public byte BlackKnightsCount => (byte)BitOperations.PopCount(BlackKnights);
+	public byte BlackPawnsCount => (byte)BitOperations.PopCount(BlackPawns);
 
 	public void EmptyField(byte fieldNo, ColoredPiece coloredPiece)
 	{
