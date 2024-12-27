@@ -1,11 +1,10 @@
-﻿using System.Diagnostics;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Minakuru.Engine.MoveGenerators;
 
 namespace Minakuru.Engine.PerftTests;
 
 [TestClass]
-public sealed class FromStartPositionTests
+public sealed class FromPerftPositionsTests
 {
 	[DataRow(1, 20UL, DisplayName = "Depth 1")]
 	[DataRow(2, 400UL, DisplayName = "Depth 2")]
@@ -125,7 +124,7 @@ public sealed class FromStartPositionTests
 	}
 
 	[DataRow(1, 46UL, DisplayName = "Depth 1")]
-	// [DataRow(2, 2_079UL, DisplayName = "Depth 2")]
+	[DataRow(2, 2_079UL, DisplayName = "Depth 2")]
 	// [DataRow(3, 89_890UL, DisplayName = "Depth 3")]
 	// [DataRow(4, 4_085_603UL, DisplayName = "Depth 4")]
 	[DataTestMethod]
