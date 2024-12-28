@@ -1,4 +1,6 @@
-﻿namespace Minakuru.Engine.MoveGenerators;
+﻿using System.Numerics;
+
+namespace Minakuru.Engine.MoveGenerators;
 
 public class KnightMoveGenerator : IMoveGenerator
 {
@@ -12,8 +14,13 @@ public class KnightMoveGenerator : IMoveGenerator
 		var ownPiecesAt = color == Color.White ? whitePiecesAt : blackPiecesAt;
 		var opponentPiecesAt = color == Color.White ? blackPiecesAt : whitePiecesAt;
 
-		for (byte from = 0; from < 64; from++)
+		var workingCopy = knights;
+		byte from = 0;
+		while (workingCopy != 0UL)
 		{
+			byte trailingZeroes = (byte)BitOperations.TrailingZeroCount(workingCopy);
+			from += trailingZeroes;
+			workingCopy >>= trailingZeroes;
 			var filter = (ulong)1 << from;
 			if ((knights & filter) != 0)
 			{
@@ -42,12 +49,7 @@ public class KnightMoveGenerator : IMoveGenerator
 						}
 					}
 				}
-
-				knights &= ~filter;
-				if (knights == 0)
-				{
-					break;
-				}
+				workingCopy &= ~1UL;
 			}
 		}
 	}

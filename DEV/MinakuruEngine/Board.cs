@@ -149,16 +149,7 @@ public record Board
 	public byte KingAt(Color color)
 	{
 		var king = color == Color.White ? WhiteKing : BlackKing;
-		ulong filter = 1;
-		for (byte fieldNo = 0; fieldNo < 64; fieldNo++)
-		{
-			if ((king & filter) != 0)
-			{
-				return fieldNo;
-			}
-			filter <<= 1;
-		}
-		return byte.MaxValue;
+		return (byte) BitOperations.TrailingZeroCount(king);
 	}
 
 	public void Clear()

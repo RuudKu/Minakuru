@@ -25,7 +25,6 @@ public class MateStalemateEvaluator(LegalMovesGenerator legalMovesGenerator, Thr
 		{
 			return EvaluationConstants.StaleMate;
 		}
-		return -1 * EvaluationConstants.Mate;
-		// return board.ColorToMove == Color.White ? -1 * EvaluationConstants.Mate : EvaluationConstants.Mate;
+		return board.ColorToMove == Color.White ? -1 * EvaluationConstants.Mate : EvaluationConstants.Mate;
 	}
 }

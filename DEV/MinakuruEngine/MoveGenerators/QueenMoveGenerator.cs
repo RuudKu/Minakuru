@@ -1,4 +1,6 @@
-﻿namespace Minakuru.Engine.MoveGenerators;
+﻿using System.Numerics;
+
+namespace Minakuru.Engine.MoveGenerators;
 
 public class QueenMoveGenerator : IMoveGenerator
 {
@@ -9,11 +11,17 @@ public class QueenMoveGenerator : IMoveGenerator
 		var blackPiecesAt = board.BlackPieces;
 
 		var queens = color == Color.White ? board.WhiteQueens : board.BlackQueens;
+		var workingCopy = queens;
 		var ownPiecesAt = color == Color.White ? whitePiecesAt : blackPiecesAt;
 		var opponentPiecesAt = color == Color.White ? blackPiecesAt : whitePiecesAt;
 
-		for (byte from = 0; from < 64; from++)
+		byte from = 0;
+		while (workingCopy != 0UL)
 		{
+			byte trailingZeroes = (byte) BitOperations.TrailingZeroCount(workingCopy);
+			from += trailingZeroes;
+			workingCopy >>= trailingZeroes;
+
 			var filter = (ulong)1 << from;
 			if ((queens & filter) != 0)
 			{
@@ -49,11 +57,7 @@ public class QueenMoveGenerator : IMoveGenerator
 					}
 				}
 
-				queens &= ~filter;
-				if (queens == 0)
-				{
-					break;
-				}
+				workingCopy &= ~1UL;
 			}
 		}
 	}

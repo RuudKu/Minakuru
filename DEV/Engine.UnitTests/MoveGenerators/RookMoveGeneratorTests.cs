@@ -74,5 +74,22 @@ public class RookMoveGeneratorTests
 
 		readableMoves.Should().BeEquivalentTo(expected);
 	}
+
+
+	[TestMethod]
+	public void WithTwoWhiteRooks()
+	{
+		var fen = "7k/2R5/8/8/3R4/8/8/K7 w - - 0 1";
+		var board = fen.ToBoard();
+
+		var sut = new RookMoveGenerator();
+
+		var actual = sut.GenerateMove(board).ToArray();
+
+		var readableMoves = actual.ToReadableMoves().ToArray();
+		var expected = 28;
+
+		readableMoves.Should().HaveCount(expected);
+	}
 }
 

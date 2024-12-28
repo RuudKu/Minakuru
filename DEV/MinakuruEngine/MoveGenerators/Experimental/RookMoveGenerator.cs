@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 
-namespace Minakuru.Engine.MoveGenerators;
+namespace Minakuru.Engine.MoveGenerators.Experimental;
 
-public class BishopMoveGenerator : IMoveGenerator
+public class RookMoveGenerator : IMoveGenerator
 {
 	public IEnumerable<Move> GenerateMove(Board board)
 	{
@@ -10,19 +10,19 @@ public class BishopMoveGenerator : IMoveGenerator
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
 
-		var bishops = color == Color.White ? board.WhiteBishops : board.BlackBishops;
-		var workingCopy = bishops;
+		var rooks = color == Color.White ? board.WhiteRooks : board.BlackRooks;
+		var workCopy = rooks;
 		var ownPiecesAt = color == Color.White ? whitePiecesAt : blackPiecesAt;
 		var opponentPiecesAt = color == Color.White ? blackPiecesAt : whitePiecesAt;
 
 		byte from = 0;
-		while (workingCopy != 0UL)
+		while (workCopy != 0L)
 		{
-			byte trailingZeroes = (byte) BitOperations.TrailingZeroCount(workingCopy);
-			from += trailingZeroes;
-			workingCopy >>= trailingZeroes;
+			int trailingZeroes = BitOperations.TrailingZeroCount(workCopy);
+			from += (byte)trailingZeroes;
+			workCopy >>= trailingZeroes;
 			var filter = (ulong)1 << from;
-			if ((bishops & filter) != 0)
+			if ((rooks & filter) != 0)
 			{
 				int fromColumn = from % 8;
 				int fromRow = from / 8;
@@ -32,8 +32,8 @@ public class BishopMoveGenerator : IMoveGenerator
 
 				for (int direction = 0; direction < 4; direction++)
 				{
-					int deltaColumn = new int[] { -1, -1, +1, +1 }[direction];
-					int deltaRow = new int[] { -1, +1, -1, +1 }[direction];
+					int deltaColumn = new int[] { -1, +1, +0, +0 }[direction];
+					int deltaRow = new int[] { +0, 0, -1, +1 }[direction];
 					toColumn = fromColumn + deltaColumn;
 					toRow = fromRow + deltaRow;
 
@@ -56,7 +56,7 @@ public class BishopMoveGenerator : IMoveGenerator
 					}
 				}
 
-				workingCopy &= ~1UL;
+				workCopy &= ~1UL;
 			}
 		}
 	}

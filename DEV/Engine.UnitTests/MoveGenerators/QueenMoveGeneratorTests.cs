@@ -106,5 +106,22 @@ public class QueenMoveGeneratorTests
 
 		readableMoves.Should().BeEquivalentTo(expected);
 	}
+
+	[TestMethod]
+	public void TwoWhiteQueensTest()
+	{
+		var fen = "6k1/3Q4/5Q2/8/8/8/8/1K6 w - - 0 1";
+		var board = fen.ToBoard();
+
+		var sut = new QueenMoveGenerator();
+
+		var actual = sut.GenerateMove(board).ToArray();
+
+		var readableMoves = actual.ToReadableMoves().ToArray();
+		var expected = 48;
+
+		readableMoves.Should().HaveCount(expected);
+	}
+
 }
 

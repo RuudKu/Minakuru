@@ -1,4 +1,6 @@
-﻿namespace Minakuru.Engine.MoveGenerators;
+﻿using System.Numerics;
+
+namespace Minakuru.Engine.MoveGenerators;
 
 public class PawnMoveGenerator : IMoveGenerator
 {
@@ -11,13 +13,19 @@ public class PawnMoveGenerator : IMoveGenerator
 		var blackPiecesAt = board.BlackPieces;
 
 		var pawns = color == Color.White ? board.WhitePawns : board.BlackPawns;
+		var workingCopy = pawns;
+
 		var opponentPiecesAt = color == Color.White ? blackPiecesAt : whitePiecesAt;
 		var piecesAt = whitePiecesAt | blackPiecesAt;
 		var enPassantPossible = board.EnPassantPossible;
 		var enPassantTargetColumn = board.EnPassantTargetColumn;
 
-		for (byte from = 0; from < 64; from++)
+		byte from = 0;
+		while (workingCopy != 0UL)
 		{
+			byte trailingZeroes = (byte) BitOperations.TrailingZeroCount(workingCopy);
+			from += trailingZeroes;
+			workingCopy >>= trailingZeroes;
 			var filter = (ulong)1 << from;
 			if ((pawns & filter) != 0)
 			{
@@ -133,11 +141,7 @@ public class PawnMoveGenerator : IMoveGenerator
 					}
 				}
 
-				pawns &= ~filter;
-				if (pawns == 0)
-				{
-					break;
-				}
+				workingCopy &= ~1UL;
 			}
 		}
 	}

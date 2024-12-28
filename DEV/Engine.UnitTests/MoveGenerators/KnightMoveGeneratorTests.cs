@@ -56,4 +56,20 @@ public class KnightMoveGeneratorTests
 
 		readableMoves.Should().BeEquivalentTo(expected);
 	}
+
+	[TestMethod]
+	public void WithTwoWhiteKnightsTest()
+	{
+		var fen = "7k/8/4r3/5N2/3N4/5B2/8/K7 w - - 0 1";
+		var board = fen.ToBoard();
+
+		var sut = new KnightMoveGenerator();
+
+		var actual = sut.GenerateMove(board).ToArray();
+
+		var readableMoves = actual.ToReadableMoves().ToArray();
+		var expected = 13;
+
+		readableMoves.Should().HaveCount(expected);
+	}
 }

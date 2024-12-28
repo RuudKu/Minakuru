@@ -1,4 +1,6 @@
-﻿namespace Minakuru.Engine.MoveGenerators;
+﻿using System.Numerics;
+
+namespace Minakuru.Engine.MoveGenerators;
 
 public class RookMoveGenerator : IMoveGenerator
 {
@@ -9,11 +11,16 @@ public class RookMoveGenerator : IMoveGenerator
 		var blackPiecesAt = board.BlackPieces;
 
 		var rooks = color == Color.White ? board.WhiteRooks : board.BlackRooks;
+		var workCopy = rooks;
 		var ownPiecesAt = color == Color.White ? whitePiecesAt : blackPiecesAt;
 		var opponentPiecesAt = color == Color.White ? blackPiecesAt : whitePiecesAt;
 
-		for (byte from = 0; from < 64; from++)
+		byte from = 0;
+		while (workCopy != 0L)
 		{
+			int trailingZeroes = BitOperations.TrailingZeroCount(workCopy);
+			from += (byte)trailingZeroes;
+			workCopy >>= trailingZeroes;
 			var filter = (ulong)1 << from;
 			if ((rooks & filter) != 0)
 			{
@@ -49,11 +56,7 @@ public class RookMoveGenerator : IMoveGenerator
 					}
 				}
 
-				rooks &= ~filter;
-				if (rooks == 0)
-				{
-					break;
-				}
+				workCopy &= ~1UL;
 			}
 		}
 	}
