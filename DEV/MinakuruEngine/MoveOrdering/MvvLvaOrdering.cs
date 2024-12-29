@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Minakuru.Engine.Evaluators;
+﻿using Minakuru.Engine.Evaluators;
 
 namespace Minakuru.Engine.MoveOrdering;
 
@@ -10,19 +9,19 @@ public class MvvLvaOrdering : IMoveOrdering
 {
 	public IEnumerable<Move> Order(Board board, IEnumerable<Move> moves)
 	{
-		var capturingMoves = new List<Move>(moves.Where(m => m.Capture)).Select(m => new MvvLva(m));
+		var mvvLvaMoves = new List<Move>(moves.Where(m => m.Capture)).Select(m => new MvvLva(m)).ToArray();
 		var otherColor = board.ColorToMove.OtherColor();
 
-		foreach (var move in capturingMoves)
+		foreach (var mvvLvaMove in mvvLvaMoves)
 		{
-			var coloredPieceAtFrom = board.GetColoredPieceAt(move.Move.From, otherColor);
-			move.AggressorValue = ColoredPieceValue(coloredPieceAtFrom);
-			var coloredPieceAtTo = board.GetColoredPieceAt(move.Move.To, otherColor);
-			move.VictimValue = ColoredPieceValue(coloredPieceAtTo);
+			var coloredPieceAtFrom = board.GetColoredPieceAt(mvvLvaMove.Move.From, board.ColorToMove);
+			mvvLvaMove.AggressorValue = ColoredPieceValue(coloredPieceAtFrom);
+			var coloredPieceAtTo = board.GetColoredPieceAt(mvvLvaMove.Move.To, otherColor);
+			mvvLvaMove.VictimValue = ColoredPieceValue(coloredPieceAtTo);
 		}
-		foreach (var move in capturingMoves.OrderByDescending(m=>m.Difference).Select(m=>m.Move))
+		foreach (var mvvLvaMove in mvvLvaMoves.OrderByDescending(m => m.VictimValue).ThenBy(m => m.AggressorValue))
 		{
-			yield return move;
+			yield return mvvLvaMove.Move;
 		}
 		foreach (var move in moves.Where(m => !m.Capture))
 		{
@@ -36,8 +35,8 @@ public class MvvLvaOrdering : IMoveOrdering
 		{
 			ColoredPiece.WhiteKing => EvaluationConstants.KingWeightFactor,
 			ColoredPiece.BlackKing => EvaluationConstants.KingWeightFactor,
-			ColoredPiece.WhiteQueen =>  EvaluationConstants.QueenWeightFactor,
-			ColoredPiece.BlackQueen =>  EvaluationConstants.QueenWeightFactor,
+			ColoredPiece.WhiteQueen => EvaluationConstants.QueenWeightFactor,
+			ColoredPiece.BlackQueen => EvaluationConstants.QueenWeightFactor,
 			ColoredPiece.WhiteRook => EvaluationConstants.RookWeightFactor,
 			ColoredPiece.BlackRook => EvaluationConstants.RookWeightFactor,
 			ColoredPiece.WhiteBishop => EvaluationConstants.BishopWeightFactor,
@@ -54,7 +53,5 @@ public class MvvLvaOrdering : IMoveOrdering
 	{
 		public int VictimValue { get; set; }
 		public int AggressorValue { get; set; }
-
-		public int Difference => VictimValue - AggressorValue;
 	}
 }
