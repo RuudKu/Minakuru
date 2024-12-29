@@ -7,10 +7,6 @@ public class LegalMovesGenerator(PseudoLegalMoveGenerator pseudoLegalMovesGenera
 	private readonly PseudoLegalMoveGenerator _pseudoLegalMovesGenerator = pseudoLegalMovesGenerator ?? throw new ArgumentNullException(nameof(pseudoLegalMovesGenerator));
 	private readonly IThreatChecker _threatChecker = threatChecker ?? throw new ArgumentNullException(nameof(threatChecker));
 
-	public LegalMovesGenerator() : this(new PseudoLegalMoveGenerator(), new ThreatChecker())
-	{
-	}
-
 	public IEnumerable<Move> GenerateMove(Board board)
 	{
 		var color = board.ColorToMove;

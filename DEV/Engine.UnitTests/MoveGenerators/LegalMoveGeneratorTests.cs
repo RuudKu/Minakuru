@@ -12,7 +12,7 @@ public class LegalMoveGeneratorTests
 		var fen = "b6r/7B/2R5/8/8/6k1/8/q1N4K w - - 0 1";
 		var board = fen.ToBoard();
 
-		var legalMovesGenerator = new LegalMovesGenerator();
+		var legalMovesGenerator = MoveGeneratorFactory.Create();
 
 		var allMoves = legalMovesGenerator.GenerateMove(board);
 		var allReadableMoves = allMoves.ToReadableMoves().ToArray();
@@ -31,7 +31,7 @@ public class LegalMoveGeneratorTests
 		var fen = "7K/r4P2/2k5/8/8/8/8/1b4r1 w - - 0 1";
 		var board = fen.ToBoard();
 
-		var legalMovesGenerator = new LegalMovesGenerator();
+		var legalMovesGenerator = MoveGeneratorFactory.Create();
 
 		var allMoves = legalMovesGenerator.GenerateMove(board);
 		var allReadableMoves = allMoves.ToReadableMoves().ToArray();
@@ -53,7 +53,7 @@ public class LegalMoveGeneratorTests
 		var fen = "4nnnK/r4P2/2k5/8/8/8/8/1b4r1 w - - 0 1";
 		var board = fen.ToBoard();
 
-		var legalMovesGenerator = new LegalMovesGenerator();
+		var legalMovesGenerator = MoveGeneratorFactory.Create();
 
 		var allMoves = legalMovesGenerator.GenerateMove(board);
 		var allReadableMoves = allMoves.ToReadableMoves().ToArray();
@@ -89,7 +89,7 @@ public class LegalMoveGeneratorTests
 
 		board.SetColoredPieceAt(extraRookFieldNo, ColoredPiece.BlackRook);
 
-		var legalMovesGenerator = new LegalMovesGenerator();
+		var legalMovesGenerator = MoveGeneratorFactory.Create();
 
 		var allMoves = legalMovesGenerator.GenerateMove(board);
 		var allReadableMoves = allMoves.ToReadableMoves().ToArray();
@@ -117,7 +117,7 @@ public class LegalMoveGeneratorTests
 
 		board.SetColoredPieceAt(extraRookFieldNo, ColoredPiece.WhiteRook);
 
-		var legalMovesGenerator = new LegalMovesGenerator();
+		var legalMovesGenerator = MoveGeneratorFactory.Create();
 
 		var allMoves = legalMovesGenerator.GenerateMove(board);
 		var allReadableMoves = allMoves.ToReadableMoves().ToArray();

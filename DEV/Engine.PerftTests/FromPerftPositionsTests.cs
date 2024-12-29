@@ -175,7 +175,7 @@ public sealed class FromPerftPositionsTests
 	public void PerftDivideStartpositionTests()
 	{
 		var board = Board.Init();
-		var legalMovesGenerator = new LegalMovesGenerator();
+		var legalMovesGenerator = MoveGeneratorFactory.Create();
 
 		var actual = CountDividedNodes(board, 3);
 

@@ -2,5 +2,5 @@
 
 public interface IMoveSearcher
 {
-	Tuple<Move, int> Search(Board board);
+	Tuple<Move, int> Search(MoveSearchOptions moveSearchOptions, Board board);
 }

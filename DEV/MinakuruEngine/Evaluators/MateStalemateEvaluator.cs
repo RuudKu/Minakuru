@@ -3,14 +3,10 @@ using Minakuru.Engine.ThreatCheckers;
 
 namespace Minakuru.Engine.Evaluators;
 
-public class MateStalemateEvaluator(LegalMovesGenerator legalMovesGenerator, ThreatChecker threatChecker) : IEvaluator
+public class MateStalemateEvaluator(IMoveGenerator legalMovesGenerator, IThreatChecker threatChecker) : IEvaluator
 {
-	private readonly ThreatChecker _threatChecker = threatChecker ?? throw new ArgumentNullException(nameof(threatChecker));
-	private readonly LegalMovesGenerator _legalMovesGenerator = legalMovesGenerator ?? throw new ArgumentNullException(nameof(legalMovesGenerator));
-
-	public MateStalemateEvaluator() : this(new LegalMovesGenerator(), new ThreatChecker())
-	{
-	}
+	private readonly IThreatChecker _threatChecker = threatChecker ?? throw new ArgumentNullException(nameof(threatChecker));
+	private readonly IMoveGenerator _legalMovesGenerator = legalMovesGenerator ?? throw new ArgumentNullException(nameof(legalMovesGenerator));
 
 	public int Evaluate(Board board)
 	{

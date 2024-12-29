@@ -1,11 +1,8 @@
 ﻿namespace Minakuru.Engine.Evaluators;
+
 public class Evaluator(IEvaluator[] evaluators) : IEvaluator
 {
 	private readonly IEvaluator[] _evaluators = evaluators ?? throw new ArgumentNullException(nameof(evaluators));
-
-	public Evaluator() : this([new MateStalemateEvaluator(), new SimpleMaterialEvaluator()])
-	{
-	}
 
 	public int Evaluate(Board board)
 	{

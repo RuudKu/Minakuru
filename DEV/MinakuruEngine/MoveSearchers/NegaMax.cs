@@ -2,17 +2,12 @@
 using Minakuru.Engine.MoveGenerators;
 
 namespace Minakuru.Engine.MoveSearchers;
-public class NegaMax(MoveSearchOptions moveSearchOptions, IEvaluator evaluator, IMoveGenerator moveGenerator) : IMoveSearcher
+public class NegaMax(IEvaluator evaluator, IMoveGenerator moveGenerator) : IMoveSearcher
 {
 	private readonly IEvaluator _evaluator = evaluator ?? throw new ArgumentNullException(nameof(evaluator));
 	private readonly IMoveGenerator _moveGenerator = moveGenerator ?? throw new ArgumentNullException(nameof(moveGenerator));
-	private readonly MoveSearchOptions _moveSearchOptions = moveSearchOptions ?? throw new ArgumentNullException(nameof(moveSearchOptions));
 
-	public NegaMax() : this(new MoveSearchOptions(4), new Evaluator(), new LegalMovesGenerator())
-	{		
-	}
-
-	public Tuple<Move, int> Search(Board board)
+	public Tuple<Move, int> Search(MoveSearchOptions moveSearchOptions, Board board)
 	{
 		var allMoves = _moveGenerator.GenerateMove(board);
 		int max = int.MinValue;
@@ -20,7 +15,7 @@ public class NegaMax(MoveSearchOptions moveSearchOptions, IEvaluator evaluator, 
 		foreach (var move in allMoves)
 		{
 			var newBoard = MoveMaker.MakeMove(board, move);
-			int moveScore = -SearchCore(newBoard, _moveSearchOptions.MaxDepth - 1);
+			int moveScore = -SearchCore(newBoard, moveSearchOptions.MaxDepth - 1);
 			if (moveScore > max)
 			{
 				max = moveScore;

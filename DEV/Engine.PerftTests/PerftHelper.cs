@@ -5,7 +5,7 @@ namespace Minakuru.Engine.PerftTests;
 
 public static class PerftHelper
 {
-	public static readonly LegalMovesGenerator LegalMovesGenerator = new();
+	public static readonly LegalMovesGenerator LegalMovesGenerator = (LegalMovesGenerator)MoveGeneratorFactory.Create();
 
 	public static ulong CountNodes(Board board, int remainingDepth)
 	{
