@@ -121,4 +121,42 @@ public class AlphaBetaTests
 		actualMove.Should().Be(expectedMove);
 		actualScore.Should().Be(expectedScore);
 	}
+
+	[TestMethod]
+	public void WhiteRookSacrificeLeadsToMate()
+	{
+		var fen = "k1K5/qp5p/2p3pP/2Pp1pP1/B2PpP2/4P3/8/RR6 w - - 0 1";
+		var board = fen.ToBoard();
+
+		var alphaBeta = new AlphaBeta(
+			new MoveSearchOptions(4),
+			new Evaluator([new MateStalemateEvaluator(), new SimpleMaterialEvaluator()]),
+			new LegalMovesGenerator());
+		var (actualMove, actualScore) = alphaBeta.Search(board);
+
+		var expectedMove = new Move(Field.A4FieldNo, Field.C6FieldNo, true);
+		var expectedScore = EvaluationConstants.Mate;
+
+		actualMove.Should().Be(expectedMove);
+		actualScore.Should().Be(expectedScore);
+	}
+
+	// [TestMethod]
+	public void BlackRookSacrificeLeadsToDoubleCheckMate()
+	{
+		var fen = "6k1/pp4p1/2p5/2bp4/8/P5Pb/1P3rrP/2BRRN1K b - - 0 1";
+		var board = fen.ToBoard();
+
+		var alphaBeta = new AlphaBeta(
+			new MoveSearchOptions(4),
+			new Evaluator([new MateStalemateEvaluator(), new SimpleMaterialEvaluator()]),
+			new LegalMovesGenerator());
+		var (actualMove, actualScore) = alphaBeta.Search(board);
+
+		var expectedMove = new Move(Field.G2FieldNo, Field.G1FieldNo, false);
+		var expectedScore = EvaluationConstants.Mate;
+
+		actualMove.Should().Be(expectedMove);
+		actualScore.Should().Be(expectedScore);
+	}
 }
