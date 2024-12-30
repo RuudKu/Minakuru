@@ -1,4 +1,4 @@
-﻿namespace Minakuru.Engine.ThreatCheckers;
+﻿namespace Minakuru.Engine.ThreatCheckers.Experimental;
 
 public class KnightThreatChecker : IThreatChecker
 {

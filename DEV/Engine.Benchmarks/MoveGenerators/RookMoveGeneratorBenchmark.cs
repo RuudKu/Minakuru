@@ -2,7 +2,7 @@
 using Baseline = Minakuru.Engine.MoveGenerators;
 using Experimental = Minakuru.Engine.MoveGenerators;
 
-namespace Minakuru.Engine.Benchmarks;
+namespace Minakuru.Engine.Benchmarks.MoveGenerators;
 
 [HtmlExporter]
 public class RookMoveGeneratorBenchmark
@@ -44,7 +44,7 @@ public class RookMoveGeneratorBenchmark
 
 	public Board Board { get; set; }
 
-	[Benchmark(Baseline = true)]
+	//[Benchmark(Baseline = true)]
 	public void BaselineMoves()
 	{
 		for (int i = 0; i < Times; i++)
@@ -53,7 +53,7 @@ public class RookMoveGeneratorBenchmark
 		}
 	}
 
-	[Benchmark]
+	//[Benchmark]
 	public void ExperimentalMoves()
 	{
 		for (int i = 0; i < Times; i++)
