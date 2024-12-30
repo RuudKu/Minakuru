@@ -1,9 +1,12 @@
 ﻿using System.Numerics;
+using Minakuru.Engine.Fields;
 
 namespace Minakuru.Engine.MoveGenerators;
 
 public class KnightMoveGenerator : IMoveGenerator
 {
+	private static readonly ulong[] _bitmasks = KnightBitmasks.KnightFieldBitmasks;
+
 	public IEnumerable<Move> GenerateMove(Board board)
 	{
 		var color = board.ColorToMove;
@@ -18,39 +21,22 @@ public class KnightMoveGenerator : IMoveGenerator
 		byte from = 0;
 		while (workingCopy != 0UL)
 		{
-			byte trailingZeroes = (byte)BitOperations.TrailingZeroCount(workingCopy);
-			from += trailingZeroes;
-			workingCopy >>= trailingZeroes;
-			var filter = (ulong)1 << from;
-			if ((knights & filter) != 0)
+			byte trailingZeroesFrom = (byte)BitOperations.TrailingZeroCount(workingCopy);
+			from += trailingZeroesFrom;
+			workingCopy >>= trailingZeroesFrom;
+			var toFields = _bitmasks[from] & ~ownPiecesAt;
+
+			while (toFields != 0UL)
 			{
-				int fromColumn = from % 8;
-				int fromRow = from / 8;
+				byte toFieldNo = (byte)BitOperations.TrailingZeroCount(toFields);
 
-				int toColumn;
-				int toRow;
+				ulong toFilter = (ulong)1 << toFieldNo;
 
-				for (int option = 0; option < 8; option++)
-				{
-					int deltaColumn = new int[] { -2, -2, -1, -1, +1, +1, +2, +2 }[option];
-					int deltaRow = new int[] { -1, +1, -2, +2, -2, 2, -1, 1 }[option];
-					toColumn = fromColumn + deltaColumn;
-					toRow = fromRow + deltaRow;
-
-					if (toColumn >= 0 && toColumn < 8 && toRow >= 0 && toRow < 8)
-					{
-						byte to = (byte)(8 * toRow + toColumn);
-						ulong toFilter = (ulong)1 << to;
-
-						if ((ownPiecesAt & toFilter) == 0)
-						{
-							bool isCapture = (opponentPiecesAt & toFilter) != 0;
-							yield return new Move(from, to, isCapture);
-						}
-					}
-				}
-				workingCopy &= ~1UL;
+				bool isCapture = (opponentPiecesAt & toFilter) != 0;
+				yield return new Move(from, toFieldNo, isCapture);
+				toFields &= ~toFilter;
 			}
+			workingCopy &= ~1UL;
 		}
 	}
 }
