@@ -2,27 +2,11 @@
 
 public class KingThreatChecker : IThreatChecker
 {
+	private static readonly ulong[] _bitmasks = Fields.KingBitmasks.KingFieldBitmasks;
+
 	public bool IsUnderAttack(Board board, byte targetFieldNo, Color attackedByColor)
 	{
 		var opponentKing = attackedByColor == Color.White ? board.WhiteKing : board.BlackKing;
-
-		var toColumnNo = targetFieldNo % 8;
-		var toRowNo = targetFieldNo / 8;
-		ulong kingFilter = 0L;
-		for (int option = 0; option < 8; option++)
-		{
-			int deltaColumn = new int[] { -1, -1, -1, 0, 0, +1, +1, +1 }[option];
-			int deltaRow = new int[] { -1, 0, +1, -1, +1, -1, +0, +1 }[option];
-			int fromColumn = toColumnNo + deltaColumn;
-			int fromRow = toRowNo + deltaRow;
-
-			if (fromColumn >= 0 && fromColumn < 8 && fromRow >= 0 && fromRow < 8)
-			{
-				byte fromFieldNo = (byte)(8 * fromRow + fromColumn);
-				ulong fromFilter = (ulong)1 << fromFieldNo;
-				kingFilter |= fromFilter;
-			}
-		}
-		return (opponentKing & kingFilter) != 0;
+		return (opponentKing & _bitmasks[targetFieldNo]) != 0;
 	}
 }
