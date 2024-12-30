@@ -42,13 +42,13 @@ public class KnightThreatCheckerBenchmark
 
 	public Board Board { get; set; }
 
-	[Benchmark(Baseline = true)]
+	// [Benchmark(Baseline = true)]
 	public void BaselineMoves()
 	{
 			baselineResult = threatCheckerBaseline.IsUnderAttack(Board, Field.E5FieldNo, Color.Black);
 	}
 
-	[Benchmark]
+	// [Benchmark]
 	public void ExperimentalMoves()
 	{
 		experimentalResult = threatCheckerExperimental.IsUnderAttack(Board, Field.E5FieldNo, Color.Black);
