@@ -1,13 +1,13 @@
 ﻿namespace Minakuru.Engine.Fields;
 
-public static class StraightLineBitmasks
+public static class DiagonalBitmasks
 {
 	// Index 1: direction
 	// Index 2: fieldNo
 	// The result is an array of ulongs (with a maximum of 8 elements), which can be used as bitmasks
 	private static readonly ulong[,][] _bitmasks = new ulong[64, 4][];
 
-	static StraightLineBitmasks()
+	static DiagonalBitmasks()
 	{
 		for (int targetFieldNo = 0; targetFieldNo < 64; targetFieldNo++)
 		{
@@ -16,8 +16,8 @@ public static class StraightLineBitmasks
 			for (int option = 0; option < 4; option++)
 			{
 				List<ulong> fieldIds = [];
-				int deltaColumn = new int[] { +1, 0, -1, 0 }[option];
-				int deltaRow = new int[] { 0, +1, 0, -1 }[option];
+				int deltaColumn = new int[] { +1, +1, -1, -1 }[option];
+				int deltaRow = new int[] { +1, -1, +1, -1 }[option];
 				int fromColumn = toColumnNo + deltaColumn;
 				int fromRow = toRowNo + deltaRow;
 
@@ -35,7 +35,7 @@ public static class StraightLineBitmasks
 		}
 	}
 
-	public static ulong[,][] StraightLineFieldBitmasks
+	public static ulong[,][] DiagonalFieldBitmasks
 	{
 		get
 		{

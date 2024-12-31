@@ -5,13 +5,13 @@ using Experimental = Minakuru.Engine.ThreatCheckers.Experimental;
 namespace Minakuru.Engine.Benchmarks.ThreatCheckers;
 
 [HtmlExporter]
-public class StraightLineThreatCheckerBenchmark
+public class DiagonalThreatCheckerBenchmark
 {
-	private readonly Baseline.IThreatChecker threatCheckerBaseline = new Baseline.StraightLineThreatChecker();
-	private readonly Baseline.IThreatChecker threatCheckerExperimental = new Experimental.StraightLineThreatChecker();
+	private readonly Baseline.IThreatChecker threatCheckerBaseline = new Baseline.DiagonalThreatChecker();
+	private readonly Baseline.IThreatChecker threatCheckerExperimental = new Experimental.DiagonalThreatChecker();
 
-	private const string Fen1 = "6k1/8/3b4/8/1B1K4/8/8/8 w - - 0 1";
-	private const string Fen2 = "6K1/8/3B4/8/1b1k4/8/8/8 b - - 0 1";
+	private const string Fen1 = "6k1/8/5r2/8/3K4/8/1B6/8 w - - 0 1";
+	private const string Fen2 = "6K1/8/5R2/8/3k4/8/1b6/8 b - - 0 1";
 
 	bool baselineResult = false;
 	bool experimentalResult = false;
@@ -42,13 +42,13 @@ public class StraightLineThreatCheckerBenchmark
 
 	public Board Board { get; set; }
 
-	// [Benchmark(Baseline = true)]
+	[Benchmark(Baseline = true)]
 	public void BaselineMoves()
 	{
 		baselineResult = threatCheckerBaseline.IsUnderAttack(Board, Field.D4FieldNo, Color.Black);
 	}
 
-	// [Benchmark]
+	[Benchmark]
 	public void ExperimentalMoves()
 	{
 		experimentalResult = threatCheckerExperimental.IsUnderAttack(Board, Field.D4FieldNo, Color.Black);
