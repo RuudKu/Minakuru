@@ -5,13 +5,13 @@ using Experimental = Minakuru.Engine.ThreatCheckers.Experimental;
 namespace Minakuru.Engine.Benchmarks.ThreatCheckers;
 
 [HtmlExporter]
-public class KingThreatCheckerBenchmark
+public class StraightLineThreatCheckerBenchmark
 {
-	private readonly Baseline.IThreatChecker threatCheckerBaseline = new Baseline.KingThreatChecker();
-	private readonly Baseline.IThreatChecker threatCheckerExperimental = new Experimental.KingThreatChecker();
+	private readonly Baseline.IThreatChecker threatCheckerBaseline = new Baseline.StraightLineThreatChecker();
+	private readonly Baseline.IThreatChecker threatCheckerExperimental = new Experimental.StraightLineThreatChecker();
 
-	private const string Fen1 = "1n6/8/3n3n/1n2Kn2/8/4n3/8/n3n3 w - - 0 1";
-	private const string Fen2 = "r1bqkb1r/pppnpppp/5n2/8/8/2N2N2/PPPPPPPP/R1BQKB1R w KQkq - 0 1";
+	private const string Fen1 = "6k1/8/3b4/8/1B1K4/8/8/8 w - - 0 1";
+	private const string Fen2 = "6K1/8/3b4/8/1B1k4/8/8/8 w - - 0 1";
 
 	bool baselineResult = false;
 	bool experimentalResult = false;
@@ -42,15 +42,15 @@ public class KingThreatCheckerBenchmark
 
 	public Board Board { get; set; }
 
-	// [Benchmark(Baseline = true)]
+	[Benchmark(Baseline = true)]
 	public void BaselineMoves()
 	{
-			baselineResult = threatCheckerBaseline.IsUnderAttack(Board, Field.E5FieldNo, Color.Black);
+		baselineResult = threatCheckerBaseline.IsUnderAttack(Board, Field.D4FieldNo, Color.Black);
 	}
 
-	// [Benchmark]
+	[Benchmark]
 	public void ExperimentalMoves()
 	{
-		experimentalResult = threatCheckerExperimental.IsUnderAttack(Board, Field.E5FieldNo, Color.Black);
+		experimentalResult = threatCheckerExperimental.IsUnderAttack(Board, Field.D4FieldNo, Color.Black);
 	}
 }

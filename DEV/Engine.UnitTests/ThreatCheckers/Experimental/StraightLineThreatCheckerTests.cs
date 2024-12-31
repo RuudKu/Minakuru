@@ -1,11 +1,12 @@
 ﻿using FluentAssertions;
-using Minakuru.Engine.ThreatCheckers;
+using Experiment = Minakuru.Engine.ThreatCheckers.Experimental;
 
-namespace Minakuru.Engine.UnitTests.ThreatCheckers;
+namespace Minakuru.Engine.UnitTests.ThreatCheckers.Experimental;
 
 [TestClass]
 public class StraightLineThreatCheckerTests
 {
+
 	[DataRow(ColoredPiece.BlackQueen, "d1", true, DisplayName = "Qd1")]
 	[DataRow(ColoredPiece.BlackRook, "d3", true, DisplayName = "Rd3")]
 	[DataRow(ColoredPiece.BlackQueen, "e4", true, DisplayName = "Qe4")]
@@ -20,7 +21,7 @@ public class StraightLineThreatCheckerTests
 	{
 		var fen = "6k1/8/3b4/8/1B1K4/8/8/8 w - - 0 1";
 		var board = fen.ToBoard();
-		var sut = new StraightLineThreatChecker();
+		var sut = new Experiment.StraightLineThreatChecker();
 		byte kingFieldNo = "d4".ToFieldNo();
 		byte attackerFieldNo = fieldName.ToFieldNo();
 		board.SetColoredPieceAt(attackerFieldNo, coloredPiece);
@@ -44,7 +45,7 @@ public class StraightLineThreatCheckerTests
 	{
 		var fen = "6K1/8/3b4/8/1B1k4/8/8/8 w - - 0 1";
 		var board = fen.ToBoard();
-		var sut = new StraightLineThreatChecker();
+		var sut = new Experiment.StraightLineThreatChecker();
 		byte kingFieldNo = "d4".ToFieldNo();
 		byte attackerFieldNo = fieldName.ToFieldNo();
 		board.SetColoredPieceAt(attackerFieldNo, coloredPiece);
@@ -54,3 +55,4 @@ public class StraightLineThreatCheckerTests
 		actual.Should().Be(expected);
 	}
 }
+
