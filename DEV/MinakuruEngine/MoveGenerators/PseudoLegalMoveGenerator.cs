@@ -12,15 +12,14 @@ public class PseudoLegalMoveGenerator : IMoveGenerator
 			new KingMoveGenerator()
 		];
 
-	public IEnumerable<Move> GenerateMove(Board board)
+	public MoveList GenerateMove(Board board)
 	{
+		MoveList moveList = [];
 		foreach (var generator in generators)
 		{
-			var generatorEnumerator = generator.GenerateMove(board).GetEnumerator();
-			while (generatorEnumerator.MoveNext())
-			{
-				yield return generatorEnumerator.Current;
-			}
+			var extraMoveList = generator.GenerateMove(board);
+			moveList.Merge(extraMoveList);
 		}
+		return moveList;
 	}
 }

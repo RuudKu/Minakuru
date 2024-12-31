@@ -4,8 +4,10 @@ namespace Minakuru.Engine.MoveGenerators;
 
 public class RookMoveGenerator : IMoveGenerator
 {
-	public IEnumerable<Move> GenerateMove(Board board)
+	public MoveList GenerateMove(Board board)
 	{
+		MoveList moveList = [];
+
 		var color = board.ColorToMove;
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
@@ -47,7 +49,7 @@ public class RookMoveGenerator : IMoveGenerator
 						if ((ownPiecesAt & toFilter) == 0)
 						{
 							isCapture = (opponentPiecesAt & toFilter) != 0;
-							yield return new Move(from, to, isCapture);
+							moveList.Add(new Move(from, to, isCapture));
 						}
 						ownPiece = (ownPiecesAt & toFilter) != 0;
 
@@ -59,5 +61,6 @@ public class RookMoveGenerator : IMoveGenerator
 				workCopy &= ~1UL;
 			}
 		}
+		return moveList;
 	}
 }

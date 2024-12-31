@@ -2,5 +2,5 @@
 
 public interface IMoveGenerator
 {
-	public IEnumerable<Move> GenerateMove(Board board);
+	public MoveList GenerateMove(Board board);
 }

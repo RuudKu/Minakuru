@@ -2,8 +2,9 @@
 
 public class KingMoveGenerator : IMoveGenerator
 {
-	public IEnumerable<Move> GenerateMove(Board board)
+	public MoveList GenerateMove(Board board)
 	{
+		MoveList moveList = [];
 		var color = board.ColorToMove;
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
@@ -33,7 +34,7 @@ public class KingMoveGenerator : IMoveGenerator
 				if ((ownPiecesAt & toFilter) == 0)
 				{
 					bool isCapture = (opponentPiecesAt & toFilter) != 0;
-					yield return new Move(kingAt, to, isCapture);
+					moveList.Add(new Move(kingAt, to, isCapture));
 				}
 			}
 		}
@@ -43,25 +44,26 @@ public class KingMoveGenerator : IMoveGenerator
 			case Color.White:
 				if (board.WhiteCanCastleShort && board.IsEmpty(Field.F1FieldNo) && board.IsEmpty(Field.G1FieldNo))
 				{
-					yield return new Move(Field.E1FieldNo, Field.G1FieldNo);
+					moveList.Add(new Move(Field.E1FieldNo, Field.G1FieldNo));
 				}
 				if (board.WhiteCanCastleLong && board.IsEmpty(Field.D1FieldNo) && board.IsEmpty(Field.C1FieldNo) && board.IsEmpty(Field.B1FieldNo))
 				{
-					yield return new Move(Field.E1FieldNo, Field.C1FieldNo);
+					moveList.Add(new Move(Field.E1FieldNo, Field.C1FieldNo));
 				}
 				break;
 			case Color.Black:
 				if (board.BlackCanCastleShort && board.IsEmpty(Field.F8FieldNo) && board.IsEmpty(Field.G8FieldNo))
 				{
-					yield return new Move(Field.E8FieldNo, Field.G8FieldNo);
+					moveList.Add(new Move(Field.E8FieldNo, Field.G8FieldNo));
 				}
 				if (board.BlackCanCastleLong && board.IsEmpty(Field.D8FieldNo) && board.IsEmpty(Field.C8FieldNo) && board.IsEmpty(Field.B8FieldNo))
 				{
-					yield return new Move(Field.E8FieldNo, Field.C8FieldNo);
+					moveList.Add(new Move(Field.E8FieldNo, Field.C8FieldNo));
 				}
 				break;
 			default:
 				throw new NotSupportedException();
 		}
+		return moveList;
 	}
 }

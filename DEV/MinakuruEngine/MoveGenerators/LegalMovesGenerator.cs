@@ -7,13 +7,13 @@ public class LegalMovesGenerator(PseudoLegalMoveGenerator pseudoLegalMovesGenera
 	private readonly PseudoLegalMoveGenerator _pseudoLegalMovesGenerator = pseudoLegalMovesGenerator ?? throw new ArgumentNullException(nameof(pseudoLegalMovesGenerator));
 	private readonly IThreatChecker _threatChecker = threatChecker ?? throw new ArgumentNullException(nameof(threatChecker));
 
-	public IEnumerable<Move> GenerateMove(Board board)
+	public MoveList GenerateMove(Board board)
 	{
+		MoveList moveList = [];
 		var color = board.ColorToMove;
-		var enumerator = _pseudoLegalMovesGenerator.GenerateMove(board).GetEnumerator();
-		while (enumerator.MoveNext())
+		var pseudoLegalMoveList = _pseudoLegalMovesGenerator.GenerateMove(board);
+		foreach (var pseudoLegalMove in pseudoLegalMoveList)
 		{
-			var pseudoLegalMove = enumerator.Current;
 			Color opponentColor = color.OtherColor();
 
 			var newBoard = MoveMaker.MakeMove(board, pseudoLegalMove);
@@ -58,8 +58,9 @@ public class LegalMovesGenerator(PseudoLegalMoveGenerator pseudoLegalMovesGenera
 			bool check = _threatChecker.IsUnderAttack(newBoard, kingFieldNo, colorToMove.OtherColor());
 			if (!check)
 			{
-				yield return pseudoLegalMove;
+				moveList.Add(pseudoLegalMove);
 			}
 		}
+		return moveList;
 	}
 }

@@ -6,8 +6,9 @@ public class PawnMoveGenerator : IMoveGenerator
 {
 	private readonly Piece[] PromotionToPieces = [Piece.Queen, Piece.Rook, Piece.Bishop, Piece.Knight];
 
-	public IEnumerable<Move> GenerateMove(Board board)
+	public MoveList GenerateMove(Board board)
 	{
+		MoveList moveList = new MoveList();
 		var color = board.ColorToMove;
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
@@ -50,12 +51,12 @@ public class PawnMoveGenerator : IMoveGenerator
 					{
 						foreach (var promotionToPiece in PromotionToPieces)
 						{
-							yield return new Move(from, to, false, promotionToPiece);
+							moveList.Add(new Move(from, to, false, promotionToPiece));
 						}
 					}
 					else
 					{
-						yield return new Move(from, to, false);
+						moveList.Add(new Move(from, to, false));
 					}
 
 					// move 2 up
@@ -70,7 +71,7 @@ public class PawnMoveGenerator : IMoveGenerator
 						toFilter = (ulong)1 << to;
 						if ((piecesAt & toFilter) == 0)
 						{
-							yield return new Move(from, to, false);
+							moveList.Add(new Move(from, to, false));
 						}
 					}
 				}
@@ -89,13 +90,13 @@ public class PawnMoveGenerator : IMoveGenerator
 							// all promotions
 							foreach (var promotionToPiece in PromotionToPieces)
 							{
-								yield return new Move(from, to, true, promotionToPiece);
+								moveList.Add(new Move(from, to, true, promotionToPiece));
 							}
 						}
 						else
 						{
 							// no promotion
-							yield return new Move(from, to, true);
+							moveList.Add(new Move(from, to, true));
 						}
 					}
 				}
@@ -114,13 +115,13 @@ public class PawnMoveGenerator : IMoveGenerator
 							// all promotions
 							foreach (var promotionToPiece in PromotionToPieces)
 							{
-								yield return new Move(from, to, true, promotionToPiece);
+								moveList.Add(new Move(from, to, true, promotionToPiece));
 							}
 						}
 						else
 						{
 							// no promotion
-							yield return new Move(from, to, true);
+							moveList.Add(new Move(from, to, true));
 						}
 					}
 				}
@@ -136,7 +137,7 @@ public class PawnMoveGenerator : IMoveGenerator
 						if (toColumn == fromColumn + 1 || toColumn == fromColumn - 1)
 						{
 							to = (byte)(8 * toRow + toColumn);
-							yield return new Move(from, to, true);
+							moveList.Add(new Move(from, to, true));
 						}
 					}
 				}
@@ -144,5 +145,6 @@ public class PawnMoveGenerator : IMoveGenerator
 				workingCopy &= ~1UL;
 			}
 		}
+		return moveList;
 	}
 }

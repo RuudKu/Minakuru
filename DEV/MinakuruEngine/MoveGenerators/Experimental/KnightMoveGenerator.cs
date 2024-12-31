@@ -7,8 +7,9 @@ public class KnightMoveGenerator : IMoveGenerator
 {
 	private static readonly ulong[] _bitmasks = KnightBitmasks.KnightFieldBitmasks;
 
-	public IEnumerable<Move> GenerateMove(Board board)
+	public MoveList GenerateMove(Board board)
 	{
+		MoveList moveList = [];
 		var color = board.ColorToMove;
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
@@ -33,10 +34,11 @@ public class KnightMoveGenerator : IMoveGenerator
 				ulong toFilter = (ulong)1 << toFieldNo;
 
 				bool isCapture = (opponentPiecesAt & toFilter) != 0;
-				yield return new Move(from, toFieldNo, isCapture);
+				moveList.Add(new Move(from, toFieldNo, isCapture));
 				toFields &= ~toFilter;
 			}
 			workingCopy &= ~1UL;
 		}
+		return moveList;
 	}
 }
