@@ -8,12 +8,14 @@ namespace Minakuru.Engine.PerftTests;
 [TestClass]
 public partial class FromEpdFile
 {
+	public const int DefaultDepth = 3;
+
 	public TestContext TestContext { get; set; }
 
 	[TestMethod]
 	public void RunEpdFile()
 	{
-		var maxDepth = int.Parse(TestContext.Properties["MaxDepth"]?.ToString() ?? "3");
+		var maxDepth = int.Parse(TestContext.Properties["MaxDepth"]?.ToString() ?? DefaultDepth.ToString());
 
 		string[] epdContent = File.ReadAllLines("Files\\PerftTestset.epd");
 		Debug.WriteLine("EPD file has " + epdContent.Length + " lines");
