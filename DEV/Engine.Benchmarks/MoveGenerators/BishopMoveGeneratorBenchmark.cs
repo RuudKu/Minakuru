@@ -5,13 +5,13 @@ using Experimental = Minakuru.Engine.MoveGenerators;
 namespace Minakuru.Engine.Benchmarks.MoveGenerators;
 
 [HtmlExporter]
-public class KingMoveGeneratorBenchmark
+public class BishopMoveGeneratorBenchmark
 {
-	private readonly Baseline.IMoveGenerator moveGeneratorBaseline = new Baseline.KingMoveGenerator();
-	private readonly Baseline.IMoveGenerator moveGeneratorExperimental = new Experimental.KingMoveGenerator();
+	private readonly Baseline.IMoveGenerator moveGeneratorBaseline = new Baseline.BishopMoveGenerator();
+	private readonly Baseline.IMoveGenerator moveGeneratorExperimental = new Experimental.BishopMoveGenerator();
 
-	private const string Fen1 = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-	private const string Fen2 = "k7/8/5q2/8/3B4/8/8/6K1 w - - 0 1";
+	private const string Fen1 = "k7/8/8/8/3B4/8/8/7K w - - 0 1";
+	private const string Fen2 = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1";
 
 	private const int Times = 1;
 
@@ -44,7 +44,7 @@ public class KingMoveGeneratorBenchmark
 
 	public Board Board { get; set; }
 
-	//[Benchmark(Baseline = true)]
+	[Benchmark(Baseline = true)]
 	public void BaselineMoves()
 	{
 		for (int i = 0; i < Times; i++)
@@ -53,7 +53,7 @@ public class KingMoveGeneratorBenchmark
 		}
 	}
 
-	// [Benchmark]
+	[Benchmark]
 	public void ExperimentalMoves()
 	{
 		for (int i = 0; i < Times; i++)
