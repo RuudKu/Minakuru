@@ -1,6 +1,6 @@
 ﻿using Minakuru.Engine.Fields;
 
-namespace Minakuru.Engine.MoveGenerators;
+namespace Minakuru.Engine.MoveGenerators.Experimental;
 
 public class KingMoveGenerator : IMoveGenerator
 {
