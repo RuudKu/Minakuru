@@ -4,7 +4,8 @@ namespace Minakuru.Engine.ThreatCheckers;
 
 public class DiagonalThreatChecker : IThreatChecker
 {
-	private static readonly ulong[,][] _bitmasks = DiagonalBitmasks.DiagonalFieldBitmasks;
+	private static readonly ulong[,][] _diagonalPerDirectionBitmasks = DiagonalBitmasks.DiagonalPerDirectionFieldBitmasks;
+	private static readonly ulong[] _diagonalAllDirectionsBitmasks = DiagonalBitmasks.DiagonalAllDirectionsFieldBitmasks;
 
 	public bool IsUnderAttack(Board board, byte targetFieldNo, Color attackedByColor)
 	{
@@ -12,10 +13,15 @@ public class DiagonalThreatChecker : IThreatChecker
 
 		var opponentBishopsQueens = attackedByColor == Color.White ? board.WhiteQueens | board.WhiteBishops : board.BlackQueens | board.BlackBishops;
 
+		if ((opponentBishopsQueens & _diagonalAllDirectionsBitmasks[targetFieldNo]) == 0)
+		{
+			return false;
+		}
+
 		for (int direction = 0; direction < 4; direction++)
 		{
 			bool occupied = false;
-			ulong[] fieldIds = _bitmasks[targetFieldNo, direction];
+			ulong[] fieldIds = _diagonalPerDirectionBitmasks[targetFieldNo, direction];
 			byte i = 0;
 			while (!occupied && i < fieldIds.Length)
 			{

@@ -4,7 +4,7 @@ namespace Minakuru.Engine.ThreatCheckers.Experimental;
 
 public class DiagonalThreatChecker : IThreatChecker
 {
-	private static readonly ulong[,][] _bitmasks = DiagonalBitmasks.DiagonalFieldBitmasks;
+	private static readonly ulong[,][] _bitmasks = DiagonalBitmasks.DiagonalPerDirectionFieldBitmasks;
 
 	public bool IsUnderAttack(Board board, byte targetFieldNo, Color attackedByColor)
 	{
