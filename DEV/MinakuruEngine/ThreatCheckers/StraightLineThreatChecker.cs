@@ -4,7 +4,7 @@ namespace Minakuru.Engine.ThreatCheckers;
 
 public class StraightLineThreatChecker : IThreatChecker
 {
-	private static readonly ulong[,][] _bitmasks = StraightLineBitmasks.StraightLineFieldBitmasks;
+	private static readonly ulong[,][] _bitmasks = StraightLineBitmasks.StraightLinePerDirectionFieldBitmasks;
 
 	public bool IsUnderAttack(Board board, byte targetFieldNo, Color attackedByColor)
 	{

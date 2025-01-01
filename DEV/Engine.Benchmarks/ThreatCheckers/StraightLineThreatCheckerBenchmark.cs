@@ -10,45 +10,30 @@ public class StraightLineThreatCheckerBenchmark
 	private readonly Baseline.IThreatChecker threatCheckerBaseline = new Baseline.StraightLineThreatChecker();
 	private readonly Baseline.IThreatChecker threatCheckerExperimental = new Experimental.StraightLineThreatChecker();
 
-	private const string Fen1 = "6k1/8/3b4/8/1B1K4/8/8/8 w - - 0 1";
-	private const string Fen2 = "6K1/8/3B4/8/1b1k4/8/8/8 b - - 0 1";
+	private const string Fen = "6K1/8/8/8/1rk5/8/8/8 w - - 0 1";
 
 	bool baselineResult = false;
 	bool experimentalResult = false;
 
-	string fenCode;
+	[Params(Field.C6FieldNo, Field.E6FieldNo, Field.H4FieldNo)]
+	public byte PieceAt { get; set; }
 
-	[Params("Start w", "Start b")]
-	public string FenCode
+	[IterationSetup]
+	public void InterationSetup()
 	{
-		get { return fenCode; }
-		set
-		{
-			fenCode = value;
-			var fen = "";
-			switch (value)
-			{
-				case "Start w":
-					fen = Fen1;
-					break;
-				case "Start b":
-					fen = Fen2;
-					break;
-			}
-
-			Board = fen.ToBoard();
-		}
+		Board = Fen.ToBoard();
+		Board.SetColoredPieceAt(PieceAt, ColoredPiece.WhiteRook);
 	}
 
 	public Board Board { get; set; }
 
-	// [Benchmark(Baseline = true)]
+	[Benchmark(Baseline = true)]
 	public void BaselineMoves()
 	{
 		baselineResult = threatCheckerBaseline.IsUnderAttack(Board, Field.D4FieldNo, Color.Black);
 	}
 
-	// [Benchmark]
+	[Benchmark]
 	public void ExperimentalMoves()
 	{
 		experimentalResult = threatCheckerExperimental.IsUnderAttack(Board, Field.D4FieldNo, Color.Black);

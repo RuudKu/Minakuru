@@ -5,7 +5,8 @@ public static class StraightLineBitmasks
 	// Index 1: direction
 	// Index 2: fieldNo
 	// The result is an array of ulongs (with a maximum of 8 elements), which can be used as bitmasks
-	private static readonly ulong[,][] _bitmasks = new ulong[64, 4][];
+	private static readonly ulong[,][] _straightLinePerDirectionFieldBitmasks = new ulong[64, 4][];
+	private static readonly ulong[] _straightLineAllDirectionsFieldBitmasks = new ulong[64];
 
 	static StraightLineBitmasks()
 	{
@@ -26,16 +27,17 @@ public static class StraightLineBitmasks
 					byte fromFieldNo = (byte)(8 * fromRow + fromColumn);
 					ulong filter = (ulong)1 << fromFieldNo;
 					fieldIds.Add(filter);
+					_straightLineAllDirectionsFieldBitmasks[targetFieldNo] |= filter;
 
 					fromColumn = fromColumn + deltaColumn;
 					fromRow = fromRow + deltaRow;
 				}
-				_bitmasks[targetFieldNo, option] = [.. fieldIds];
+				_straightLinePerDirectionFieldBitmasks[targetFieldNo, option] = [.. fieldIds];
 			}
 		}
 	}
 
-	public static ulong[,][] StraightLineFieldBitmasks
+	public static ulong[,][] StraightLinePerDirectionFieldBitmasks
 	{
 		get
 		{
@@ -44,10 +46,20 @@ public static class StraightLineBitmasks
 			{
 				for (int j = 0; j < 4; j++)
 				{
-					copy[i, j] = new ulong[_bitmasks[i, j].Length];
-					Array.Copy(_bitmasks[i, j], copy[i, j], _bitmasks[i, j].Length);
+					copy[i, j] = new ulong[_straightLinePerDirectionFieldBitmasks[i, j].Length];
+					Array.Copy(_straightLinePerDirectionFieldBitmasks[i, j], copy[i, j], _straightLinePerDirectionFieldBitmasks[i, j].Length);
 				}
 			}
+			return copy;
+		}
+	}
+
+	public static ulong[] StraightLineAllDirectionsFieldBitmasks
+	{
+		get
+		{
+			var copy = new ulong[64];
+			Array.Copy(_straightLineAllDirectionsFieldBitmasks, copy, _straightLineAllDirectionsFieldBitmasks.Length);
 			return copy;
 		}
 	}

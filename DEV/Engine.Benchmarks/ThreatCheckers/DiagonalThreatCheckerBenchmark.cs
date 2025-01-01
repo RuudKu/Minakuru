@@ -42,13 +42,13 @@ public class DiagonalThreatCheckerBenchmark
 
 	public Board Board { get; set; }
 
-	[Benchmark(Baseline = true)]
+	// [Benchmark(Baseline = true)]
 	public void BaselineMoves()
 	{
 		baselineResult = threatCheckerBaseline.IsUnderAttack(Board, Field.D4FieldNo, Color.Black);
 	}
 
-	[Benchmark]
+	// [Benchmark]
 	public void ExperimentalMoves()
 	{
 		experimentalResult = threatCheckerExperimental.IsUnderAttack(Board, Field.D4FieldNo, Color.Black);
