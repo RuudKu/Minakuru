@@ -4,7 +4,7 @@ namespace Minakuru.Engine.MoveGenerators;
 
 public static class MoveGeneratorFactory
 {
-	public static IMoveGenerator Create()
+	public static LegalMovesGenerator Create()
 	{
 		return new LegalMovesGenerator(new PseudoLegalMoveGenerator(), ThreatCheckerFactory.Create());
 	}

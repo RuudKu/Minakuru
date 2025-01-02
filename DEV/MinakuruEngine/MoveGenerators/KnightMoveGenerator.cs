@@ -7,9 +7,8 @@ public class KnightMoveGenerator : IMoveGenerator
 {
 	private static readonly ulong[] _bitmasks = KnightBitmasks.KnightFieldBitmasks;
 
-	public MoveList GenerateMove(Board board)
+	public void GenerateMove(Board board, MoveList moveList)
 	{
-		MoveList moveList = [];
 		var color = board.ColorToMove;
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
@@ -39,6 +38,5 @@ public class KnightMoveGenerator : IMoveGenerator
 			}
 			workingCopy &= ~1UL;
 		}
-		return moveList;
 	}
 }

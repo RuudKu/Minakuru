@@ -6,9 +6,8 @@ public class KingMoveGenerator : IMoveGenerator
 {
 	private static readonly byte[][] _fieldNos = KingFieldNo.KingFieldNos;
 
-	public MoveList GenerateMove(Board board)
+	public void GenerateMove(Board board, MoveList moveList)
 	{
-		MoveList moveList = [];
 		var color = board.ColorToMove;
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
@@ -21,7 +20,6 @@ public class KingMoveGenerator : IMoveGenerator
 
 		AddNormalMoves();
 		AddCastling();
-		return moveList;
 
 		void AddNormalMoves()
 		{

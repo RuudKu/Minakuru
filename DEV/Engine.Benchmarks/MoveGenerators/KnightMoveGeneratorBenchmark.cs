@@ -13,10 +13,8 @@ public class KnightMoveGeneratorBenchmark
 	private const string Fen1 = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 	private const string Fen2 = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1";
 
-	private const int Times = 1;
-
-	Move[] baselineResult = [];
-	Move[] experimentalResult = [];
+	readonly MoveList baselineResult = [];
+	readonly MoveList experimentalResult = [];
 
 	string fenCode;
 
@@ -47,18 +45,12 @@ public class KnightMoveGeneratorBenchmark
 	// [Benchmark(Baseline = true)]
 	public void BaselineMoves()
 	{
-		for (int i = 0; i < Times; i++)
-		{
-			baselineResult = moveGeneratorBaseline.GenerateMove(Board).ToArray();
-		}
+		moveGeneratorBaseline.GenerateMove(Board, baselineResult);
 	}
 
 	// [Benchmark]
 	public void ExperimentalMoves()
 	{
-		for (int i = 0; i < Times; i++)
-		{
-			experimentalResult = moveGeneratorExperimental.GenerateMove(Board).ToArray();
-		}
+		moveGeneratorExperimental.GenerateMove(Board, experimentalResult);
 	}
 }

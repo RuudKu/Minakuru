@@ -12,9 +12,10 @@ public class PseudoLegalMoveGeneratorTests
 		var board = Board.Init();
 		var sut = new PseudoLegalMoveGenerator();
 
-		var allMoves = sut.GenerateMove(board);
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
-		allMoves.Should().HaveCount(20);
+		actual.Should().HaveCount(20);
 	}
 
 	[DataRow("rnbqkbnr/ppp2ppp/4p3/3pP3/8/8/PPPP1PPP/RNBQKBNR w KQkq d6 0 3", 30, 1, 0, DisplayName = "1.e4 e5 2.e6 d5")]
@@ -26,10 +27,11 @@ public class PseudoLegalMoveGeneratorTests
 		var board = fen.ToBoard();
 		var sut = new PseudoLegalMoveGenerator();
 
-		var allMoves = sut.GenerateMove(board).ToArray();
+		MoveList allMoves = [];
+		sut.GenerateMove(board, allMoves);
 
 		var actualPerftStats = new PerftStats(
-			allMoves.Length,
+			allMoves.Count(),
 			allMoves.Count(m => m.Capture),
 			allMoves.Count(m => m.PromotedTo != Piece.None));
 

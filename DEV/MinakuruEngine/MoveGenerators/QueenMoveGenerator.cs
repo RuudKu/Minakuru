@@ -4,9 +4,8 @@ namespace Minakuru.Engine.MoveGenerators;
 
 public class QueenMoveGenerator : IMoveGenerator
 {
-	public MoveList GenerateMove(Board board)
+	public void GenerateMove(Board board, MoveList moveList)
 	{
-		MoveList moveList = [];
 		var color = board.ColorToMove;
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
@@ -61,6 +60,5 @@ public class QueenMoveGenerator : IMoveGenerator
 				workingCopy &= ~1UL;
 			}
 		}
-		return moveList;
 	}
 }

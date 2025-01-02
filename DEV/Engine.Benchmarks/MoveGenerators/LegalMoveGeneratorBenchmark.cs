@@ -7,7 +7,7 @@ namespace Minakuru.Engine.Benchmarks.MoveGenerators;
 [HtmlExporter]
 public class LegalMoveGeneratorBenchmark
 {
-	private readonly IMoveGenerator legalMovesGeneratorBaseline = MoveGeneratorFactory.Create();
+	private readonly LegalMovesGenerator legalMovesGeneratorBaseline = MoveGeneratorFactory.Create();
 	private readonly Experiment.LegalMovesGenerator legalMovesGeneratorExperimental = Experiment.MoveGeneratorFactory.Create();
 
 	private const string Fen1 = "r1bqk2r/4bp1p/p1np4/1p1Npp2/4P3/N1P5/PP3PPP/R2QKB1R w KQkq - 0 12";

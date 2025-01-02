@@ -2,7 +2,7 @@
 
 namespace Minakuru.Engine.MoveGenerators;
 
-public class LegalMovesGenerator(PseudoLegalMoveGenerator pseudoLegalMovesGenerator, IThreatChecker threatChecker) : IMoveGenerator
+public class LegalMovesGenerator(PseudoLegalMoveGenerator pseudoLegalMovesGenerator, IThreatChecker threatChecker)
 {
 	private readonly PseudoLegalMoveGenerator _pseudoLegalMovesGenerator = pseudoLegalMovesGenerator ?? throw new ArgumentNullException(nameof(pseudoLegalMovesGenerator));
 	private readonly IThreatChecker _threatChecker = threatChecker ?? throw new ArgumentNullException(nameof(threatChecker));
@@ -10,8 +10,9 @@ public class LegalMovesGenerator(PseudoLegalMoveGenerator pseudoLegalMovesGenera
 	public MoveList GenerateMove(Board board)
 	{
 		MoveList moveList = [];
+		MoveList pseudoLegalMoveList = [];
 		var color = board.ColorToMove;
-		var pseudoLegalMoveList = _pseudoLegalMovesGenerator.GenerateMove(board);
+		_pseudoLegalMovesGenerator.GenerateMove(board, pseudoLegalMoveList);
 		foreach (var pseudoLegalMove in pseudoLegalMoveList)
 		{
 			Color opponentColor = color.OtherColor();

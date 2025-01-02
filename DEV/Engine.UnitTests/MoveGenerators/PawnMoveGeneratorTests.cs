@@ -14,7 +14,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -35,7 +36,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -55,7 +57,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = Array.Empty<ReadableMove>();
@@ -71,7 +74,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = Array.Empty<ReadableMove>();
@@ -87,7 +91,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -107,7 +112,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = Array.Empty<ReadableMove>();
@@ -123,7 +129,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -143,7 +150,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = Array.Empty<ReadableMove>();
@@ -159,7 +167,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -182,7 +191,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -205,7 +215,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -228,7 +239,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -248,7 +260,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -268,7 +281,8 @@ public class PawnMoveGeneratorTests
 
 		var sut = new PawnMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = Array.Empty<ReadableMove>();

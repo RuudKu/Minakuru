@@ -6,9 +6,8 @@ public class PawnMoveGenerator : IMoveGenerator
 {
 	private readonly Piece[] PromotionToPieces = [Piece.Queen, Piece.Rook, Piece.Bishop, Piece.Knight];
 
-	public MoveList GenerateMove(Board board)
+	public void GenerateMove(Board board, MoveList moveList)
 	{
-		MoveList moveList = new MoveList();
 		var color = board.ColorToMove;
 		var whitePiecesAt = board.WhitePieces;
 		var blackPiecesAt = board.BlackPieces;
@@ -145,6 +144,5 @@ public class PawnMoveGenerator : IMoveGenerator
 				workingCopy &= ~1UL;
 			}
 		}
-		return moveList;
 	}
 }

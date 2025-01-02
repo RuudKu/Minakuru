@@ -14,7 +14,8 @@ public class RookMoveGeneratorTests
 
 		var sut = new RookMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -50,7 +51,8 @@ public class RookMoveGeneratorTests
 
 		var sut = new RookMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -84,7 +86,8 @@ public class RookMoveGeneratorTests
 
 		var sut = new RookMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = 28;

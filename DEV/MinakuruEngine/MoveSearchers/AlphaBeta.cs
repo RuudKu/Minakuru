@@ -3,10 +3,10 @@ using Minakuru.Engine.MoveGenerators;
 
 namespace Minakuru.Engine.MoveSearchers;
 
-public class AlphaBeta(IEvaluator evaluator, IMoveGenerator moveGenerator) : IMoveSearcher
+public class AlphaBeta(IEvaluator evaluator, LegalMovesGenerator moveGenerator) : IMoveSearcher
 {
 	private readonly IEvaluator _evaluator = evaluator ?? throw new ArgumentNullException(nameof(evaluator));
-	private readonly IMoveGenerator _moveGenerator = moveGenerator ?? throw new ArgumentNullException(nameof(moveGenerator));
+	private readonly LegalMovesGenerator _moveGenerator = moveGenerator ?? throw new ArgumentNullException(nameof(moveGenerator));
 
 	public Tuple<Move, int> Search(MoveSearchOptions moveSearchOptions, Board board)
 	{
