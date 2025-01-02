@@ -10,7 +10,7 @@
     <!-- Omit the whole tag for auto-detection. -->
     <!-- [x86] or x64, ARM, ARM64, s390x  -->
     <!-- You can also change it from the Test menu; choose "Processor Architecture for AnyCPU Projects" -->
-    <TargetPlatform>x86</TargetPlatform>
+    <TargetPlatform>x64</TargetPlatform>
 
     <!-- Any TargetFramework moniker or omit the whole tag for auto-detection. -->
     <!-- net48, [net40], net6.0, net5.0, netcoreapp3.1, uap10.0 etc. -->
