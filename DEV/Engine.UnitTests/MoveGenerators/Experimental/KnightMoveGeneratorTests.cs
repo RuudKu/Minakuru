@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Experiment = Minakuru.Engine.MoveGenerators.Experimental;
+using Minakuru.Engine.MoveGenerators.Experimental;
 
 namespace Minakuru.Engine.UnitTests.MoveGenerators.Experimental;
 
@@ -12,9 +12,10 @@ public class KnightMoveGeneratorTests
 		var fen = "7k/8/8/8/3N4/8/8/K7 w - - 0 1";
 		var board = fen.ToBoard();
 
-		var sut = new Experiment.KnightMoveGenerator();
+		var sut = new KnightMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -38,9 +39,10 @@ public class KnightMoveGeneratorTests
 		var fen = "7k/8/4r3/8/3N4/5B2/8/K7 w - - 0 1";
 		var board = fen.ToBoard();
 
-		var sut = new Experiment.KnightMoveGenerator();
+		var sut = new KnightMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -63,9 +65,10 @@ public class KnightMoveGeneratorTests
 		var fen = "7k/8/4r3/5N2/3N4/5B2/8/K7 w - - 0 1";
 		var board = fen.ToBoard();
 
-		var sut = new Experiment.KnightMoveGenerator();
+		var sut = new KnightMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = 13;

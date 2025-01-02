@@ -7,9 +7,8 @@ public class BishopMoveGenerator : IMoveGenerator
 {
 	private static readonly byte[,][] _diagonalPerDirectionFieldNos = DiagonalFieldNo.DiagonalPerDirectionFieldNos;
 
-	public MoveList GenerateMove(Board board)
+	public void GenerateMove(Board board, MoveList moveList)
 	{
-		MoveList moveList = [];
 		var color = board.ColorToMove;
 
 		var bishops = color == Color.White ? board.WhiteBishops : board.BlackBishops;
@@ -53,6 +52,5 @@ public class BishopMoveGenerator : IMoveGenerator
 				workingCopy &= ~1UL;
 			}
 		}
-		return moveList;
 	}
 }

@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Experiment =Minakuru.Engine.MoveGenerators.Experimental;
+using Minakuru.Engine.MoveGenerators.Experimental;
 
 namespace Minakuru.Engine.UnitTests.MoveGenerators.Experimental;
 
@@ -12,9 +12,10 @@ public class KingMoveGeneratorTests
 		var fen = "7k/8/8/8/3K4/8/8/8 w - - 0 1";
 		var board = fen.ToBoard();
 
-		var sut = new Experiment.KingMoveGenerator();
+		var sut = new KingMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]
@@ -46,9 +47,10 @@ public class KingMoveGeneratorTests
 		var fen = "7k/8/8/2R5/3K4/4r3/8/8 w - - 0 1";
 		var board = fen.ToBoard();
 
-		var sut = new Experiment.KingMoveGenerator();
+		var sut = new KingMoveGenerator();
 
-		var actual = sut.GenerateMove(board).ToArray();
+		MoveList actual = [];
+		sut.GenerateMove(board, actual);
 
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = new ReadableMove[]

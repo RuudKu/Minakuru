@@ -44,7 +44,7 @@ public class BishopMoveGeneratorBenchmark
 
 	public Board Board { get; set; }
 
-	[Benchmark(Baseline = true)]
+	// [Benchmark(Baseline = true)]
 	public void BaselineMoves()
 	{
 		for (int i = 0; i < Times; i++)
@@ -53,7 +53,7 @@ public class BishopMoveGeneratorBenchmark
 		}
 	}
 
-	[Benchmark]
+	// [Benchmark]
 	public void ExperimentalMoves()
 	{
 		for (int i = 0; i < Times; i++)

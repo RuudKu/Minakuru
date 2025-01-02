@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
-using Minakuru.Engine.MoveGenerators;
+using Minakuru.Engine.MoveGenerators.Experimental;
 
-namespace Minakuru.Engine.UnitTests.MoveGenerators;
+namespace Minakuru.Engine.UnitTests.MoveGenerators.Experimental;
 
 [TestClass]
 public class LegalMoveGeneratorTests

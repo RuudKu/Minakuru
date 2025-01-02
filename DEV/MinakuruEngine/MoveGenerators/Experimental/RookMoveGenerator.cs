@@ -7,10 +7,8 @@ public class RookMoveGenerator : IMoveGenerator
 {
 	private static readonly byte[,][] _straightLinePerDirectionFieldNos = StraightLineFieldNo.StraightLinePerDirectionFieldNos;
 
-	public MoveList GenerateMove(Board board)
+	public void GenerateMove(Board board, MoveList moveList)
 	{
-		MoveList moveList = [];
-
 		var color = board.ColorToMove;
 		var rooks = color == Color.White ? board.WhiteRooks : board.BlackRooks;
 		var workCopy = rooks;
@@ -51,6 +49,5 @@ public class RookMoveGenerator : IMoveGenerator
 				workCopy &= ~1UL;
 			}
 		}
-		return moveList;
 	}
 }
