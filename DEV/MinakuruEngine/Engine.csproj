@@ -9,7 +9,7 @@
 		<Nullable>enable</Nullable>
 		<PublishAot>true</PublishAot>
 		<InvariantGlobalization>true</InvariantGlobalization>
-		<Platforms>AMD64;ARM64;x64</Platforms>
+		<Platforms>ARM64;x64</Platforms>
 		<PlatformTarget>x64</PlatformTarget>
 	</PropertyGroup>
 

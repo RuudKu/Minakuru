@@ -2,13 +2,14 @@
 
 	<PropertyGroup>
 		<AssemblyName>Minakuru.UciServer</AssemblyName>
+		<RootNamespace>Minakuru.UciServer</RootNamespace>
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PublishAot>true</PublishAot>
 		<InvariantGlobalization>true</InvariantGlobalization>
-		<Platforms>AMD64;ARM64</Platforms>
+		<Platforms>x64;ARM64</Platforms>
 	</PropertyGroup>
 
 	<ItemGroup>

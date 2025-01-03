@@ -1,2 +1,10 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿namespace Minakuru.UciServer;
+
+internal class Program
+{
+	public static async Task Main(string[] args)
+	{
+		UciServer uciServer = new(Console.OpenStandardInput(), Console.OpenStandardOutput());
+		await uciServer.RunAsync();
+	}
+}
