@@ -29,8 +29,7 @@ public class UciServer(Stream InputStream, Stream OutputStream)
 
 	private async Task WriteAsync(string line)
 	{
-		await _textWriter.WriteAsync(line.ToCharArray());
-		await _textWriter.WriteAsync('\n');
+		await _textWriter.WriteLineAsync(line.ToCharArray());
 		await _textWriter.FlushAsync();
 	}
 
@@ -42,6 +41,7 @@ public class UciServer(Stream InputStream, Stream OutputStream)
 			UciNewGameCommandProcessorAsync,
 			PositionCommandProcessorAsync,
 			GoCommandProcessorAsync,
+			IsReadyCommandProcessorAsync,
 			StopCommandProcessorAsync,
 			UnknownCommandProcessorAsync // last one
 		];
@@ -99,6 +99,16 @@ public class UciServer(Stream InputStream, Stream OutputStream)
 		if ("stop".Equals(line, StringComparison.OrdinalIgnoreCase))
 		{
 			await WriteAsync("string stopped");
+			return true;
+		}
+		return false;
+	}
+
+	private async Task<bool> IsReadyCommandProcessorAsync(string line)
+	{
+		if ("isready".Equals(line, StringComparison.OrdinalIgnoreCase))
+		{
+			await WriteAsync("readyok");
 			return true;
 		}
 		return false;
