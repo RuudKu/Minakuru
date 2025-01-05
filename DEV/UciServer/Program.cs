@@ -1,6 +1,6 @@
 ﻿namespace Minakuru.UciServer;
 
-internal class Program
+public static class Program
 {
 	public static async Task Main(string[] args)
 	{
