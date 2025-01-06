@@ -9,6 +9,8 @@
 		<Nullable>enable</Nullable>
 		<UseVSTest>true</UseVSTest>
 		<IsTestProject>true</IsTestProject>
+		<Platforms>ARM64;x64</Platforms>
+		<PlatformTarget>x64</PlatformTarget>
 	</PropertyGroup>
 
 	<ItemGroup>
