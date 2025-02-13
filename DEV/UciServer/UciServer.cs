@@ -1,7 +1,4 @@
-﻿
-
-using System.ComponentModel.DataAnnotations;
-using Minakuru.Engine;
+﻿using Minakuru.Engine;
 using Minakuru.Engine.MoveGenerators;
 
 namespace Minakuru.UciServer;
@@ -10,7 +7,7 @@ public class UciServer(Stream InputStream, Stream OutputStream)
 {
 	private readonly TextReader _textReader = new StreamReader(InputStream);
 	private readonly TextWriter _textWriter = new StreamWriter(OutputStream);
-	private GameState _gameState = new();
+	internal GameState GameState { get; set; } = new();
 
 	public async Task RunAsync()
 	{
@@ -19,7 +16,7 @@ public class UciServer(Stream InputStream, Stream OutputStream)
 			string? line = await _textReader.ReadLineAsync();
 			if (line == null)
 			{
-				await Task.Delay(50);
+			//	await Task.Delay(50);
 			}
 			else
 			{
@@ -81,7 +78,7 @@ public class UciServer(Stream InputStream, Stream OutputStream)
 	{
 		if ("ucinewgame".Equals(line, StringComparison.OrdinalIgnoreCase))
 		{
-			_gameState = new();
+			GameState = new();
 			await WriteAsync("isready");
 			return true;
 		}
@@ -131,7 +128,7 @@ public class UciServer(Stream InputStream, Stream OutputStream)
 			board = MoveMaker.MakeMove(board, actualMove);
 		}
 
-		_gameState.Board = board;
+		GameState.Board = board;
 
 		var currentFen = board.ToFen();
 

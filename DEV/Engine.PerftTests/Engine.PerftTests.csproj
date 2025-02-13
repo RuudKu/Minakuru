@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSTest.Sdk">
+﻿<Project Sdk="MSTest.Sdk/3.8.0">
 
 	<PropertyGroup>
 		<RootNamespace>Minakuru.Engine.PerftTests</RootNamespace>

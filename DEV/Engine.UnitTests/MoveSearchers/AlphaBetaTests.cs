@@ -11,6 +11,7 @@ public class AlphaBetaTests
 	private IMoveSearcher _moveSearcher;
 	private readonly MoveSearchOptions options3 = new(3);
 	private readonly MoveSearchOptions options4 = new(4);
+	private readonly MoveSearchOptions options6 = new(6);
 
 	[TestInitialize]
 	public void TestInitialize()
@@ -59,6 +60,21 @@ public class AlphaBetaTests
 		var (actualMove, actualScore) = _moveSearcher.Search(options3, board);
 
 		var expectedMove = new Move(Field.E5FieldNo, Field.E6FieldNo);
+		var expectedScore = EvaluationConstants.Mate;
+
+		actualMove.Should().Be(expectedMove);
+		actualScore.Should().Be(expectedScore);
+	}
+
+	[TestMethod]
+	public void BlackQueenMoveAndPromotionCheckmates()
+	{
+		var fen = "7k/8/8/8/8/4q3/4p3/4K3 b - - 0 1";
+		var board = fen.ToBoard();
+
+		var (actualMove, actualScore) = _moveSearcher.Search(options4, board);
+
+		var expectedMove = new Move(Field.E3FieldNo, Field.E4FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
 		actualMove.Should().Be(expectedMove);
@@ -154,4 +170,50 @@ public class AlphaBetaTests
 		actualMove.Should().Be(expectedMove);
 		actualScore.Should().Be(expectedScore);
 	}
+
+	[TestMethod]
+	public void WhiteBishopSacrificeLeadsToDoubleCheckMate()
+	{
+		var fen = "Q5bk/6p1/6P1/8/8/8/8/2B4K w - - 0 1";
+		var board = fen.ToBoard();
+
+		var (actualMove, actualScore) = _moveSearcher.Search(options4, board);
+
+		var expectedMove = new Move(Field.C1FieldNo, Field.H6FieldNo, false);
+		var expectedScore = EvaluationConstants.Mate;
+
+		actualMove.Should().Be(expectedMove);
+		actualScore.Should().Be(expectedScore);
+	}
+
+	[TestMethod]
+	public void WhiteRookSacrificeLeadsToDoubleCheckMate()
+	{
+		var fen = "8/8/8/8/8/7N/6Rp/5Kbk w - - 0 1";
+		var board = fen.ToBoard();
+
+		var (actualMove, actualScore) = _moveSearcher.Search(options4, board);
+
+		var expectedMove = new Move(Field.G2FieldNo, Field.F2FieldNo, false);
+		var expectedScore = EvaluationConstants.Mate;
+
+		actualMove.Should().Be(expectedMove);
+		actualScore.Should().Be(expectedScore);
+	}
+
+	// [TestMethod]
+	public void WhiteQueenSacrificeLeadsToCheckMate()
+	{
+		var fen = "r2qkbnr/1bppppp1/1pn5/p3P3/8/1QPB1N1P/PP1P1P2/RNB1R1K1 w kq - 0 1";
+		var board = fen.ToBoard();
+
+		var (actualMove, actualScore) = _moveSearcher.Search(options6, board);
+
+		var expectedMove = new Move(Field.B3FieldNo, Field.F7FieldNo, false);
+		var expectedScore = EvaluationConstants.Mate;
+
+		actualMove.Should().Be(expectedMove);
+		actualScore.Should().Be(expectedScore);
+	}
+
 }

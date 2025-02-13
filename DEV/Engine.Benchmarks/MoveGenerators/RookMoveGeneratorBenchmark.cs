@@ -15,8 +15,8 @@ public class RookMoveGeneratorBenchmark
 
 	private const int Times = 1;
 
-	Move[] baselineResult = [];
-	Move[] experimentalResult = [];
+	MoveList baselineResult = [];
+	MoveList experimentalResult = [];
 
 	string fenCode;
 
@@ -49,7 +49,7 @@ public class RookMoveGeneratorBenchmark
 	{
 		for (int i = 0; i < Times; i++)
 		{
-			baselineResult = moveGeneratorBaseline.GenerateMove(Board).ToArray();
+			moveGeneratorBaseline.GenerateMove(Board, baselineResult);
 		}
 	}
 
@@ -58,7 +58,7 @@ public class RookMoveGeneratorBenchmark
 	{
 		for (int i = 0; i < Times; i++)
 		{
-			experimentalResult = moveGeneratorExperimental.GenerateMove(Board).ToArray();
+			moveGeneratorExperimental.GenerateMove(Board, experimentalResult);
 		}
 	}
 }

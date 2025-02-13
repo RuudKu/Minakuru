@@ -3,7 +3,7 @@ namespace Minakuru.Engine;
 
 public class GameState
 {
-	public Board Board { get; set; }
+	public Board Board { get; set; } = new();
 
 	public List<Move> PlayedMoves { get; init; } = [];
 
