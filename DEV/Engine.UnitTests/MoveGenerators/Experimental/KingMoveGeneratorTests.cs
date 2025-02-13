@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.MoveGenerators.Experimental;
 
 namespace Minakuru.Engine.UnitTests.MoveGenerators.Experimental;
@@ -38,7 +38,7 @@ public class KingMoveGeneratorTests
 			new ("d4", "e5"),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -73,6 +73,6 @@ public class KingMoveGeneratorTests
 			new ("d4", "e5"),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 }

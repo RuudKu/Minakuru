@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 
 namespace Minakuru.Engine.UnitTests;
 
@@ -15,7 +15,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq d3 0 1";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -29,7 +29,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPPKPPPP/R6R b kq - 1 1";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -43,7 +43,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "7k/7p/8/8/8/8/8/1R2K2R b K - 1 1";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -57,7 +57,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "7k/7p/8/8/8/8/8/R3K1R1 b Q - 1 1";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -71,7 +71,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "7k/7p/8/8/8/8/8/R4RK1 b - - 1 1";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -85,7 +85,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "7k/7p/8/8/8/8/8/2KR3R b - - 1 1";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -99,7 +99,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "r6r/4k3/8/8/8/8/4P3/4K3 w - - 2 2";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -113,7 +113,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "4k2r/8/r7/8/8/8/4P3/4K3 w k - 2 2";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -127,7 +127,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "r3k3/7r/8/8/8/8/4P3/4K3 w q - 2 2";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -141,7 +141,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "r4rk1/8/8/8/8/8/4P3/4K3 w - - 2 2";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -155,7 +155,7 @@ public class MoveMakerTests
 
 		var newFen = newBoard.ToFen();
 		var expected = "2kr3r/8/8/8/8/8/4P3/4K3 w - - 2 2";
-		newFen.Should().Be(expected);
+		newFen.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -172,7 +172,7 @@ public class MoveMakerTests
 		var actualFen = newBoard.ToFen();
 		var expectedFen = "7k/8/3pP3/8/8/8/8/K7 b - - 0 1";
 
-		actualFen.Should().Be(expectedFen);
+		actualFen.ShouldBe(expectedFen);
 	}
 
 	[TestMethod]
@@ -189,7 +189,7 @@ public class MoveMakerTests
 		var actualFen = newBoard.ToFen();
 		var expectedFen = "Q1n5/P1Pk4/8/8/8/8/4Kppp/5N1N b - - 0 1";
 
-		actualFen.Should().Be(expectedFen);
+		actualFen.ShouldBe(expectedFen);
 	}
 
 	[TestMethod]
@@ -206,6 +206,6 @@ public class MoveMakerTests
 		var actualFen = newBoard.ToFen();
 		var expectedFen = "K3k3/8/8/8/8/8/8/8 b - - 0 1";
 
-		actualFen.Should().Be(expectedFen);
+		actualFen.ShouldBe(expectedFen);
 	}
 }

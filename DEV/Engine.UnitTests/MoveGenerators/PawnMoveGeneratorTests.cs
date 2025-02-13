@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.MoveGenerators;
 
 namespace Minakuru.Engine.UnitTests.MoveGenerators;
@@ -25,7 +25,7 @@ public class PawnMoveGeneratorTests
 			new ("d2", "d4"),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -46,7 +46,7 @@ public class PawnMoveGeneratorTests
 			new ("d3", "d4"),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -63,7 +63,7 @@ public class PawnMoveGeneratorTests
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = Array.Empty<ReadableMove>();
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -80,7 +80,7 @@ public class PawnMoveGeneratorTests
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = Array.Empty<ReadableMove>();
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -101,7 +101,7 @@ public class PawnMoveGeneratorTests
 			new ("d4", "c5", true),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -118,7 +118,7 @@ public class PawnMoveGeneratorTests
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = Array.Empty<ReadableMove>();
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -139,7 +139,7 @@ public class PawnMoveGeneratorTests
 			new ("d4", "e5", true),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -156,7 +156,7 @@ public class PawnMoveGeneratorTests
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = Array.Empty<ReadableMove>();
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -180,7 +180,7 @@ public class PawnMoveGeneratorTests
 			new ("d7", "d8", false, Piece.Knight)
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -204,7 +204,7 @@ public class PawnMoveGeneratorTests
 			new ("d7", "c8", true, Piece.Knight)
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -228,7 +228,7 @@ public class PawnMoveGeneratorTests
 			new ("d7", "e8", true, Piece.Knight)
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -249,7 +249,7 @@ public class PawnMoveGeneratorTests
 			new ("d5", "c6", true),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -270,7 +270,7 @@ public class PawnMoveGeneratorTests
 			new ("d5", "e6", true),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -287,6 +287,6 @@ public class PawnMoveGeneratorTests
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = Array.Empty<ReadableMove>();
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 }

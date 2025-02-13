@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.Evaluators;
 
 namespace Minakuru.Engine.UnitTests.Evaluators;
@@ -16,7 +16,7 @@ public class SimpleMaterialEvaluatorTests
 		var simpleMaterialEvaluator = new SimpleMaterialEvaluator();
 		var actual = simpleMaterialEvaluator.Evaluate(board);
 
-		actual.Should().Be(2000);
+		actual.ShouldBe(2000);
 	}
 
 	[TestMethod]
@@ -28,7 +28,7 @@ public class SimpleMaterialEvaluatorTests
 		var simpleMaterialEvaluator = new SimpleMaterialEvaluator();
 		var actual = simpleMaterialEvaluator.Evaluate(board);
 
-		actual.Should().Be(-2000);
+		actual.ShouldBe(-2000);
 	}
 
 	[TestMethod]
@@ -40,7 +40,7 @@ public class SimpleMaterialEvaluatorTests
 		var simpleMaterialEvaluator = new SimpleMaterialEvaluator();
 		var actual = simpleMaterialEvaluator.Evaluate(board);
 
-		actual.Should().Be(1500);
+		actual.ShouldBe(1500);
 	}
 
 	[TestMethod]
@@ -52,7 +52,7 @@ public class SimpleMaterialEvaluatorTests
 		var simpleMaterialEvaluator = new SimpleMaterialEvaluator();
 		var actual = simpleMaterialEvaluator.Evaluate(board);
 
-		actual.Should().Be(-1500);
+		actual.ShouldBe(-1500);
 	}
 
 	[TestMethod]
@@ -64,7 +64,7 @@ public class SimpleMaterialEvaluatorTests
 		var simpleMaterialEvaluator = new SimpleMaterialEvaluator();
 		var actual = simpleMaterialEvaluator.Evaluate(board);
 
-		actual.Should().Be(4000);
+		actual.ShouldBe(4000);
 	}
 
 	[TestMethod]
@@ -76,7 +76,7 @@ public class SimpleMaterialEvaluatorTests
 		var simpleMaterialEvaluator = new SimpleMaterialEvaluator();
 		var actual = simpleMaterialEvaluator.Evaluate(board);
 
-		actual.Should().Be(-4000);
+		actual.ShouldBe(-4000);
 	}
 
 	[TestMethod]
@@ -88,7 +88,7 @@ public class SimpleMaterialEvaluatorTests
 		var simpleMaterialEvaluator = new SimpleMaterialEvaluator();
 		var actual = simpleMaterialEvaluator.Evaluate(board);
 
-		actual.Should().Be(-1000);
+		actual.ShouldBe(-1000);
 	}
 
 	[TestMethod]
@@ -100,6 +100,6 @@ public class SimpleMaterialEvaluatorTests
 		var simpleMaterialEvaluator = new SimpleMaterialEvaluator();
 		var actual = simpleMaterialEvaluator.Evaluate(board);
 
-		actual.Should().Be(1000);
+		actual.ShouldBe(1000);
 	}
 }

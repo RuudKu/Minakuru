@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.MoveGenerators.Experimental;
 
 namespace Minakuru.Engine.UnitTests.MoveGenerators.Experimental;
@@ -15,7 +15,9 @@ public class PseudoLegalMoveGeneratorTests
 		MoveList allMoves = [];
 		sut.GenerateMove(board, allMoves);
 
-		allMoves.Should().HaveCount(20);
+		int expected = 20;
+
+		allMoves.Count().ShouldBe(expected);
 	}
 
 	[DataRow("rnbqkbnr/ppp2ppp/4p3/3pP3/8/8/PPPP1PPP/RNBQKBNR w KQkq d6 0 3", 30, 1, 0, DisplayName = "1.e4 e5 2.e6 d5")]
@@ -45,7 +47,7 @@ public class PseudoLegalMoveGeneratorTests
 			readableCaptureMoves = allMoves.Where(m => m.Capture).ToReadableMoves().ToArray();
 			readablePromotionMoves = allMoves.Where(m => m.PromotedTo != Piece.None).ToReadableMoves().ToArray();
 		}
-		actualPerftStats.Should().Be(expectedPerftStats);
+		actualPerftStats.ShouldBe(expectedPerftStats);
 	}
 
 	private record PerftStats(int Nodes, int Captures, int Promotions)

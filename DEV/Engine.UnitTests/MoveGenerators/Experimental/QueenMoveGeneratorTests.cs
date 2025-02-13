@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.MoveGenerators.Experimental;
 
 namespace Minakuru.Engine.UnitTests.MoveGenerators.Experimental;
@@ -57,7 +57,7 @@ public class QueenMoveGeneratorTests
 			new ("d4", "h8")
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -106,7 +106,7 @@ public class QueenMoveGeneratorTests
 			new ("d4", "f6"),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -123,7 +123,7 @@ public class QueenMoveGeneratorTests
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = 48;
 
-		readableMoves.Should().HaveCount(expected);
+		readableMoves.Length.ShouldBe(expected);
 	}
 
 }

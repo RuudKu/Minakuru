@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.MoveGenerators.Experimental;
 
 namespace Minakuru.Engine.UnitTests.MoveGenerators.Experimental;
@@ -30,7 +30,7 @@ public class KnightMoveGeneratorTests
 			new ("d4", "f5"),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBe(expected, ignoreOrder: true	);
 	}
 
 	[TestMethod]
@@ -56,7 +56,7 @@ public class KnightMoveGeneratorTests
 			new ("d4", "f5"),
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBe(expected, ignoreOrder: true);
 	}
 
 	[TestMethod]
@@ -73,6 +73,6 @@ public class KnightMoveGeneratorTests
 		var readableMoves = actual.ToReadableMoves().ToArray();
 		var expected = 13;
 
-		readableMoves.Should().HaveCount(expected);
+		readableMoves.Length.ShouldBe(expected);
 	}
 }

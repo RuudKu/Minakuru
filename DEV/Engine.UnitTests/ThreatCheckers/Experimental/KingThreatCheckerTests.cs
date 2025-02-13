@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.ThreatCheckers.Experimental;
 
 namespace Minakuru.Engine.UnitTests.ThreatCheckers.Experimental;
@@ -28,7 +28,7 @@ public class KingThreatCheckerTests
 
 		var actual = sut.IsUnderAttack(board, kingFieldNo, Color.Black);
 
-		actual.Should().Be(expected);
+		actual.ShouldBe(expected);
 	}
 }
 

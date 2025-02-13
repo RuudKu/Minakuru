@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSTest.Sdk/3.7.0">
 
 	<PropertyGroup>
-		<!--<AssemblyName>Minakuru.Engine.Benchmarks</AssemblyName>-->
+		<AssemblyName>Minakuru.Engine.Benchmarks</AssemblyName>
 		<RootNamespace>Minakuru.Engine.Benchmarks</RootNamespace>
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net9.0</TargetFramework>
@@ -12,6 +12,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="MSTest" Version="3.7.0" />
 		<PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
 	</ItemGroup>
 

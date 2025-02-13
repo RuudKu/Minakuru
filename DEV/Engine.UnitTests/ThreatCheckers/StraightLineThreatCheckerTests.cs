@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.ThreatCheckers;
 
 namespace Minakuru.Engine.UnitTests.ThreatCheckers;
@@ -27,7 +27,7 @@ public class StraightLineThreatCheckerTests
 
 		var actual = sut.IsUnderAttack(board, kingFieldNo, Color.Black);
 
-		actual.Should().Be(expected);
+		actual.ShouldBe(expected);
 	}
 
 	[DataRow(ColoredPiece.WhiteQueen, "d1", true, DisplayName = "Qd1")]
@@ -51,6 +51,6 @@ public class StraightLineThreatCheckerTests
 
 		var actual = sut.IsUnderAttack(board, kingFieldNo, Color.White);
 
-		actual.Should().Be(expected);
+		actual.ShouldBe(expected);
 	}
 }

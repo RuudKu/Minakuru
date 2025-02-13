@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.MoveGenerators;
 
 namespace Minakuru.Engine.PerftTests;
@@ -19,7 +19,7 @@ public sealed class FromPerftPositionsTests
 
 		var actual = PerftHelper.CountNodes(board, depth);
 
-		actual.Should().Be(expectedNodes);
+		actual.ShouldBe(expectedNodes);
 	}
 
 	[DataRow(1, 48UL, DisplayName = "Depth 1")]
@@ -35,7 +35,7 @@ public sealed class FromPerftPositionsTests
 
 		var actual = PerftHelper.CountNodes(board, depth);
 
-		actual.Should().Be(expectedNodes);
+		actual.ShouldBe(expectedNodes);
 	}
 
 	[DataRow(1, 14UL, DisplayName = "Depth 1")]
@@ -50,7 +50,7 @@ public sealed class FromPerftPositionsTests
 
 		var actual = PerftHelper.CountNodes(board, depth);
 
-		actual.Should().Be(expectedNodes);
+		actual.ShouldBe(expectedNodes);
 	}
 
 	[DataRow("8/2p5/3p4/KP5r/1R3p1k/4P3/6P1/8 b - - 0 1", 15, DisplayName = "After e2-e3")]
@@ -76,7 +76,7 @@ public sealed class FromPerftPositionsTests
 
 		var actual = legalMoves.Length;
 
-		actual.Should().Be(expectedNodes);
+		actual.ShouldBe(expectedNodes);
 	}
 
 	[DataRow(1, 6UL, DisplayName = "Depth 1")]
@@ -91,7 +91,7 @@ public sealed class FromPerftPositionsTests
 
 		var actual = PerftHelper.CountNodes(board, depth);
 
-		actual.Should().Be(expectedNodes);
+		actual.ShouldBe(expectedNodes);
 	}
 
 	[DataRow(1, 6UL, DisplayName = "Depth 1")]
@@ -106,7 +106,7 @@ public sealed class FromPerftPositionsTests
 
 		var actual = PerftHelper.CountNodes(board, depth);
 
-		actual.Should().Be(expectedNodes);
+		actual.ShouldBe(expectedNodes);
 	}
 
 	[DataRow(1, 44UL, DisplayName = "Depth 1")]
@@ -121,7 +121,7 @@ public sealed class FromPerftPositionsTests
 
 		var actual = PerftHelper.CountNodes(board, depth);
 
-		actual.Should().Be(expectedNodes);
+		actual.ShouldBe(expectedNodes);
 	}
 
 	[DataRow(1, 46UL, DisplayName = "Depth 1")]
@@ -136,7 +136,7 @@ public sealed class FromPerftPositionsTests
 
 		var actual = PerftHelper.CountNodes(board, depth);
 
-		actual.Should().Be(expectedNodes);
+		actual.ShouldBe(expectedNodes);
 	}
 
 	[DataRow(1, 24UL, DisplayName = "Depth 1")]
@@ -151,7 +151,7 @@ public sealed class FromPerftPositionsTests
 
 		var actual = PerftHelper.CountNodes(board, depth);
 
-		actual.Should().Be(expectedNodes);
+		actual.ShouldBe(expectedNodes);
 	}
 
 	[DataRow(1, 24UL, DisplayName = "Depth 1")]
@@ -166,7 +166,7 @@ public sealed class FromPerftPositionsTests
 
 		var actual = PerftHelper.CountNodes(board, depth);
 
-		actual.Should().Be(expectedNodes);
+		actual.ShouldBe(expectedNodes);
 	}
 
 	//  n1n5/PPPk4/8/8/8/8/4Kppp/5N1k w - - 0 1
@@ -224,7 +224,7 @@ public sealed class FromPerftPositionsTests
 			{"g1h3", 198502UL },
 		};
 
-		actual.Should().BeEquivalentTo(expected);
+		actual.ShouldBeEquivalentTo(expected);
 
 
 		Dictionary<string, ulong> CountDividedNodes(Board board, int remainingDepth)

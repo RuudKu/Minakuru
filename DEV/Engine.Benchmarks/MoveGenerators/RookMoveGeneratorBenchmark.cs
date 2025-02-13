@@ -15,8 +15,8 @@ public class RookMoveGeneratorBenchmark
 
 	private const int Times = 1;
 
-	MoveList baselineResult = [];
-	MoveList experimentalResult = [];
+	readonly MoveList baselineResult = [];
+	readonly MoveList experimentalResult = [];
 
 	string fenCode;
 

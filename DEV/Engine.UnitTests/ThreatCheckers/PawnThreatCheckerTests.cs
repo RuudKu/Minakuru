@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.ThreatCheckers;
 
 namespace Minakuru.Engine.UnitTests.ThreatCheckers;
@@ -28,7 +28,7 @@ public class PawnThreatCheckerTests
 
 		var actual = sut.IsUnderAttack(board, kingFieldNo, Color.Black);
 
-		actual.Should().Be(expected);
+		actual.ShouldBe(expected);
 	}
 
 	[DataRow(ColoredPiece.WhitePawn, "c3", true, DisplayName = "pc3")]
@@ -53,7 +53,7 @@ public class PawnThreatCheckerTests
 
 		var actual = sut.IsUnderAttack(board, kingFieldNo, Color.White);
 
-		actual.Should().Be(expected);
+		actual.ShouldBe(expected);
 	}
 }
 

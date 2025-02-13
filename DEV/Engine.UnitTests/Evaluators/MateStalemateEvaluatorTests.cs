@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.Evaluators;
 using Minakuru.Engine.MoveGenerators;
 using Minakuru.Engine.ThreatCheckers;
@@ -24,7 +24,7 @@ public class MateStalemateEvaluatorTests
 
 		var actual = _evaluator.Evaluate(board);
 
-		actual.Should().Be(EvaluationConstants.Mate);
+		actual.ShouldBe(EvaluationConstants.Mate);
 	}
 
 	[TestMethod]
@@ -35,7 +35,7 @@ public class MateStalemateEvaluatorTests
 
 		var actual = _evaluator.Evaluate(board);
 
-		actual.Should().Be(- EvaluationConstants.Mate);
+		actual.ShouldBe(- EvaluationConstants.Mate);
 	}
 
 	[TestMethod]
@@ -46,7 +46,7 @@ public class MateStalemateEvaluatorTests
 
 		var actual = _evaluator.Evaluate(board);
 
-		actual.Should().Be(EvaluationConstants.StaleMate);
+		actual.ShouldBe(EvaluationConstants.StaleMate);
 	}
 
 	[TestMethod]
@@ -57,6 +57,6 @@ public class MateStalemateEvaluatorTests
 
 		var actual = _evaluator.Evaluate(board);
 
-		actual.Should().Be(0);
+		actual.ShouldBe(0);
 	}
 }

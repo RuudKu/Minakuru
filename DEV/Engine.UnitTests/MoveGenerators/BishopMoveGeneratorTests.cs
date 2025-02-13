@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.MoveGenerators;
 
 namespace Minakuru.Engine.UnitTests.MoveGenerators;
@@ -39,7 +39,7 @@ public class BishopMoveGeneratorTests
 			new ("d4", "h8")
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBe(expected, ignoreOrder: true);
 	}
 
 	[TestMethod]
@@ -72,7 +72,7 @@ public class BishopMoveGeneratorTests
 			new ("d4", "f6", true)
 		};
 
-		readableMoves.Should().BeEquivalentTo(expected);
+		readableMoves.ShouldBe(expected, ignoreOrder: true);
 	}
 }
 

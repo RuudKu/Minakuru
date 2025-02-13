@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.MoveGenerators.Experimental;
 
 namespace Minakuru.Engine.UnitTests.MoveGenerators.Experimental;
@@ -22,7 +22,7 @@ public class LegalMoveGeneratorTests
 			new("h1", "g1")
 		};
 
-		allReadableMoves.Should().BeEquivalentTo(expected);
+		allReadableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -44,7 +44,7 @@ public class LegalMoveGeneratorTests
 			new("f7", "f8", false, Piece.Knight),
 		};
 
-		allReadableMoves.Should().BeEquivalentTo(expected);
+		allReadableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[TestMethod]
@@ -70,7 +70,7 @@ public class LegalMoveGeneratorTests
 			new("f7", "g8", true, Piece.Knight)
 		};
 
-		allReadableMoves.Should().BeEquivalentTo(expected);
+		allReadableMoves.ShouldBeEquivalentTo(expected);
 	}
 
 	[DataRow(Field.A7FieldNo, true, true, DisplayName = "Rook a7 allows both sides")]
@@ -98,7 +98,7 @@ public class LegalMoveGeneratorTests
 
 		var expectedCastlingOptions = new CastlingOptions(longCastlingAllowed, shortCastlingAllowed);
 		var actualCastlingOptions = new CastlingOptions(actualLongCastling, actualShortCastling);
-		actualCastlingOptions.Should().BeEquivalentTo(expectedCastlingOptions);
+		actualCastlingOptions.ShouldBeEquivalentTo(expectedCastlingOptions);
 	}
 
 	[DataRow(Field.A7FieldNo, true, true, DisplayName = "Rook a2 allows both sides")]
@@ -126,7 +126,7 @@ public class LegalMoveGeneratorTests
 
 		var expectedCastlingOptions = new CastlingOptions(longCastlingAllowed, shortCastlingAllowed);
 		var actualCastlingOptions = new CastlingOptions(actualLongCastling, actualShortCastling);
-		actualCastlingOptions.Should().BeEquivalentTo(expectedCastlingOptions);
+		actualCastlingOptions.ShouldBeEquivalentTo(expectedCastlingOptions);
 	}
 
 	record CastlingOptions(bool Long, bool Short)

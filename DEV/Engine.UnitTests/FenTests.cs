@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 
 namespace Minakuru.Engine.UnitTests;
 
@@ -16,7 +16,7 @@ public sealed class FenTests
 
 		// Assert
 		var expected = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-		actual.Should().Be(expected);
+		actual.ShouldBe(expected);
 	}
 
 	[TestMethod]
@@ -31,7 +31,7 @@ public sealed class FenTests
 
 		// Assert
 		var expected = Board.Init();
-		actual.Should().Be(expected);
+		actual.ShouldBe(expected);
 	}
 
 	[DataRow("rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1", DisplayName = "1. e4")]
@@ -48,7 +48,7 @@ public sealed class FenTests
 		var fenAgain = board.ToFen();
 
 		// Assert
-		fenAgain.Should().Be(originalFen);
+		fenAgain.ShouldBe(originalFen);
 	}
 
 }

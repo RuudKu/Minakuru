@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.Evaluators;
 using Minakuru.Engine.MoveGenerators;
 using Minakuru.Engine.MoveSearchers;
@@ -32,8 +32,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.D2FieldNo, Field.G5FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -47,8 +47,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.F7FieldNo, Field.F8FieldNo, false, Piece.Knight);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -62,8 +62,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.E5FieldNo, Field.E6FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -77,8 +77,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.E3FieldNo, Field.E4FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	// [TestMethod]
@@ -92,8 +92,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.D5FieldNo, Field.F6FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -107,8 +107,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.H1FieldNo, Field.H6FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -122,8 +122,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.E1FieldNo, Field.B4FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -137,8 +137,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.D2FieldNo, Field.D4FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -152,8 +152,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.A4FieldNo, Field.C6FieldNo, true);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	// [TestMethod]
@@ -167,8 +167,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.G2FieldNo, Field.G1FieldNo, false);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -182,8 +182,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.C1FieldNo, Field.H6FieldNo, false);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -197,8 +197,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.G2FieldNo, Field.F2FieldNo, false);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	// [TestMethod]
@@ -212,8 +212,8 @@ public class AlphaBetaTests
 		var expectedMove = new Move(Field.B3FieldNo, Field.F7FieldNo, false);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 }

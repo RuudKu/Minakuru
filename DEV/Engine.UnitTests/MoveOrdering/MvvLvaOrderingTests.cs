@@ -1,5 +1,5 @@
 ﻿
-using FluentAssertions;
+using Shouldly;
 using Minakuru.Engine.MoveOrdering;
 
 namespace Minakuru.Engine.UnitTests.MoveOrdering;
@@ -44,7 +44,7 @@ public class MvvLvaOrderingTests
 			pf6f5 // non-capture move
 			];
 
-		actual.Should().Equal(expected);
+		actual.ShouldBe(expected);
 
 
 	}

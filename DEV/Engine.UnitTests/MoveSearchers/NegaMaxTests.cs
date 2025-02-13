@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine.Evaluators;
 using Minakuru.Engine.MoveGenerators;
 using Minakuru.Engine.MoveSearchers;
@@ -31,8 +31,8 @@ public class NegaMaxTests
 		var expectedMove = new Move(Field.D2FieldNo, Field.G5FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -46,8 +46,8 @@ public class NegaMaxTests
 		var expectedMove = new Move(Field.F7FieldNo, Field.F8FieldNo, false, Piece.Knight);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	[TestMethod]
@@ -61,8 +61,8 @@ public class NegaMaxTests
 		var expectedMove = new Move(Field.E5FieldNo, Field.E6FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 
 	// [TestMethod]
@@ -76,7 +76,7 @@ public class NegaMaxTests
 		var expectedMove = new Move(Field.D5FieldNo, Field.F6FieldNo);
 		var expectedScore = EvaluationConstants.Mate;
 
-		actualMove.Should().Be(expectedMove);
-		actualScore.Should().Be(expectedScore);
+		actualMove.ShouldBe(expectedMove);
+		actualScore.ShouldBe(expectedScore);
 	}
 }

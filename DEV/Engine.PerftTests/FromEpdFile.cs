@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text.RegularExpressions;
-using FluentAssertions;
+using Shouldly;
 
 namespace Minakuru.Engine.PerftTests;
 
@@ -53,7 +53,7 @@ public partial class FromEpdFile
 				var actual = PerftHelper.CountNodes(board, depth);
 				Debug.WriteLine(epdLine.LineNumber + "  Expected nodes = " + expected);
 				Debug.WriteLine(epdLine.LineNumber + "  Actual nodes = " + actual);
-				actual.Should().Be(expected);
+				actual.ShouldBe(expected);
 			}
 		}
 		Debug.WriteLine(epdLine.LineNumber + "  Done testing FEN " + fen);

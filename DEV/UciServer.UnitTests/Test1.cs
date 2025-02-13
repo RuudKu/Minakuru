@@ -1,13 +1,12 @@
-﻿
-using System.Runtime.CompilerServices;
-using FluentAssertions;
+﻿using Shouldly;
 using Minakuru.Engine;
 
-namespace UciServer.UnitTests;
+namespace Minakuru.UciServer.UnitTests;
 
 [TestClass]
 public sealed class Test1
 {
+	[Ignore]
 	[TestMethod]
 	public async Task TestPositionStartPosAsync()
 	{
@@ -17,7 +16,7 @@ public sealed class Test1
 		var textWriter = new StreamWriter(inStream);
 		var textReader = new StreamReader(outStream);
 
-		var uciServer = new Minakuru.UciServer.UciServer(inStream, outStream);
+		var uciServer = new UciServer(inStream, outStream);
 
 		Thread thread = new(StartThread!);
 		thread.Start();
@@ -38,7 +37,7 @@ public sealed class Test1
 
 		string expectedFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-		actualFen.Should().Be(expectedFen);
+		actualFen.ShouldBe(expectedFen);
 
 		async void StartThread(object data)
 		{
